@@ -5,7 +5,7 @@ class Categorias{
 
 	public function __construct(){
     	require_once 'conexion.php';
-		$this->datos=array();
+		  $this->datos = array();
     }
 
 	public function getCategorias(){
@@ -15,9 +15,9 @@ class Categorias{
 					WHERE categorias.activo = 1
 					ORDER BY categorias.titulo";
 
-
-        $conexion = new Conexion();
+        $superArray =  array();
         $superArray['success'] = true;
+        $conexion = new Conexion($superArray);
         $dbConectado = $conexion->DBConect($superArray);
 
 		try {
@@ -50,8 +50,9 @@ class Categorias{
             }
 
 
-          $conexion = new Conexion();
-          $superArray['success'] = true;
+        $superArray =  array();
+        $superArray['success'] = true;
+        $conexion = new Conexion($superArray);
           $dbConectado = $conexion->DBConect($superArray);
 
             $stm= $dbConectado->prepare("SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo

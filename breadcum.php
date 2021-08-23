@@ -2,7 +2,8 @@
 <?php
 	$obj=new Productos();
    	$id=strip_tags($_GET["id"]);
-   	$productos=$obj->getProductosPorId($id);
+    $menssages = [];
+   	$productos=$obj->getProductosPorId($id,$menssages);
     $productos= (object)$productos[0];
 
 ?>

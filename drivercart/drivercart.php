@@ -64,12 +64,13 @@ function Add(&$superArray,$input){
 	$manejoCarrito->setCantidad($cantidad);
 	$manejoCarrito->setProductoId($productoid);
 
-	$superArray = $manejoCarrito->Add();
+	$manejoCarrito->Add($superArray);
 
 	$superArray['cantidadTotal'] = $manejoCarrito->getCantidadTotal();
 	$superArray['TotalaPagar'] = $manejoCarrito->getTotalAPagar();
 
 	$superArray['carrito'] = $manejoCarrito->getCarro();
+
 	$superArray['success']=true;
 	$superArray['mensaje']="";
 
@@ -86,8 +87,8 @@ function ShowTotals(&$superArray){
 
 	$superArray['cantidadTotal'] = $manejoCarrito->getCantidadTotal();
 	$superArray['TotalaPagar'] = $manejoCarrito->getTotalAPagar();
-
 	$superArray['carrito'] = $manejoCarrito->getCarro();
+
 	$superArray['success']=true;
 	$superArray['mensaje']="";
 

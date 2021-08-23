@@ -8,12 +8,15 @@
 						<span>Categorias</span>
 					</div>
 					<ul>
-						<?php require_once("class/categorias.php");
+						<?php
+
+							require_once("class/categorias.php");
  							$categorias = new Categorias();
 				 			$arrCategorias = $categorias->getCategorias();
 							foreach ($arrCategorias as $categorias):
                                 echo '<li><a href="#">'.$categorias['titulo'].'</a></li>';
 							endforeach;
+
 						?>
 					</ul>
 				</div>

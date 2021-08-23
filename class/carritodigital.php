@@ -40,14 +40,16 @@ class ManejoCarrito{
 	}
 
 	public function getCarro(){
-
-		return  $_SESSION["carro"];
+		if (isset($_SESSION["carro"])):
+			return  $_SESSION["carro"];
+		endif;
 	}
 
-	public function Add(){
+	public function Add(&$superArray){
 
 		$obj = new Productos();
-		$productos = $obj->getProductosPorId($this->_productoId);
+        $superArray['productoid'] = $this->_productoId;
+		$productos = $obj->getProductosPorId($this->_productoId,$superArray);
 		$productos = (object)$productos[0];
 
 		if (!isset($_SESSION["carro"][$productos->id])):
@@ -64,10 +66,13 @@ class ManejoCarrito{
 	}
 
 	private function CalcularCantidadTotal(){
+
 		$cantidadTotal = 0 ;
-		foreach ($_SESSION['carro'] as $subarray) :
-			$cantidadTotal +=   $subarray['cantidad'];
-		endforeach;
+		if (isset($_SESSION["carro"])):
+			foreach ($_SESSION['carro'] as $subarray) :
+				$cantidadTotal +=   $subarray['cantidad'];
+			endforeach;
+		endif;
 		$this->_cantidadTotal = $cantidadTotal;
         return;
 
@@ -75,11 +80,11 @@ class ManejoCarrito{
 
 	private function CalcularTotal(){
 		$totales = 0;
-
-		foreach ($_SESSION['carro'] as $subarray) :
-			$totales  +=  $subarray['total'];
-		endforeach;
-
+		if (isset($_SESSION["carro"])):
+			foreach ($_SESSION['carro'] as $subarray) :
+				$totales  +=  $subarray['total'];
+			endforeach;
+		endif;
 		$this->_TotalAPagar = $totales;
         return;
 	}
@@ -89,11 +94,12 @@ class ManejoCarrito{
         $tabla .='<caption>PRODUCTOS EN EL CARRITO DE COMPRAS</caption>';
 		$tabla .=  $this->Thead();
         $tabla .='<tbody> ';
-
+        $messages=[];
 		foreach ($_SESSION['carro'] as $subarray) :
 			$obj = new Productos();
    			$id  = strip_tags( $subarray["id"]);
-			$productos=$obj->getProductosPorId($id);
+
+			   $productos=$obj->getProductosPorId($id,$messages);
     		$productos= (object)$productos[0];
             $tabla .='<tr>';
 			$tablaProducto ='<td class= "tabla-carro_item"><img src="./fotos/'. $productos->imagenPresentacion .' " alt=""><h5>'.$productos->producto.'</h5></td>';
@@ -138,7 +144,7 @@ class ManejoCarrito{
 							<ul>
 								<li>Total a Pagar <span>$'.$this->getTotalAPagar().'</span></li>
 							</ul>
-							<a href="finalizar_compra.php" class="primary-btn">PROCEDER A PAGAR</a>
+							<button type ="submmit"  onclick="checkout.open()" class="primary-btn">PROCEDER A PAGAR</button>
 					</div>
 				</div>';
 		return $tabla ;

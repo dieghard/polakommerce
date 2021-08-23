@@ -12,8 +12,9 @@ class FotosVideosProductos{
 
 		$strSql="	SELECT * FROM productos_fotos_videos Where productoId=". $productoId;
 		$this->datos=array();
-        $conexion = new Conexion();
+        $superArray =  array();
         $superArray['success'] = true;
+        $conexion = new Conexion($superArray);
         $dbConectado = $conexion->DBConect($superArray);
        // var_dump($strSql);
 

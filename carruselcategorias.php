@@ -19,8 +19,9 @@
 function categoriaFrame(){
     require_once("class/categorias.php");
     $categorias = new Categorias();
-    $arrCategorias = $categorias->getCategorias();
     $categoria_frame ='';
+
+    $arrCategorias = $categorias->getCategorias();
     foreach ($arrCategorias as $categorias):
         $categoria_frame .=  '<div class="owl-item cloned" style="width: 800.5px;">
                                     <div class="col-lg-3">
@@ -30,6 +31,7 @@ function categoriaFrame(){
                                     </div>
                                 </div>';
     endforeach;
+
     return  $categoria_frame;
 }
 ?>

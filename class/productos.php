@@ -38,7 +38,9 @@ class Productos{
 
   public function getProductos(){
     $strSql= $this->sql() ."     ORDER BY productos.producto  LIMIT 0,10";
-    $conexion = new Conexion();
+     $superArray =  array();
+        $superArray['success'] = true;
+        $conexion = new Conexion($superArray);
     $superArray['success'] = true;
     $dbConectado = $conexion->DBConect($superArray);
     try {
@@ -59,10 +61,11 @@ class Productos{
 
 
    public function getProductosxCarrusel(){
-    $strSql= $this->sql() ."  WHERE enCarrusel = 1   ORDER BY productos.producto  LIMIT 10";
-    $conexion = new Conexion();
-    $superArray['success'] = true;
-    $dbConectado = $conexion->DBConect($superArray);
+      $strSql= $this->sql() ."  WHERE enCarrusel = 1   ORDER BY productos.producto  LIMIT 10";
+      $superArray =  array();
+      $superArray['success'] = true;
+      $conexion = new Conexion($superArray);
+      $dbConectado = $conexion->DBConect($superArray);
     try {
           $stmt = $dbConectado->prepare($strSql);
           $stmt->execute();
@@ -79,16 +82,16 @@ class Productos{
     return $this->datos;
   }
 
-  public function getProductosPorId($id=null){
+  public function getProductosPorId($id=null,&$superArray){
 
       $id=(int)$id;
       //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
-           //redireciona llamanedo el metodo _redirect();.
+      //redireciona llamanedo el metodo _redirect();.
       if (empty($id) OR !$id) {$this->_redirect();}
-      $conexion = new Conexion();
+      //$superArray =  array();
       $superArray['success'] = true;
+      $conexion = new Conexion($superArray);
       $dbConectado = $conexion->DBConect($superArray);
-
 		  $strSql=$strSql= $this->sql() ."  WHERE 1 = 1 AND productos.id=" .$id;
 
       $stm= $dbConectado->prepare($strSql);
@@ -100,6 +103,7 @@ class Productos{
       }
       //validacion de get para detos que sean superior a los id de db
       if (empty($this->datos)){$this->_redirect();}
+
       return $this->datos;
     }
 

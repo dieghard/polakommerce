@@ -16,7 +16,9 @@ class Rubros{
 					ORDER BY rubros.titulo";
 
 
-        $conexion = new Conexion();
+        $superArray =  array();
+        $superArray['success'] = true;
+        $conexion = new Conexion($superArray);
         $superArray['success'] = true;
         $dbConectado = $conexion->DBConect($superArray);
 
@@ -50,9 +52,10 @@ class Rubros{
             }
 
 
-          $conexion = new Conexion();
-          $superArray['success'] = true;
-          $dbConectado = $conexion->DBConect($superArray);
+            $superArray =  array();
+            $superArray['success'] = true;
+            $conexion = new Conexion($superArray);
+            $dbConectado = $conexion->DBConect($superArray);
 
             $stm= $dbConectado->prepare("SELECT rubros.id, rubros.titulo, rubros.subtitulo, rubros.descripcion,rubros.imagen, rubros.activo
 										FROM rubros WHERE rubros.id  ='".$id."'");

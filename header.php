@@ -1,5 +1,4 @@
 <header class="header">
-
 	<div class="header__top">
 		<div class="container">
 			<div class="row">
@@ -61,4 +60,4 @@
 		</div>
 	</div>
 </header>
-<?php require_once("barrabusqueda.php") ?>
+<?php //require_once("barrabusqueda.php") ?>
