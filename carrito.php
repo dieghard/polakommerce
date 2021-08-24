@@ -53,7 +53,6 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 <html>
 <?php require_once("head.php"); ?>
 <script src="js/car.js"></script>
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <body>
 	<?php require_once("header.php") ;?>
@@ -68,81 +67,58 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<div class="shoping__checkout">
-						<h4>DETALLES DE FACTURACIÓN</h4>
-						<form action="#">
+					<h4>DETALLES DE FACTURACIÓN</h4>
+					<div class="row">
+						<div class="col-lg-8 col-md-6">
+							<form role="form" id="contactForm" method="post" action="finalizar_compra.php">
 
-							<div class="finalizar_compra__input">
-								<p>Nombre<span>*</span></p>
-								<input type="text">
-							</div>
+								<div class="form-group">
+									<label for="nombre">Nombre</label>
+									<input type="text" class="form-control" name="nombre" placeholder="Nombre" requiere>
+								</div>
+								<div class="form-group">
 
-							<div class="finalizar_compra__input">
-								<p>Apellido<span>*</span></p>
-								<input type="text">
-							</div>
-
-							<div class="finalizar_compra__input">
-								<p>Pais<span>*</span></p>
-								<input type="text">
-							</div>
-							<div class="finalizar_compra__input">
-								<p>Dirección<span>*</span></p>
-								<input type="text" placeholder="Dirección" class="finalizar_compra__input__add">
-								<input type="text" placeholder="departamento (opcional)">
-							</div>
-							<div class="finalizar_compra__input">
-								<p>Ciudad<span>*</span></p>
-								<input type="text">
-							</div>
-							<div class="finalizar_compra__input">
-								<p>Pais<span>*</span></p>
-								<input type="text">
-							</div>
-							<div class="finalizar_compra__input">
-								<p>Codigo postal<span>*</span></p>
-								<input type="text">
-							</div>
-
-
-							<div class="finalizar_compra__input">
-								<p>Telefono<span>*</span></p>
-								<input type="text">
-							</div>
-
-
-							<div class="finalizar_compra__input">
-								<p>Email<span>*</span></p>
-								<input type="text">
-							</div>
-
-							<div class="finalizar_compra__input">
-								<p>Observaciones<span>*</span></p>
-								<input type="text" placeholder="Alguna nota sobre la compra o donde entregarlo">
-							</div>
+									<label for="apellido">Apellido</label>
+									<input type="text" class="form-control" name="apellido" placeholder="Apellido" requiered>
+								</div>
+								<div class="form-group">
+									<label for="pais">Pais</label>
+									<input type="text" class="form-control" name="pais" placeholder="Pais" value='ARGENTINA' requiered>
+								</div>
+								<div class="form-group">
+									<label for="direccion">Dirección</label>
+									<input type="text" class="form-control" name="direccion" placeholder="Dirección" requiered>
+									<input type="text" class="form-control" name="departamento" placeholder="departamento (opcional)">
+								</div>
+								<div class="form-group">
+									<label for="ciudad">Ciudad</label>
+									<input type="text" class="form-control" name="ciudad" placeholder="Ciudad" requiered>
+								</div>
+								<div class="form-group">
+									<label for="codigoPostal">Codigo postal</label>
+									<input type="text" class="form-control" name="codigoPostal" placeholder="Codigo Postal" requiered>
+								</div>
+								<div class="form-group">
+									<label for="telefono">Telefono</label>
+									<input type="text" class="form-control" name="telefono" placeholder="Telefono (opcional)">
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" name="email" placeholder="email" requiered>
+								</div>
+								<div class="form-group">
+									<label for="Observaciones">Observaciones</label>
+									<input type="Observaciones" class=" form-control" name="observaciones" placeholder="Observaciones">
+									<small id="emailHelp" class="form-text text-muted">Alguna nota sobre la compra o donde entregarlo</small>
+								</div>
+								<button type="submit" class="btn btn-primary" name=="form-submit">Pagar</button>
+							</form>
+						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<div class="finalizar_compra__finalizar" id="finalizar_compra__finalizar">
-						<!--<input type="button" id="checkout-open-radio" value="PAGAR" onclick="checkout.open()">-->
-						<script>
-						const mp = new MercadoPago('TEST-f23a2997-302e-41c4-ad53-2355f4effee7', {
-							locale: 'es-AR'
-						});
 
-						const checkout = mp.checkout({
-							preference: {
-								id: '<?php echo $preference->id ?>'
-							}
-						});
-						</script>
-
-					</div>
-				</div>
-			</div>
 			</form>
 		</div>
 
