@@ -21,12 +21,12 @@
         /*------------------
             Gallery filter
         --------------------*/
-        $('.destacados__controls li').on('click', function () {
-            $('.destacados__controls li').removeClass('active');
+        $('.featured__controls li').on('click', function () {
+            $('.featured__controls li').removeClass('active');
             $(this).addClass('active');
         });
-        if ($('.destacados__filter').length > 0) {
-            var containerEl = document.querySelector('.destacados__filter');
+        if ($('.featured__filter').length > 0) {
+            var containerEl = document.querySelector('.featured__filter');
             var mixer = mixitup(containerEl);
         }
     });
@@ -103,7 +103,7 @@
     /*--------------------------
         Latest Product Slider
     ----------------------------*/
-    $(".ultimos-productos__slider").owlCarousel({
+    $(".latest-product__slider").owlCarousel({
         loop: true,
         margin: 0,
         items: 1,

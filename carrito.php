@@ -77,9 +77,13 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 									<input type="text" class="form-control" name="nombre" placeholder="Nombre" requiere>
 								</div>
 								<div class="form-group">
-
 									<label for="apellido">Apellido</label>
 									<input type="text" class="form-control" name="apellido" placeholder="Apellido" requiered>
+								</div>
+								<div class="form-group">
+									<label for="direccion">DNI</label>
+									<input type="text" class="form-control" name="dni" placeholder="numero documento" requiered>
+									<small id="numberHelp" class="form-text text-muted">solo el número(sin puntos)</small>
 								</div>
 								<div class="form-group">
 									<label for="pais">Pais</label>
@@ -87,12 +91,9 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 								</div>
 								<div class="form-group">
 									<label for="direccion">Dirección</label>
-									<input type="text" class="form-control" name="direccion" placeholder="Dirección" requiered>
-									<input type="text" class="form-control" name="departamento" placeholder="departamento (opcional)">
-								</div>
-								<div class="form-group">
-									<label for="ciudad">Ciudad</label>
-									<input type="text" class="form-control" name="ciudad" placeholder="Ciudad" requiered>
+									<input type="text" class="form-control" name="direccion" placeholder="calle" requiered>
+									<input type="text" class="form-control" name="numero" placeholder="numero">
+									<small id="numberHelp" class="form-text text-muted">solo el número de la calle</small>
 								</div>
 								<div class="form-group">
 									<label for="codigoPostal">Codigo postal</label>

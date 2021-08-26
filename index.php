@@ -1,4 +1,11 @@
 <?php
+/*  ---------------------------------------------------
+    SOFTWARE NAME: polakommerce
+    Description:  Software para carrito de compras
+    Author: Diego Sebastian Markiewicz
+    Version: 1.0
+	Obs: se utilizo template de Ogani eCommerce  HTML Template - Created: Colorlib
+---------------------------------------------------------  */
  require_once("class/productos.php");
  require_once("class/fotosvideosproductos.php");
 ?>

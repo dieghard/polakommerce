@@ -1,10 +1,10 @@
 <head>
-	<title>..::Mi carrito::..</title>
+	<title>..::Polakommerce Carrito Compras::..</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="Ogani Template">
-	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="description" content="Polakommerce">
+	<meta name="keywords" content="carrito, compras, polakomerce">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Ogani | Template</title>
+	<title>Polakomerce Carrito de compras</title>
 
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">

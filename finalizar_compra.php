@@ -5,9 +5,9 @@ require __DIR__ .  '/vendor/autoload.php';
   $preference = new MercadoPago\Preference();  // Crea un ítem en la preferencia
 
   $preference->back_urls = array (
-   	"success" => "http://localhost:8080/polakommerce/gracias.php",
-   	"failure" => "http://localhost:8080/polakommerce/errorpago.php",
-   	"pending" =>"http://localhost:8080/polakommerce/pendiente.php"
+   	"success" => "http://localhost:8080/polakommerce/fin.php?success=true&pagado=true",
+   	"failure" => "http://localhost:8080/polakommerce/errorpago.php?success=false&pagado=false",
+   	"pending" =>"http://localhost:8080/polakommerce/pendiente.php&success=true&pagado=false"
   );
 
 /*
@@ -36,6 +36,13 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 	if(isset($_POST['apellido'])):
 		header("Location:carrito.php");
 	endif;
+	if(isset($_POST['dni'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['numero'])):
+		header("Location:carrito.php");
+	endif;
+
 	if(isset($_POST['pais'])):
 		header("Location:carrito.php");
 	endif;
@@ -52,29 +59,25 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 		header("Location:carrito.php");
 	endif;
 
-
-$_SESSION['cliente']['nombre'] = $_POST['nombre'];
-$_SESSION['cliente']['apellido'] = $_POST['apellido'];
-$_SESSION['cliente']['pais'] = $_POST['pais'];
-$_SESSION['cliente']['direccion'] = $_POST['direccion'];
-$_SESSION['cliente']['departamento'] ='';
-if(!isset($_POST['departamento'])):
-	$_SESSION['cliente']['departamento'] = $_POST['departamento'];
-endif;
-$_SESSION['cliente']['ciudad'] = $_POST['ciudad'];
-$_SESSION['cliente']['codigoPostal'] = $_POST['codigoPostal'];
-$_SESSION['cliente']['telefono'] ='';
-if(isset($_POST['telefono'])):
-	$_SESSION['cliente']['telefono'] = $_POST['telefono'];
-endif;
-$_SESSION['cliente']['email'] = $_POST['email'];
-$_SESSION['cliente']['observaciones'] ='';
+	$_SESSION['cliente']['nombre'] = $_POST['nombre'];
+	$_SESSION['cliente']['apellido'] = $_POST['apellido'];
+	$_SESSION['cliente']['pais'] = $_POST['pais'];
+	$_SESSION['cliente']['direccion'] = $_POST['direccion'];
+	$_SESSION['cliente']['numero'] = $_POST['numero'];
+	$_SESSION['cliente']['codigoPostal'] = $_POST['codigoPostal'];
+	$_SESSION['cliente']['telefono'] ='';
+	if(isset($_POST['telefono'])):
+		$_SESSION['cliente']['telefono'] = $_POST['telefono'];
+	endif;
+	$_SESSION['cliente']['email'] = $_POST['email'];
+	$_SESSION['cliente']['dni'] = $_POST['dni'];
+	$_SESSION['cliente']['observaciones'] ='';
 if(!isset($_POST['observaciones'])):
 	$_SESSION['cliente']['observaciones'] = $_POST['observaciones'];
 endif;
 
 
-   $datosCompra = array();
+	$datosCompra = array();
     $messages =[];
 	foreach ($_SESSION['carro'] as $subarray) :
 		$obj = new Productos();
@@ -84,13 +87,35 @@ endif;
 		$item = new MercadoPago\Item();
 		$item->title = $productos->producto;
 		$item->quantity = $subarray["cantidad"];
+		$item->currency_id  = 'ARS';
 		$item->unit_price = $subarray["precio"];
 		$datosCompra[] =$item;
 	endforeach;
 
-  $preference->items = $datosCompra;
-  $preference->save();
 
+	$payer = new MercadoPago\Payer();
+  	$payer->name = $_SESSION['cliente']['nombre'];
+  	$payer->surname = $_SESSION['cliente']['apellido'];
+    $payer->email = $_SESSION['cliente']['email'];
+  	$payer->phone = array(
+    	"area_code" => "+54",
+   	    "number" =>$_SESSION['cliente']['telefono']
+  	);
+
+  $payer->identification = array(
+    "type" => "DNI",
+    "number" => $_SESSION['cliente']['dni']
+  );
+
+  $payer->address = array(
+    "street_name" => $_SESSION['cliente']['direccion'],
+    "street_number" => $_SESSION['cliente']['numero'],
+    "zip_code" => $_SESSION['cliente']['codigoPostal']
+  );
+
+  	$preference->items = $datosCompra;
+    $preference->prayer =  $payer;
+  	$preference->save();
 
 
 ?>
