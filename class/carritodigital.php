@@ -145,6 +145,7 @@ class ManejoCarrito{
 								<li>Total a Pagar <span>$'.$this->getTotalAPagar().'</span></li>
 							</ul>
 
+							<button type ="submmit"  onclick="checkout.open()" class="primary-btn">PROCEDER A PAGAR</button>
 					</div>
 				</div>';
 		return $tabla ;
@@ -178,6 +179,7 @@ class ManejoCarrito{
         $order .= '<div class="finalizar_compra__order__subtotal">Subtotal <span>$'. $this->getTotalAPagar() .'</span></div>';
         $order .= '<div class="finalizar_compra__order__total">Total <span>$'. $this->getTotalAPagar() .'</span></div>';
 
+        $order .= '<button type="submit" class="site-btn">PAGAR</button>';
 
 		return $order;
 	}
