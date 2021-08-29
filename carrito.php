@@ -53,6 +53,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 <html>
 <?php require_once("head.php"); ?>
 <script src="js/car.js"></script>
+
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <body>
@@ -68,6 +69,55 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 					</div>
 				</div>
 				<div class="col-lg-6">
+
+					<h4>DETALLES DE FACTURACIÓN</h4>
+					<div class="row">
+						<div class="col-lg-8 col-md-6">
+							<form role="form" id="contactForm" method="post" action="finalizar_compra.php">
+
+								<div class="form-group">
+									<label for="nombre">Nombre</label>
+									<input type="text" class="form-control" name="nombre" placeholder="Nombre" requiere>
+								</div>
+								<div class="form-group">
+
+									<label for="apellido">Apellido</label>
+									<input type="text" class="form-control" name="apellido" placeholder="Apellido" requiered>
+								</div>
+								<div class="form-group">
+									<label for="pais">Pais</label>
+									<input type="text" class="form-control" name="pais" placeholder="Pais" value='ARGENTINA' requiered>
+								</div>
+								<div class="form-group">
+									<label for="direccion">Dirección</label>
+									<input type="text" class="form-control" name="direccion" placeholder="Dirección" requiered>
+									<input type="text" class="form-control" name="departamento" placeholder="departamento (opcional)">
+								</div>
+								<div class="form-group">
+									<label for="ciudad">Ciudad</label>
+									<input type="text" class="form-control" name="ciudad" placeholder="Ciudad" requiered>
+								</div>
+								<div class="form-group">
+									<label for="codigoPostal">Codigo postal</label>
+									<input type="text" class="form-control" name="codigoPostal" placeholder="Codigo Postal" requiered>
+								</div>
+								<div class="form-group">
+									<label for="telefono">Telefono</label>
+									<input type="text" class="form-control" name="telefono" placeholder="Telefono (opcional)">
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" name="email" placeholder="email" requiered>
+								</div>
+								<div class="form-group">
+									<label for="Observaciones">Observaciones</label>
+									<input type="Observaciones" class=" form-control" name="observaciones" placeholder="Observaciones">
+									<small id="emailHelp" class="form-text text-muted">Alguna nota sobre la compra o donde entregarlo</small>
+								</div>
+								<button type="submit" class="btn btn-primary" name=="form-submit">Pagar</button>
+							</form>
+						</div>
+
 					<div class="shoping__checkout">
 						<h4>DETALLES DE FACTURACIÓN</h4>
 						<form action="#">
@@ -120,6 +170,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 								<p>Observaciones<span>*</span></p>
 								<input type="text" placeholder="Alguna nota sobre la compra o donde entregarlo">
 							</div>
+
 					</div>
 
 				</div>
@@ -143,6 +194,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 					</div>
 				</div>
 			</div>
+
 			</form>
 		</div>
 

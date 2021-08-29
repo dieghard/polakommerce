@@ -1,4 +1,5 @@
 <?php
+
 require_once 'class/carritodigital.php';
 require_once 'class/productos.php';
 // SDK de Mercado Pago
@@ -31,6 +32,50 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 //{"id":811476812,"nickname":"TESTQVTWE78W","password":"qatest197","site_status":"active","email":"test_user_98042701@testuser.com"}
 //echo(enviar($vars, $url));
 
+
+
+	if(isset($_POST['nombre'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['apellido'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['pais'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['direccion'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['ciudad'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['codigoPostal'])):
+		header("Location:carrito.php");
+	endif;
+	if(isset($_POST['email'])):
+		header("Location:carrito.php");
+	endif;
+
+
+$_SESSION['cliente']['nombre'] = $_POST['nombre'];
+$_SESSION['cliente']['apellido'] = $_POST['apellido'];
+$_SESSION['cliente']['pais'] = $_POST['pais'];
+$_SESSION['cliente']['direccion'] = $_POST['direccion'];
+$_SESSION['cliente']['departamento'] ='';
+if(!isset($_POST['departamento'])):
+	$_SESSION['cliente']['departamento'] = $_POST['departamento'];
+endif;
+$_SESSION['cliente']['ciudad'] = $_POST['ciudad'];
+$_SESSION['cliente']['codigoPostal'] = $_POST['codigoPostal'];
+$_SESSION['cliente']['telefono'] ='';
+if(isset($_POST['telefono'])):
+	$_SESSION['cliente']['telefono'] = $_POST['telefono'];
+endif;
+$_SESSION['cliente']['email'] = $_POST['email'];
+$_SESSION['cliente']['observaciones'] ='';
+if(!isset($_POST['observaciones'])):
+	$_SESSION['cliente']['observaciones'] = $_POST['observaciones'];
+endif;
 	$datosCompra = array();
     $messages =[];
 	foreach ($_SESSION['carro'] as $subarray) :
@@ -51,12 +96,28 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 ?>
 
 
-
 <html>
 <?php require_once("head.php"); ?>
 <script src="js/finishhim.js"></script>
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
+<body>
+
+	<script>
+	const mp = new MercadoPago('TEST-f23a2997-302e-41c4-ad53-2355f4effee7', {
+		locale: 'es-AR'
+	});
+
+	const checkout = mp.checkout({
+		preference: {
+			id: '<?php echo $preference->id ?>'
+		},
+		autoOpen: true, // Habilita la apertura automática del Checkout Pro
+	});
+	</script>
+	<!--<input type="button" id="checkout-open-radio" value="PAGAR" onclick="checkout.open()">-->
+</body>
+<?php
 
 <body>
 
