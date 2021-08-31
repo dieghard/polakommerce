@@ -9,7 +9,7 @@ class Productos{
   }
 
   private function sql(){
-    $strSql="select productos.id,
+    $strSql = " SELECT productos.id,
               IFNULL(productos.producto,'') as producto ,
               IFNULL(productos.subtitulo,'') as subtitulo,
               IFNULL(productos.precio,0) as precio,
@@ -32,40 +32,33 @@ class Productos{
               IFNULL(rubros.titulo,'') as  rubro
         from productos
         LEFT JOIN categorias ON categorias.id = productos.categoriaID
-        LEFT JOIN rubros ON rubros.id = productos.rubroID";
+        LEFT JOIN rubros ON rubros.id = productos.rubroID
+        WHERE 1=1 ";
+
+
     return $strSql;
   }
 
-  public function getProductos(){
-    $strSql= $this->sql() ."     ORDER BY productos.producto  LIMIT 0,10";
-     $superArray =  array();
-        $superArray['success'] = true;
-        $conexion = new Conexion($superArray);
+  public function getProductos($descripcion,$rubroID,$categoriID){
+
+    $strSql = $this->sql();
+    if(strlen($descripcion)>0){
+      $strSql .= " AND productos.producto like '%". $descripcion ."%'";
+    }
+
+    if($rubroID > 0){
+      $strSql .= " AND productos.rubroID =". $rubroID ;
+    }
+    if($categoriID > 0){
+      $strSql .= " AND productos.categoriaID =". $categoriID ;
+    }
+
+    $strSql .= "     ORDER BY productos.producto  LIMIT 0,10";
+    $superArray =  array();
+    $superArray['success'] = true;
+    $conexion = new Conexion($superArray);
     $superArray['success'] = true;
     $dbConectado = $conexion->DBConect($superArray);
-    try {
-          $stmt = $dbConectado->prepare($strSql);
-          $stmt->execute();
-		}
-		catch (Throwable $e) {
-            $superArray['success'] = false;
-            $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
-    }
-    while ($row=$stmt->fetch()) :
-        $this->datos[] = $row;
-    endwhile;
-    if (empty($this->datos)){$this->_redirect();}
-    return $this->datos;
-  }
-
-
-   public function getProductosxCarrusel(){
-      $strSql= $this->sql() ."  WHERE enCarrusel = 1   ORDER BY productos.producto  LIMIT 10";
-      $superArray =  array();
-      $superArray['success'] = true;
-      $conexion = new Conexion($superArray);
-      $dbConectado = $conexion->DBConect($superArray);
     try {
           $stmt = $dbConectado->prepare($strSql);
           $stmt->execute();
@@ -92,7 +85,7 @@ class Productos{
       $superArray['success'] = true;
       $conexion = new Conexion($superArray);
       $dbConectado = $conexion->DBConect($superArray);
-		  $strSql=$strSql= $this->sql() ."  WHERE 1 = 1 AND productos.id=" .$id;
+		  $strSql      = $this->sql() ."  AND productos.id=" .$id;
 
       $stm= $dbConectado->prepare($strSql);
       $stm->execute();
@@ -107,9 +100,8 @@ class Productos{
       return $this->datos;
     }
 
-
     private function _redirect(){
-      return header("Location:index.php");
+  //    return header("Location:index.php");
   }
 
 }

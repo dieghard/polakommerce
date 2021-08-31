@@ -26,7 +26,7 @@ function categoriaFrame(){
         $categoria_frame .=  '<div class="owl-item cloned" style="width: 800.5px;">
                                     <div class="col-lg-3">
                                         <div class="categories__item set-bg" data-setbg="'. $categorias['imagen'].'" style="background-image: url(&quot;'. $categorias['imagen'].'&quot;);">
-                                            <h5><a href="#">'. $categorias['titulo'].'</a></h5>
+                                            <h5><a href="index.php?categoriaID='.$categorias['id'] .'">'. $categorias['titulo'].'</a></h5>
                                         </div>
                                     </div>
                                 </div>';

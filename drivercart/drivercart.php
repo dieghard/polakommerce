@@ -3,7 +3,8 @@
 	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 	header('Content-type: application/json; charset=utf-8');
-	require_once("../class/carritodigital.php");
+    $host = 'polakommerce';
+	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/carritodigital.php');
 
 	$input = json_decode(file_get_contents("php://input"), true);
 	$superArray['success'] = false;
@@ -81,7 +82,6 @@ function Add(&$superArray,$input){
 function ShowTotals(&$superArray){
 
 
-	require_once("../class/carritodigital.php");
 
 	$manejoCarrito = new ManejoCarrito();
 
@@ -89,8 +89,10 @@ function ShowTotals(&$superArray){
 	$superArray['TotalaPagar'] = $manejoCarrito->getTotalAPagar();
 	$superArray['carrito'] = $manejoCarrito->getCarro();
 
-	$superArray['success']=true;
-	$superArray['mensaje']="";
+	//$superArray['path'] = $_SERVER["DOCUMENT_ROOT"].'/polakommerce/config.php';
+	$superArray['success']= true;
+	$superArray['mensaje']= "";
+
 
 	return ;
 
@@ -99,11 +101,13 @@ function ShowTotals(&$superArray){
 function ShowCart(&$superArray){
 
 	$manejoCarrito = new ManejoCarrito();
+
 	$superArray['tabla']  = $manejoCarrito->ShowCart();
-    $superArray['success']  = true;
+	$superArray['success']  = true;
 
 	return;
 }
+
 
 function ShowOrden(&$superArray){
 

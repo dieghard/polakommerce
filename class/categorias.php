@@ -13,6 +13,7 @@ class Categorias{
 		$strSql="	SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
 					FROM categorias
 					WHERE categorias.activo = 1
+
 					ORDER BY categorias.titulo";
 
         $superArray =  array();

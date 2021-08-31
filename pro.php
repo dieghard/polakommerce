@@ -1,7 +1,8 @@
 <?php
 
-	require_once("class/productos.php");
-   	$obj = new Productos();
+
+	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/productos.php');
+	$obj = new Productos();
    	$id  = strip_tags($_GET["id"]);
     $menssages = [];
 	$productos=$obj->getProductosPorId($id,$menssages);
@@ -31,8 +32,8 @@
 
 									<?php
 								  		$categoriaslider = categoriaFrame($id);
-                      						echo	  $categoriaslider;
-                    					?>
+                      					echo  $categoriaslider;
+                    				?>
 
 								</ul>
 
@@ -44,35 +45,39 @@
 
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
-						<h3><?php echo $productos->producto ?></h3>
-						<h6><?php echo $productos->subtitulo ?></h6>
-						<div class="product__details__price">$<?php echo $productos->precio ;?></div>
-						<p><?php echo $productos->descripcion; ?></p>
-						<div class="product__details__quantity">
-							<div class="quantity">
-								<input type="number" value="1" min="1">
+						<form action="carrito.php" method="post">
+							<h3><?php echo $productos->producto ?></h3>
+							<h6><?php echo $productos->subtitulo ?></h6>
+							<div class="product__details__price">$<?php echo $productos->precio ;?></div>
+							<p><?php echo $productos->descripcion; ?></p>
+							<div class="product__details__quantity">
+								<input type="number" value=<?php echo $productos->id ?> name='productoid' hidden>
+								<div class="quantity">
+									<input type="number" value="1" min="1" name='cantidad'>
+								</div>
 							</div>
-						</div>
-						<a href="carrito.php?id=<?php echo $productos->id; ?>&action=add" class="primary-btn">AGREGAR AL CARRITO</a>
-						<a href="#" class="heart-icon"><i class="fas fa-heart"></i></a>
-						<ul>
-							<li><b>Disponibilidad:</b>
-								<?php if ($productos->conStock):
+							<input type="submit" class="primary-btn" value="COMPRAR">
+							<!--<a href="carrito.php?id=<?php //echo $productos->id; ?>&action=add">AGREGAR AL CARRITO</a>-->
+							<a href="#" class="heart-icon"><i class="fas fa-heart"></i></a>
+							<ul>
+								<li><b>Disponibilidad:</b>
+									<?php if ($productos->conStock):
 										echo '<span style= "color:green" >SIN STOCK</span>';
 								 	else:
 										echo '<span style= "color:red" >CON STOCK</span>';
 								 endif;?>
-							</li>
-							<!--<li><b>Envio:</b> <span><samp>Free pickup today</samp></span></li>-->
-							<li><b>Peso</b> <span><?php echo $productos->peso; ?></span></li>
-							<li><b>Compartilo:</b>
-								<div class="share">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</div>
-							</li>
+								</li>
+								<!--<li><b>Envio:</b> <span><samp>Free pickup today</samp></span></li>-->
+								<li><b>Peso</b> <span><?php echo $productos->peso; ?></span></li>
+						</form>
+						<li><b>Compartilo:</b>
+							<div class="share">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa fa-pinterest"></i></a>
+							</div>
+						</li>
 						</ul>
 					</div>
 				</div>
@@ -115,20 +120,14 @@
 </html>
 <?php
 function categoriaFrame($id){
-	include_once('class/fotosvideosproductos.php');
+	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/fotosvideosproductos.php');
 
 	$obj		 = new FotosVideosProductos();
 	$fotosProductos	 = $obj->getFotosVideos($id);
-
 	$fotoProducto_frame ='';
-
-
-		foreach ($fotosProductos as $fotoProducto):
-
-			$fotoProducto_frame .=  '<li><img class="minigaleria" src="'. $fotoProducto['foto'].'"onclick="imageClick(this)" /></li>';
-    	endforeach;
+	foreach ($fotosProductos as $fotoProducto):
+		$fotoProducto_frame .=  '<li><img class="minigaleria" src="'. $fotoProducto['foto'].'"onclick="imageClick(this)" /></li>';
+    endforeach;
     return  $fotoProducto_frame;
-
-
 }
 ?>

@@ -3,7 +3,6 @@ window.addEventListener("load", function (event) {
 
 });
 
-
 function pagar(){
     // cancels the form submission
     event.preventDefault();
@@ -37,7 +36,6 @@ function pagar(){
         });
 
 };
-
 function show_cart() {
 
 	var strUrl = "./drivercart/drivercart.php";

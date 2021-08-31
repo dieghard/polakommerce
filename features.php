@@ -8,7 +8,7 @@
 				<ul>
 					<li class="active" data-filter="*">Todos</li>
 					<?php
-					require_once("class/categorias.php");
+					require_once($_SESSION['CLASS_PATH'].'categorias.php');
     				$categorias = new Categorias();
     				$arrCategorias = $categorias->getCategorias();
     				$categoria_frame ='';
@@ -23,7 +23,14 @@
 	<div class="row featured__filter" id="MixItUp48D1AC">
 		<?php
 		$obj		 = new Productos();
-		$productos	 = $obj->getProductos();
+        $descripcion = '';
+        $rubroID     = 0;
+        $categoriID  = 0;
+		if (isset($_GET['categoriaID'])){
+            $categoriID = $_GET['categoriaID'];
+
+		}
+		$productos	 = $obj->getProductos($descripcion,$rubroID,$categoriID);
 		foreach ($productos as $producto):
 		?>
 
@@ -33,7 +40,6 @@
 					<ul class="featured__item__pic__hover">
 						<?php echo '<li><a href="pro.php?id='.$producto["id"].'"><i class="fa fa-info"></i></a></li>' ;?>
 						<?php $action="'ADD'"; echo '<li><a  onclick="agregar('. $producto["id"].','.$action.')"><i class="fa fa-shopping-cart"></i></a></li>' ;?>
-
 
 					</ul>
 				</div>
