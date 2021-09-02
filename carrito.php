@@ -33,7 +33,11 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 //echo(enviar($vars, $url));
 
 	if(isset($_POST['productoid'])){
-        $superArray =array();
+        $superArray = array();
+		$cantidad   = 0;
+		$productoid = 0 ;
+		$productoid = $_POST['productoid'];
+		$cantidad   = $_POST['cantidad'];
 		$manejoCarrito = new ManejoCarrito();
 		$manejoCarrito->setCantidad($cantidad);
 		$manejoCarrito->setProductoId($productoid);
@@ -75,7 +79,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<div class="tabla-carro_">
+					<div class="shoping__cart__table">
 						<div id="tabla">
 						</div>
 					</div>
@@ -85,7 +89,6 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 					<div class="row">
 						<div class="col-lg-8 col-md-6">
 							<form role="form" id="contactForm" method="post" action="finalizar_compra.php">
-
 								<div class="form-group">
 									<label for="nombre">Nombre</label>
 									<input type="text" class="form-control" name="nombre" placeholder="Nombre" requiere>

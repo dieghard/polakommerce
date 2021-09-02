@@ -24,24 +24,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => 'ac05d039e7d68c4a20a9aceaef949b338b976f31',
+    'reference' => '26074c83c5b39eab1a1fb97afe5d5802cbde2f3c',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => 'ac05d039e7d68c4a20a9aceaef949b338b976f31',
+      'reference' => '26074c83c5b39eab1a1fb97afe5d5802cbde2f3c',
     ),
     'doctrine/annotations' => 
     array (
