@@ -38,9 +38,9 @@ class Rubros{
          endwhile;
 
          return $this->datos;
-    }
+  }
 
-    public function getRubrosPorId($id=null){
+  public function getRubrosPorId($id=null){
 
             $id=(int)$id;
           //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
@@ -76,9 +76,7 @@ class Rubros{
     }
 
 	private function _redirect(){
-
 		return header("Location:index.php");
-
 	}
 
 }

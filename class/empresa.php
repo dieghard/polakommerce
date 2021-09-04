@@ -18,7 +18,7 @@ class Empresa{
 	private $maneja_mercado_pago;
 	private $mercado_pago_access_token;
 	private $mercado_pago_key;
-  private $realiza_envios_gratis_mayor_a;
+     private $realiza_envios_gratis_mayor_a;
 
   const TABLA = 'empresa';
 
