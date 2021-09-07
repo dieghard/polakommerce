@@ -1,13 +1,24 @@
 <?php
-// SDK de Mercado Pago
-require __DIR__ .  '/vendor/autoload.php';
- MercadoPago\SDK::setAccessToken('TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701'); //ACCES TOKEN
-  $preference = new MercadoPago\Preference();  // Crea un ítem en la preferencia
+	require_once("class/empresa.php");
+	require_once("class/productos.php");
+    $empresa = new Empresa();
+    $empresa = $empresa->Empresa();
 
-  $preference->back_urls = array (
-   	"success" => "http://localhost:8080/polakommerce/fin.php?success=true&pagado=true",
-   	"failure" => "http://localhost:8080/polakommerce/errorpago.php?success=false&pagado=false",
-   	"pending" =>"http://localhost:8080/polakommerce/pendiente.php&success=true&pagado=false"
+// SDK de Mercado Pago
+
+	require __DIR__ .  '/vendor/autoload.php';
+	$accessTocken =$empresa->getMercado_pago_access_token()  ;
+
+	//MercadoPago\SDK::setAccessToken('TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701'); //ACCES TOKEN
+
+	MercadoPago\SDK::setAccessToken($accessTocken); //ACCES TOKEN
+  	$preference = new MercadoPago\Preference();  // Crea un ítem en la preferencia
+
+
+  	$preference->back_urls = array (
+   			"success" => "http://localhost:8080/polakommerce/fin.php?success=true&pagado=true",
+   			"failure" => "http://localhost:8080/polakommerce/errorpago.php?success=false&pagado=false",
+   			"pending" =>"http://localhost:8080/polakommerce/pendiente.php&success=true&pagado=false"
   );
 
 /*
@@ -28,37 +39,37 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 //COMPRADOR
 //{"id":811476812,"nickname":"TESTQVTWE78W","password":"qatest197","site_status":"active","email":"test_user_98042701@testuser.com"}
 //echo(enviar($vars, $url));
+  session_start();
 
-
-	if(isset($_POST['nombre'])):
+	if(!isset($_POST['nombre'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['apellido'])):
+	if(!isset($_POST['apellido'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['dni'])):
+	if(!isset($_POST['dni'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['numero'])):
+	if(!isset($_POST['numero'])):
 		header("Location:carrito.php");
 	endif;
-
-	if(isset($_POST['pais'])):
+	/*
+	if(!isset($_POST['pais'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['direccion'])):
+	if(!isset($_POST['direccion'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['ciudad'])):
+	if(!isset($_POST['ciudad'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['codigoPostal'])):
+	if(!isset($_POST['codigoPostal'])):
 		header("Location:carrito.php");
 	endif;
-	if(isset($_POST['email'])):
+	if(!isset($_POST['email'])):
 		header("Location:carrito.php");
 	endif;
-
+*/
 	$_SESSION['cliente']['nombre'] = $_POST['nombre'];
 	$_SESSION['cliente']['apellido'] = $_POST['apellido'];
 	$_SESSION['cliente']['pais'] = $_POST['pais'];
@@ -72,9 +83,9 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 	$_SESSION['cliente']['email'] = $_POST['email'];
 	$_SESSION['cliente']['dni'] = $_POST['dni'];
 	$_SESSION['cliente']['observaciones'] ='';
-if(!isset($_POST['observaciones'])):
-	$_SESSION['cliente']['observaciones'] = $_POST['observaciones'];
-endif;
+	if(!isset($_POST['observaciones'])):
+		$_SESSION['cliente']['observaciones'] = $_POST['observaciones'];
+	endif;
 
 
 	$datosCompra = array();
@@ -117,23 +128,23 @@ endif;
     $preference->prayer =  $payer;
   	$preference->save();
 
-
+	$key =  $empresa->getmercado_pago_key();
 ?>
 <html>
 <?php require_once("head.php"); ?>
-<script src="js/finishhim.js"></script>
+<!--<script src="js/finishhim.js"></script>-->
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <body>
 
 	<script>
-	const mp = new MercadoPago('TEST-f23a2997-302e-41c4-ad53-2355f4effee7', {
+	const mp = new MercadoPago('<?php echo $key ?>', {
 		locale: 'es-AR'
 	});
 
 	const checkout = mp.checkout({
 		preference: {
-			id: '<?php echo $preference->id ?>'
+			id: '<?php echo $preference->id ;?>'
 		},
 		autoOpen: true, // Habilita la apertura automática del Checkout Pro
 	});

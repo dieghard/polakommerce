@@ -2,8 +2,8 @@
 
 class Empresa{
 
-  private $id   ;
-  private $descripcion;
+     private $id   ;
+     private $descripcion;
 	private $direccion;
 	private $cuit;
 	private $localidad;
@@ -13,7 +13,7 @@ class Empresa{
 	private $facebook_link;
 	private $twitter_link;
 	private $instagram_link;
-  private $pinterest_link;
+     private $pinterest_link;
 	private $logo;
 	private $maneja_mercado_pago;
 	private $mercado_pago_access_token;
