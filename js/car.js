@@ -1,9 +1,9 @@
-window.addEventListener("load", function (event) {
-	show_cart();
+window.addEventListener("load", function(event) {
+    show_cart();
 
 });
 
-function pagar(){
+function pagar() {
     // cancels the form submission
     event.preventDefault();
     console.log('ESTOY PAGANDO');
@@ -17,17 +17,17 @@ function pagar(){
         'pais': document.getElementById("pais").value,
         'direccion': document.getElementById("direccion").value,
 
-     };
+    };
 
-     fetch(strUrl, {
+    fetch(strUrl, {
             method: 'POST',
             body: JSON.stringify(object)
         })
         .then(response => response.json())
         .then(function(data) {
-             console.log(data);
-             if (data.success) {
-				 document.getElementById("tabla").innerHTML = data.tabla;
+            console.log(data);
+            if (data.success) {
+                document.getElementById("tabla").innerHTML = data.tabla;
             };
 
         })
@@ -36,22 +36,23 @@ function pagar(){
         });
 
 };
+
 function show_cart() {
 
-	var strUrl = "./drivercart/drivercart.php";
-     let object = {
-          'action' : 'SHOW_CART'
-     };
+    var strUrl = "./drivercart/drivercart.php";
+    let object = {
+        'action': 'SHOW_CART'
+    };
 
-     fetch(strUrl, {
+    fetch(strUrl, {
             method: 'POST',
             body: JSON.stringify(object)
         })
         .then(response => response.json())
         .then(function(data) {
-             console.log(data);
-             if (data.success) {
-				 document.getElementById("tabla").innerHTML = data.tabla;
+            console.log(data);
+            if (data.success) {
+                document.getElementById("tabla").innerHTML = data.tabla;
             };
 
         })

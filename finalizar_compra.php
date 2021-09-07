@@ -16,9 +16,10 @@
 
 
   	$preference->back_urls = array (
-   			"success" => "http://localhost:8080/polakommerce/fin.php?success=true&pagado=true",
-   			"failure" => "http://localhost:8080/polakommerce/errorpago.php?success=false&pagado=false",
-   			"pending" =>"http://localhost:8080/polakommerce/pendiente.php&success=true&pagado=false"
+   			"success" => "http://localhost/polakommerce/fin.php?success=true&pagado=true",
+   			"failure" => "http://localhost/polakommerce/fin.php??success=false&pagado=false",
+   			"pending" =>"http://localhost/polakommerce/fin.php?&success=true&pagado=false"
+
   );
 
 /*
@@ -38,6 +39,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 ////////////////////////////////////////////////////
 //COMPRADOR
 //{"id":811476812,"nickname":"TESTQVTWE78W","password":"qatest197","site_status":"active","email":"test_user_98042701@testuser.com"}
+ // TARJETA = "4075 5957 1648 3764"  VENCIMIENTO = 11/25  CODIGO = 123
 //echo(enviar($vars, $url));
   session_start();
 
@@ -76,6 +78,8 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 	$_SESSION['cliente']['direccion'] = $_POST['direccion'];
 	$_SESSION['cliente']['numero'] = $_POST['numero'];
 	$_SESSION['cliente']['codigoPostal'] = $_POST['codigoPostal'];
+	$_SESSION['cliente']['departamento'] = $_POST['departamento'];
+	 $_SESSION['cliente']['ciudad'] = $_POST['ciudad'];
 	$_SESSION['cliente']['telefono'] ='';
 	if(isset($_POST['telefono'])):
 		$_SESSION['cliente']['telefono'] = $_POST['telefono'];
@@ -129,6 +133,7 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
   	$preference->save();
 
 	$key =  $empresa->getmercado_pago_key();
+<<<<<<< HEAD
 ?>
 <html>
 <?php require_once("head.php"); ?>
@@ -137,18 +142,32 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
 
 <body>
 
-	<script>
-	const mp = new MercadoPago('<?php echo $key ?>', {
-		locale: 'es-AR'
-	});
+    <script>
+    const mp = new MercadoPago('<?php echo $key ?>', {
+        locale: 'es-AR'
+    });
 
-	const checkout = mp.checkout({
-		preference: {
-			id: '<?php echo $preference->id ;?>'
-		},
-		autoOpen: true, // Habilita la apertura automática del Checkout Pro
-	});
-	</script>
-	<!--<input type="button" id="checkout-open-radio" value="PAGAR" onclick="checkout.open()">-->
+    const checkout = mp.checkout({
+        preference: {
+            id: '<?php echo $preference->id ;?>'
+        },
+        autoOpen: true, // Habilita la apertura automática del Checkout Pro
+    });
+    </script>
+    <!--<input type="button" id="checkout-open-radio" value="PAGAR" onclick="checkout.open()">-->
 </body>
 <?php
+=======
+echo '<html>';
+require_once("head.php");
+echo '<script src="https://sdk.mercadopago.com/js/v2"></script>';
+echo '<body>';
+echo '	<script>';
+echo '	const mp = new MercadoPago("'.$key.'", {';
+echo "			locale: 'es-AR'	});";
+echo '	const checkout = mp.checkout({';
+echo "			preference: {id:'".$preference->id ."'},autoOpen: true});";
+echo '	</script>';
+echo '	 <a href="index.php" class="primary-btn cart-btn">volver al inicio</a>';
+echo '	</body>';
+>>>>>>> b928f5d8284369194ea833ec4c22b5cb22a69664
