@@ -133,31 +133,6 @@ TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701
   	$preference->save();
 
 	$key =  $empresa->getmercado_pago_key();
-<<<<<<< HEAD
-?>
-<html>
-<?php require_once("head.php"); ?>
-<!--<script src="js/finishhim.js"></script>-->
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
-<body>
-
-    <script>
-    const mp = new MercadoPago('<?php echo $key ?>', {
-        locale: 'es-AR'
-    });
-
-    const checkout = mp.checkout({
-        preference: {
-            id: '<?php echo $preference->id ;?>'
-        },
-        autoOpen: true, // Habilita la apertura automática del Checkout Pro
-    });
-    </script>
-    <!--<input type="button" id="checkout-open-radio" value="PAGAR" onclick="checkout.open()">-->
-</body>
-<?php
-=======
 echo '<html>';
 require_once("head.php");
 echo '<script src="https://sdk.mercadopago.com/js/v2"></script>';
@@ -170,4 +145,3 @@ echo "			preference: {id:'".$preference->id ."'},autoOpen: true});";
 echo '	</script>';
 echo '	 <a href="index.php" class="primary-btn cart-btn">volver al inicio</a>';
 echo '	</body>';
->>>>>>> b928f5d8284369194ea833ec4c22b5cb22a69664
