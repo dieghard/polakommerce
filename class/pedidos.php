@@ -285,7 +285,9 @@ CLASS Pedidos{
         return 'INSERT INTO pedidos_det( pedido_id,  producto_id,cantidad,  precio, porcentaje_descuento, descuento, subtotal, total )
                 VALUES                 (:pedido_id,:producto_id,:cantidad,:precio,:porcentaje_descuento, :descuento,:subtotal,:total)';
     }
+    public function enviarMails(){
 
+    }
     public function guardar(){
 
         $superArray =  array();

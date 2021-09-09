@@ -21,6 +21,15 @@ class Empresa{
 	private $mercado_pago_access_token;
 	private $mercado_pago_key;
      private $realiza_envios_gratis_mayor_a;
+     private $email_is_smtp ;
+     private $email_host;
+     private $email_smtp_auth;
+     private $email_username;
+     private $email_password;
+     private $email_smtpSecure;
+     private $email_port;
+     private $paginaEnabled;
+
 
   const TABLA = 'empresa';
 
@@ -94,8 +103,6 @@ class Empresa{
        $this->telefonoWs = $telefonoWs;
   }
 
-
-
   public function getFacebook_link() {
        return $this->facebook_link;
   }
@@ -145,14 +152,14 @@ class Empresa{
        $this->mercado_pago_access_token = $mercado_pago_access_token;
   }
 
-	public function getmercado_pago_key() {
+ public function getmercado_pago_key() {
        return $this->mercado_pago_key;
   }
   public function setmercado_pago_key($mercado_pago_key) {
        $this->mercado_pago_key = $mercado_pago_key;
   }
 
-	public function getRealizaEnvios() {
+public function getRealizaEnvios() {
       $dato = '';
       if ($this->realiza_envios_gratis_mayor_a >0) {
         $dato = '<li>envios gratis por compras mayores a $' . $this->realiza_envios_gratis_mayor_a . '</li>';
@@ -162,6 +169,67 @@ class Empresa{
   public function setRealizaEnvios($realiza_envios_gratis_mayor_a) {
        $this->realiza_envios_gratis_mayor_a = $realiza_envios_gratis_mayor_a;
   }
+
+  public function getEmail_is_smtp() {
+     return $this->email_is_smtp;
+  }
+  public function setEmail_is_smtp($email_is_smtp) {
+     $this->email_is_smtp = $email_is_smtp;
+  }
+
+  public function getEmail_host() {
+     return $this->email_host;
+  }
+  public function setEmail_host($email_host) {
+     $this->email_host = $email_host;
+  }
+
+  public function getEmail_smtp_auth() {
+     return $this->email_smtp_auth;
+  }
+  public function setEmail_smtp_auth($email_smtp_auth) {
+     $this->email_smtp_auth = $email_smtp_auth;
+  }
+
+  public function getEmail_username() {
+     return $this->email_username;
+  }
+  public function setEmail_username($email_username) {
+     $this->email_username = $email_username;
+  }
+
+
+  public function getEmail_password() {
+     return $this->email_password;
+  }
+  public function setEmail_password($email_password) {
+     $this->email_password = $email_password;
+  }
+
+  public function getEmail_smtpSecure() {
+     return $this->email_smtpSecure;
+  }
+  public function setEmail_smtpSecure($email_smtpSecure) {
+     $this->email_smtpSecure = $email_smtpSecure;
+  }
+
+  public function getEmail_port() {
+     return $this->email_port;
+  }
+  public function setEmail_port($email_port) {
+     $this->email_port = $email_port;
+  }
+
+  public function getPaginaEnabled() {
+     return $this->paginaEnabled;
+  }
+  public function setPaginaEnabled($paginaEnabled) {
+     $this->paginaEnabled = $paginaEnabled;
+  }
+
+
+
+
 
   Public function getLinksRedes (){
     $dato = '';
@@ -201,7 +269,16 @@ class Empresa{
                                 string  $maneja_mercado_pago = null ,
                                 string $mercado_pago_access_token = null ,
                             	  string  $mercado_pago_key = null,
-                                 $realiza_envios_gratis = 0 ){
+                                        $realiza_envios_gratis = 0,
+                                        $email_is_smtp = -1,
+                                string  $email_host ='',
+                                        $email_smtp_auth = -1,
+                                string  $email_username,
+                                string  $email_password,
+                                string  $email_smtpSecure ='TLS',
+                                string    $email_port,
+                                        $paginaEnabled = -1,
+ ){
 
         $this->id = $id   ;
         $this->descripcion = $descripcion;

@@ -63,19 +63,18 @@
 <?php require_once("head.php"); ?>
 
 <body>
-
     <?php 	if ($success):
 
-	 	$pedidos     = new Pedidos($_id,  $_fecha, $_nombre, $_apellido     ,
-								$_dni, $_pais , $_direccion    ,
-								$_numero       ,$_departamento , $_ciudad,
-								$_codPos       ,
-								$_telefono     ,
-								$_email        ,
-								$_observaciones,
-								$_estado       ,
-								$_codigoDescuento,$_pagado,
-								$_subtotal, $_descuento, $_total );
+	 		$pedidos     = new Pedidos($_id,  $_fecha, $_nombre, $_apellido     ,
+										$_dni, $_pais , $_direccion    ,
+										$_numero       ,$_departamento , $_ciudad,
+										$_codPos       ,
+										$_telefono     ,
+										$_email        ,
+										$_observaciones,
+										$_estado       ,
+										$_codigoDescuento,$_pagado,
+										$_subtotal, $_descuento, $_total );
 			$arr = $pedidos->guardar();
 			if ($arr['success']):
 				echo '<br>';
@@ -83,6 +82,7 @@
 				echo 'Nos pondremos en contaco y te enviaremos la compra a : ' .$_SESSION['cliente']['direccion'] . ' - CP(' . $_SESSION['cliente']['codigoPostal'] . ')';
 				echo '<br>';
 				echo '<br>';
+				$arr = $pedidos->enviarMails();
 				unset($_SESSION['cliente']);
 				unset($_SESSION['carro']);
 			endif;

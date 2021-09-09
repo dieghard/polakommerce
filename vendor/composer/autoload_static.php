@@ -10,6 +10,7 @@ class ComposerStaticInite39839cd86459ead6a7e4d6af5e3d1e8
         'P' => 
         array (
             'Psr\\Cache\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -31,6 +32,10 @@ class ComposerStaticInite39839cd86459ead6a7e4d6af5e3d1e8
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'MercadoPago\\' => 
         array (
