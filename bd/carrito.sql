@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2021-09-07 22:36:18
+Date: 2021-09-08 21:50:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,9 +32,9 @@ CREATE TABLE `categorias` (
 -- ----------------------------
 -- Records of categorias
 -- ----------------------------
-INSERT INTO `categorias` VALUES ('1', 'Frutas', 'Frutas de estación', 'Frutas Especialmente Seleccionadas', 'img/categoras/frutas.jpg', '-1');
-INSERT INTO `categorias` VALUES ('2', 'Verduras', 'Verduras Seleccionadas', 'Verduras Seleccionadas', 'img/categoras/verduras.jpg', '-1');
-INSERT INTO `categorias` VALUES ('3', 'Otra Categoria', 'Otra Categoria', null, 'img/categoras/otracategoria.jpg', '-1');
+INSERT INTO `categorias` VALUES ('1', 'Frutas', 'Frutas de estación', 'Frutas Especialmente Seleccionadas', 'img/categorias/frutas.jpg', '-1');
+INSERT INTO `categorias` VALUES ('2', 'Verduras', 'Verduras Seleccionadas', 'Verduras Seleccionadas', 'img/categorias/verduras.jpg', '-1');
+INSERT INTO `categorias` VALUES ('3', 'Otra Categoria', 'Otra Categoria', null, 'img/categorias/otracategoria.jpg', '-1');
 
 -- ----------------------------
 -- Table structure for empresa
@@ -47,8 +47,10 @@ CREATE TABLE `empresa` (
   `cuit` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `localidad` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `codigo_postal` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `telefono` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `telefono_ws` varchar(100) COLLATE utf8_spanish2_ci DEFAULT '',
   `facebook_link` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `twitter_link` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `instagram_link` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -64,7 +66,7 @@ CREATE TABLE `empresa` (
 -- ----------------------------
 -- Records of empresa
 -- ----------------------------
-INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', '9 de Julio 666', null, 'BienAlSur', 'Santa Cruz', 'gitano@columelverdulero.com.ar', '3385522998', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'X', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000');
+INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000');
 
 -- ----------------------------
 -- Table structure for pedidos
@@ -93,11 +95,12 @@ CREATE TABLE `pedidos` (
   `total` float DEFAULT NULL,
   `codigoDescuento` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos
 -- ----------------------------
+INSERT INTO `pedidos` VALUES ('1', '2021-09-08 19:29:32', '2021-09-09', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio ', ' 749', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '100', '0', '100', 'SI');
 
 -- ----------------------------
 -- Table structure for pedidos_det
@@ -114,11 +117,14 @@ CREATE TABLE `pedidos_det` (
   `porcentaje_descuento` float DEFAULT NULL,
   `total` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos_det
 -- ----------------------------
+INSERT INTO `pedidos_det` VALUES ('1', '1', '3', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('2', '1', '13', '2', '30', '60', '0', '0', '60');
+INSERT INTO `pedidos_det` VALUES ('3', '1', '1', '1', '10', '10', '0', '0', '10');
 
 -- ----------------------------
 -- Table structure for perfiles
@@ -141,6 +147,7 @@ DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `producto` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `subtitulo` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `precio` float DEFAULT NULL,
   `vig` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `imagenPresentacion` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -163,20 +170,20 @@ CREATE TABLE `productos` (
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES ('1', 'Ajo', '10', null, 'ajo_1.jpg', null, null, null, '1', '1', null, null, '-1', '0', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('2', 'Berenjena', '20', null, 'berenjenas_1.jpg', null, null, null, '1', '2', null, null, '-1', '-1', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('3', 'Brocolli', '30', null, 'brocolo_1.jpg', null, null, null, '3', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('4', 'Lechuga', '40', null, 'lechuga_1.jpg', null, null, null, '2', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('5', 'Manzana Roja', '10', null, 'manzana-roja-2.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('6', 'Manzana Verde', '20', null, 'manzana-verde-1.jpg', null, null, null, '2', '2', null, null, '-1', '-1', null, '100', null, null);
-INSERT INTO `productos` VALUES ('7', 'Morron', '30', null, 'morron_1.jpg', null, null, null, '1', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('8', 'Peras', '40', null, 'peras_1.jpg', null, null, null, '2', '2', null, null, '-1', '-1', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('9', 'Uvas', '50', null, 'uvas_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('10', 'Zanhorias', '60', null, 'Zanahorias_1.jpg', null, null, null, '3', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('11', 'Zapallos', '10', null, 'zapallo_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('12', 'Remolachas', '20', null, 'remolacha_1.jpg', null, null, null, '1', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('13', 'Espinacas', '30', null, 'espinacas_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
-INSERT INTO `productos` VALUES ('14', 'Papas', '30', null, 'papas_1.jpg', null, null, null, '1', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('1', 'Ajo', null, '10', null, 'ajo_1.jpg', null, null, null, '1', '1', null, null, '-1', '0', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('2', 'Berenjena', null, '20', null, 'berenjenas_1.jpeg', null, null, null, '1', '2', null, null, '-1', '-1', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('3', 'Brocolli', null, '30', null, 'brocolo_1.jpg', null, null, null, '3', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('4', 'Lechuga', null, '40', null, 'lechuga_1.jpg', null, null, null, '2', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('5', 'Manzana Roja', null, '10', null, 'manzana-roja-2.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('6', 'Manzana Verde', null, '20', null, 'manzana-verde-1.jpg', null, null, null, '2', '2', null, null, '-1', '-1', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('7', 'Morron', null, '30', null, 'morron_1.jpg', null, null, null, '1', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('8', 'Peras', null, '40', null, 'peras_1.jpg', null, null, null, '2', '2', null, null, '-1', '-1', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('9', 'Uvas', null, '50', null, 'uvas_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('10', 'Zanhorias', null, '60', null, 'Zanahorias_1.jpg', null, null, null, '3', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('11', 'Zapallos', null, '10', null, 'zapallo_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('12', 'Remolachas', null, '20', null, 'remolacha_1.jpg', null, null, null, '1', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('13', 'Espinacas', null, '30', null, 'espinacas_1.jpg', null, null, null, '2', '1', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
+INSERT INTO `productos` VALUES ('14', 'Papas', null, '30', null, 'papas_1.jpg', null, null, null, '1', '2', null, null, '-1', '10', null, '100', null, 'Peso expresados en gramos');
 
 -- ----------------------------
 -- Table structure for productos_fotos_videos

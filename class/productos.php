@@ -25,7 +25,7 @@ class Productos{
               productos.activo,
               IFNULL(productos.conStock,1) as conStock,
               productos.conDescuento,
-              IFNULL(productos.peso,'- kg') as peso,
+              IFNULL(productos.peso,'-') as peso,
               IFNULL(productos.descripcion,'') as descripcion,
               IFNULL(productos.informacion,'') as informacion,
               IFNULL(categorias.titulo,'') as categoria,
@@ -33,7 +33,8 @@ class Productos{
         from productos
         LEFT JOIN categorias ON categorias.id = productos.categoriaID
         LEFT JOIN rubros ON rubros.id = productos.rubroID
-        WHERE 1=1 ";
+        WHERE 1=1
+        AND productos.activo = -1 ";
 
 
     return $strSql;

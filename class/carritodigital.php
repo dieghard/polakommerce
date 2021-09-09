@@ -8,10 +8,8 @@ class ManejoCarrito{
 	private $_TotalAPagar    ;
 
 	public function __construct(){
-
 		//require_once("../config.php");
-
-		 require_once($_SESSION['CLASS_PATH'].'productos.php');
+		require_once($_SESSION['CLASS_PATH'].'productos.php');
 		require_once 'conexion.php';
 	}
 
@@ -110,10 +108,11 @@ class ManejoCarrito{
             $tablaPrecio ='		<td class="shoping__cart__price"><h5>$'.$productos->precio.'</h5></td>';
             $tabla .= $tablaPrecio;
 			$tablaCantidad =' <td class="shoping__cart__quantity">
-								<input onchange="" type="number" value="'.$subarray["cantidad"] .'" class="form-control">
+								<h5>$'.$subarray["cantidad"].'</h5>
+								<!--<input onchange="" type="number" value="'.$subarray["cantidad"] .'" class="form-control">
 								<img onclick="" src="img/aumentar.png" alt="aumentar" title="aumentar">
 								<img onclick="" src="img/restar.png" alt="restar" title="restar">
-								<img onclick="" src="img/eliminar.png" alt="eliminar" title="eliminar">
+								<img onclick="" src="img/eliminar.png" alt="eliminar" title="eliminar">-->
 							</td>';
             $tabla .=$tablaCantidad;
 			$tablaSubtotal = '	<td class="shoping__cart__total">$'.$subarray["cantidad"] * $productos->precio .'</td></tr>';

@@ -1,18 +1,18 @@
 <div class="container">
-	<div class="row">
-		<div class="categories__slider owl-carousel owl-loaded owl-drag">
-			<div class="owl-stage-outer">
-				<div class="owl-stage" style="transform: translate3d(-1755px, 0px, 0px); transition: all 1.2s ease 0s; width: 3803px;">
-					<?php
+    <div class="row">
+        <div class="categories__slider owl-carousel owl-loaded owl-drag">
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(-1755px, 0px, 0px); transition: all 1.2s ease 0s; width: 3803px;">
+                    <?php
                       $categoriaslider = categoriaFrame();
                       echo  $categoriaslider;
                     ?>
-				</div>
-			</div>
-			<div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span class="fa fa-angle-left"><span></span></span></button><button type="button" role="presentation" class="owl-next"><span class="fa fa-angle-right"><span></span></span></button></div>
-			<div class="owl-dots disabled"></div>
-		</div>
-	</div>
+                </div>
+            </div>
+            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span class="fa fa-angle-left"><span></span></span></button><button type="button" role="presentation" class="owl-next"><span class="fa fa-angle-right"><span></span></span></button></div>
+            <div class="owl-dots disabled"></div>
+        </div>
+    </div>
 </div>
 <?php
 

@@ -12,7 +12,7 @@ class Categorias{
 
 		$strSql="	SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
 					FROM categorias
-					WHERE categorias.activo = 1
+					WHERE categorias.activo = -1
 
 					ORDER BY categorias.titulo";
 
@@ -30,6 +30,9 @@ class Categorias{
 
             $trace = $e->getTrace();
             $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
+            var_dump($trace);
+            die('ERROR EN CATEGORIAS');
+            return $superArray['mensaje'];
         }
 
          while ($row=$stmt->fetch()) :

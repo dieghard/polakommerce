@@ -8,8 +8,10 @@ class Empresa{
 	private $cuit;
 	private $localidad;
 	private $provincia;
-	private $email;
+	private $codigoPostal;
+     private $email;
 	private $telefono;
+     private $telefonoWs;
 	private $facebook_link;
 	private $twitter_link;
 	private $instagram_link;
@@ -64,6 +66,13 @@ class Empresa{
        $this->provincia = $provincia;
   }
 
+  public function getCodigoPostal() {
+       return $this->codigoPostal;
+  }
+  public function setCodigoPostal($codigoPostal) {
+       $this->codigoPostal = $codigoPostal;
+  }
+
   public function getEmail() {
        return $this->email;
   }
@@ -77,6 +86,15 @@ class Empresa{
   public function setTelefono($telefono) {
        $this->telefono = $telefono;
   }
+
+  public function getTelefonoWs() {
+       return $this->telefonoWs;
+  }
+  public function setTelefonoWs($telefonoWs) {
+       $this->telefonoWs = $telefonoWs;
+  }
+
+
 
   public function getFacebook_link() {
        return $this->facebook_link;
@@ -171,8 +189,10 @@ class Empresa{
                                 string $cuit = null,
                                 string $localidad = null,
                                 string $provincia = null,
+                                string $codigoPostal = null,
                                 string $email = null,
                                 string $telefono = null,
+                                string $telefonoWs = null,
                                 string $facebook_link = null ,
                                 string $twitter_link = null ,
                                 string $instagram_link = null ,
@@ -189,8 +209,10 @@ class Empresa{
         $this->cuit = $cuit;
         $this->localidad = $localidad;
         $this->provincia = $provincia;
+        $this->codigoPostal = $codigoPostal;
         $this->email = $email;
         $this->telefono = $telefono;
+        $this->telefonoWs = $telefonoWs;
         $this->facebook_link = $facebook_link;
         $this->twitter_link = $twitter_link;
         $this->instagram_link = $instagram_link;
@@ -222,8 +244,10 @@ class Empresa{
                               $registro['cuit'],
                               $registro['localidad'],
                               $registro['provincia'],
+                              $registro['codigo_postal'],
                               $registro['email'],
                               $registro['telefono'],
+                              $registro['telefono_ws'],
                               $registro['facebook_link'],
                               $registro['twitter_link'],
                               $registro['instagram_link'],
@@ -248,24 +272,26 @@ class Empresa{
 	}
 
   private function sqlEmpresa(){
-    return "SELECT empresa.id, IFNULL(empresa.descripcion,'')as descripcion,
-            IFNULL(empresa.direccion,'')as direccion,
-            IFNULL(empresa.cuit,'')as cuit,
-            IFNULL(empresa.localidad,'')as localidad ,
-            IFNULL(empresa.provincia,'')as provincia,
-            IFNULL(empresa.email,'')as email,
-            IFNULL(empresa.telefono,'')as telefono,
-            IFNULL(empresa.facebook_link,'')as facebook_link,
-            IFNULL(empresa.twitter_link,'')as twitter_link,
-            IFNULL(empresa.instagram_link,'')as instagram_link,
-            IFNULL(empresa.pinterest_link,'')as pinterest_link,
-            IFNULL(empresa.logo,'')as logo,
-            IFNULL(empresa.maneja_mercado_pago,'')as maneja_mercado_pago,
-            IFNULL(empresa.mercado_pago_access_token,'')as mercado_pago_access_token,
-            IFNULL(empresa.mercado_pago_key,'')as  mercado_pago_key ,
-            IFNULL(empresa.realiza_envios_gratis ,0) as  realiza_envios_gratis
 
-          FROM  ". self::TABLA ;
+    return "   SELECT empresa.id, IFNULL(empresa.descripcion,'')as descripcion,
+               IFNULL(empresa.direccion,'')as direccion,
+               IFNULL(empresa.cuit,'')as cuit,
+               IFNULL(empresa.localidad,'')as localidad ,
+               IFNULL(empresa.provincia,'')as provincia,
+               IFNULL(empresa.codigo_postal,'')as codigo_postal,
+               IFNULL(empresa.email,'')as email,
+               IFNULL(empresa.telefono,'')as telefono,
+               IFNULL(empresa.telefono_ws,'')as telefono_ws,
+               IFNULL(empresa.facebook_link,'')as facebook_link,
+               IFNULL(empresa.twitter_link,'')as twitter_link,
+               IFNULL(empresa.instagram_link,'')as instagram_link,
+               IFNULL(empresa.pinterest_link,'')as pinterest_link,
+               IFNULL(empresa.logo,'')as logo,
+               IFNULL(empresa.maneja_mercado_pago,'')as maneja_mercado_pago,
+               IFNULL(empresa.mercado_pago_access_token,'')as mercado_pago_access_token,
+               IFNULL(empresa.mercado_pago_key,'')as  mercado_pago_key ,
+               IFNULL(empresa.realiza_envios_gratis ,0) as  realiza_envios_gratis
+               FROM  ". self::TABLA ;
   }
 
   public static function recuperarTodos(){
