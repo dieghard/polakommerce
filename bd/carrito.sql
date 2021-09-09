@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2021-09-08 21:50:12
+Date: 2021-09-08 23:12:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,13 +60,21 @@ CREATE TABLE `empresa` (
   `mercado_pago_access_token` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `mercado_pago_key` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `realiza_envios_gratis` double DEFAULT NULL,
+  `email_is_smtp` tinyint(4) DEFAULT -1,
+  `email_host` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `email_smtp_auth` tinyint(4) DEFAULT -1,
+  `email_username` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `email_password` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `email_smtpSecure` varchar(10) COLLATE utf8_spanish2_ci DEFAULT 'TLS',
+  `email_port` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `paginaEnabled` tinyint(4) DEFAULT -1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of empresa
 -- ----------------------------
-INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000');
+INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', null, '-1', null, null, 'TLS', null, '-1');
 
 -- ----------------------------
 -- Table structure for pedidos
