@@ -6,7 +6,6 @@ window.addEventListener("load", function(event) {
 function pagar() {
     // cancels the form submission
     event.preventDefault();
-    console.log('ESTOY PAGANDO');
 
     var strUrl = "./finalizar_compra.php";
 

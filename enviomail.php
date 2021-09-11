@@ -44,8 +44,8 @@
 
                 //Recipients
                 $mail->setFrom($empresa->getEmail_username(), $empresa->getDescripcion());
-                $mail->addAddress($empresa->getEmail_username(), $empresa->getDescripcion());     //Add a recipient
-                $mail->addReplyTo($_SESSION['cliente']['email'] , $_SESSION['cliente']['nombre'] . ' ' . $_SESSION['cliente']['apellido'] );
+                $mail->addAddress($_SESSION['cliente']['email'], $_SESSION['cliente']['nombre'] . ' ' . $_SESSION['cliente']['apellido']);     //Add a recipient
+                $mail->addReplyTo( $empresa->getEmail_username(), $empresa->getDescripcion() );
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
@@ -56,7 +56,7 @@
                 $superArray['envioMail'] = true;
                 return $superArray;
             } catch (Exception $e) {
-                $superArray['mensaje'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                $superArray['mensaje'] = "El mensaje no pudo ser enviado. Error de mail: {$mail->ErrorInfo}";
                 return $superArray;
             }
         }

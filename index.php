@@ -29,5 +29,7 @@
         <?php require_once("features.php"); ?>
     </section>
     <?php require_once("footer.php") ?>
+    <!-- Código de instalación Cliengo para Diego Sebastian Markiewicz -->
+
 </body>
 </html>

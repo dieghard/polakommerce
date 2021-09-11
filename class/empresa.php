@@ -29,6 +29,9 @@ class Empresa{
      private $email_smtpSecure;
      private $email_port;
      private $paginaEnabled;
+     private $cliengo_chat_token_1;
+     private $cliengo_chat_token_2 ;
+
 
 
   const TABLA = 'empresa';
@@ -227,6 +230,20 @@ public function getRealizaEnvios() {
      $this->paginaEnabled = $paginaEnabled;
   }
 
+  public function getCliengo_chat_token_1() {
+     return $this->cliengo_chat_token_1;
+  }
+  public function setCliengo_chat_token_1($cliengo_chat_token_1) {
+     $this->cliengo_chat_token_1 = $cliengo_chat_token_1;
+  }
+
+  public function getCliengo_chat_token_2() {
+     return $this->cliengo_chat_token_2;
+  }
+  public function setCliengo_chat_token_2($cliengo_chat_token_2) {
+     $this->cliengo_chat_token_2 = $cliengo_chat_token_2;
+  }
+
 
   Public function getLinksRedes (){
     $dato = '';
@@ -275,7 +292,9 @@ public function getRealizaEnvios() {
                                 string $email_smtpSecure ='TLS',
                                 string $email_port = '',
                                        $paginaEnabled = -1,
- ){
+                                string $cliengo_chat_token_1 = '',
+                                string $cliengo_chat_token_2 = '',)
+     {
 
         $this->id             = $id   ;
         $this->descripcion    = $descripcion;
@@ -304,7 +323,8 @@ public function getRealizaEnvios() {
         $this->email_smtpSecure = $email_smtpSecure;
         $this->email_port       = $email_port ;
         $this->paginaEnabled    = $paginaEnabled ;
-
+        $this->cliengo_chat_token_1 = $cliengo_chat_token_1 ;
+        $this->cliengo_chat_token_2 = $cliengo_chat_token_2;
         require_once 'conexion.php';
 
   }
@@ -348,7 +368,9 @@ public function getRealizaEnvios() {
                               $registro['email_password'],
                               $registro['email_smtpSecure'],
                               $registro['email_port'],
-                              $registro['paginaEnabled']
+                              $registro['paginaEnabled'],
+                              $registro['cliengo_chat_token_1'],
+                              $registro['cliengo_chat_token_2']
                          );
             }else{
 
@@ -390,7 +412,10 @@ public function getRealizaEnvios() {
                IFNULL(empresa.email_password,'') as email_password,
                IFNULL(empresa.email_smtpSecure,'')  as email_smtpSecure,
                IFNULL(empresa.email_port,'')  as email_port ,
-               IFNULL(empresa.paginaEnabled,-1)as paginaEnabled
+               IFNULL(empresa.paginaEnabled,-1)as paginaEnabled,
+               IFNULL(empresa.cliengo_chat_token_1,'')as cliengo_chat_token_1,
+               IFNULL(empresa.cliengo_chat_token_2,'')as cliengo_chat_token_2
+
                FROM  ". self::TABLA ;
   }
 

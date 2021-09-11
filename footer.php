@@ -91,6 +91,13 @@
 </footer>
 <!-- Footer Section End -->
 
+<?php /* chat bot de Cliengo*/
+      if (strlen($_SESSION['empresa']->getCliengo_chat_token_1()) > 0 && strlen($_SESSION['empresa']->getCliengo_chat_token_2() > 0)  ) :
+    $strToken =  $_SESSION['empresa']->getCliengo_chat_token_1() . '/'. $_SESSION['empresa']->getCliengo_chat_token_2();
+
+    echo'<script type="text/javascript">(function () { var ldk = document.createElement("script"); ldk.type = "text/javascript"; ldk.async = true; ldk.src = "https://s.cliengo.com/weboptimizer/'.$strToken.'.js?platform=view_installation_code"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ldk, s); })();</script>';
+
+endif;?>
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
