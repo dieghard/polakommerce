@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2021-09-10 09:21:00
+Date: 2021-09-11 16:12:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,13 +68,15 @@ CREATE TABLE `empresa` (
   `email_smtpSecure` varchar(10) COLLATE utf8_spanish2_ci DEFAULT 'TLS',
   `email_port` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `paginaEnabled` tinyint(4) DEFAULT -1,
+  `cliengo_chat_token_1` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `cliengo_chat_token_2` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of empresa
 -- ----------------------------
-INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', 'smtp.gmail.com', '-1', null, null, 'TLS', null, '-1');
+INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', 'smtp.gmail.com', '-1', 'markiewiczdiego@gmail.com', 'Die*666666', 'TLS', '587', '-1', '59aee209e4b0574792f3f52a', '59aee218e4b0edbe887265d3');
 
 -- ----------------------------
 -- Table structure for pedidos
@@ -103,12 +105,16 @@ CREATE TABLE `pedidos` (
   `total` float DEFAULT NULL,
   `codigoDescuento` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos
 -- ----------------------------
 INSERT INTO `pedidos` VALUES ('1', '2021-09-08 19:29:32', '2021-09-09', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio ', ' 749', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '100', '0', '100', 'SI');
+INSERT INTO `pedidos` VALUES ('2', '2021-09-10 22:28:57', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'ARGENTINA', '9 de Julio', '749', '', 'General Levalle', '6132', '3385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '310', '0', '310', 'SI');
+INSERT INTO `pedidos` VALUES ('3', '2021-09-10 22:30:41', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'ARGENTINA', '9 de Julio', '749', '', 'General Levalle', '6132', '3385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '310', '0', '310', 'SI');
+INSERT INTO `pedidos` VALUES ('4', '2021-09-10 22:32:49', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '210', '0', '210', 'SI');
+INSERT INTO `pedidos` VALUES ('5', '2021-09-10 22:37:17', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '210', '0', '210', 'SI');
 
 -- ----------------------------
 -- Table structure for pedidos_det
@@ -124,8 +130,12 @@ CREATE TABLE `pedidos_det` (
   `descuento` float DEFAULT NULL,
   `porcentaje_descuento` float DEFAULT NULL,
   `total` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  PRIMARY KEY (`id`),
+  KEY `fk_pedidos_det_pedidos_1` (`pedido_id`),
+  KEY `fk_productoid` (`producto_id`),
+  CONSTRAINT `fk_pedidos_det_pedidos_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
+  CONSTRAINT `fk_productoid` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos_det
@@ -133,6 +143,18 @@ CREATE TABLE `pedidos_det` (
 INSERT INTO `pedidos_det` VALUES ('1', '1', '3', '1', '30', '30', '0', '0', '30');
 INSERT INTO `pedidos_det` VALUES ('2', '1', '13', '2', '30', '60', '0', '0', '60');
 INSERT INTO `pedidos_det` VALUES ('3', '1', '1', '1', '10', '10', '0', '0', '10');
+INSERT INTO `pedidos_det` VALUES ('4', '2', '13', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('5', '2', '3', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('6', '2', '2', '3', '20', '60', '0', '0', '60');
+INSERT INTO `pedidos_det` VALUES ('7', '2', '1', '4', '10', '40', '0', '0', '40');
+INSERT INTO `pedidos_det` VALUES ('8', '2', '7', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('9', '3', '13', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('10', '3', '3', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('11', '3', '2', '3', '20', '60', '0', '0', '60');
+INSERT INTO `pedidos_det` VALUES ('12', '3', '1', '4', '10', '40', '0', '0', '40');
+INSERT INTO `pedidos_det` VALUES ('13', '3', '7', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('14', '4', '3', '7', '30', '210', '0', '0', '210');
+INSERT INTO `pedidos_det` VALUES ('15', '5', '3', '7', '30', '210', '0', '0', '210');
 
 -- ----------------------------
 -- Table structure for perfiles
@@ -142,11 +164,14 @@ CREATE TABLE `perfiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of perfiles
 -- ----------------------------
+INSERT INTO `perfiles` VALUES ('1', 'ADMINISTRADOR');
+INSERT INTO `perfiles` VALUES ('2', 'USUARIO');
+INSERT INTO `perfiles` VALUES ('3', 'CLIENTE');
 
 -- ----------------------------
 -- Table structure for productos
@@ -172,7 +197,11 @@ CREATE TABLE `productos` (
   `peso` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `descripcion` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `informacion` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_Rubros` (`rubroID`),
+  KEY `fk_categorias` (`categoriaID`),
+  CONSTRAINT `fk_Rubros` FOREIGN KEY (`rubroID`) REFERENCES `rubros` (`id`),
+  CONSTRAINT `fk_categorias` FOREIGN KEY (`categoriaID`) REFERENCES `categorias` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
@@ -202,7 +231,9 @@ CREATE TABLE `productos_fotos_videos` (
   `productoId` int(11) DEFAULT NULL,
   `foto` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `video` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_fv_productos` (`productoId`),
+  CONSTRAINT `fk_fv_productos` FOREIGN KEY (`productoId`) REFERENCES `productos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
@@ -255,7 +286,11 @@ CREATE TABLE `usuarios` (
   `pass` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `perfilID` int(11) DEFAULT NULL,
   `activo` smallint(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_EmpresaUsuario` (`empresaid`),
+  KEY `fk_UserPerfil` (`perfilID`),
+  CONSTRAINT `fk_EmpresaUsuario` FOREIGN KEY (`empresaid`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `fk_UserPerfil` FOREIGN KEY (`perfilID`) REFERENCES `perfiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------

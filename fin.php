@@ -86,8 +86,6 @@
 						$envioMail = new Mails();
 
 						$arr = $envioMail->envioEmail();
-
-						var_dump($arr);
 						unset($_SESSION['cliente']);
 						unset($_SESSION['carro']);
 						unset($_SESSION['pedido']);

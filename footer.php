@@ -80,7 +80,7 @@
                             Copyright &copy;<script>
                             document.write(new Date().getFullYear());
                             </script>
-                            todos los derechos reservador | powered <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">bitSnakeSoft</a>
+                            todos los derechos reservados | powered <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">bitSnakeSoft</a>
                         </p>
                     </div>
                     <!--<div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>-->
