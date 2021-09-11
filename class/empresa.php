@@ -228,9 +228,6 @@ public function getRealizaEnvios() {
   }
 
 
-
-
-
   Public function getLinksRedes (){
     $dato = '';
 
@@ -266,39 +263,48 @@ public function getRealizaEnvios() {
                                 string $instagram_link = null ,
                                 string $pinterest_link = null,
                                 string $logo = null ,
-                                string  $maneja_mercado_pago = null ,
+                                string $maneja_mercado_pago = null ,
                                 string $mercado_pago_access_token = null ,
-                            	  string  $mercado_pago_key = null,
-                                        $realiza_envios_gratis = 0,
-                                        $email_is_smtp = -1,
-                                string  $email_host ='',
-                                        $email_smtp_auth = -1,
-                                string  $email_username,
-                                string  $email_password,
-                                string  $email_smtpSecure ='TLS',
-                                string    $email_port,
-                                        $paginaEnabled = -1,
+                            	  string $mercado_pago_key = null,
+                                       $realiza_envios_gratis = 0,
+                                       $email_is_smtp = -1,
+                                string $email_host = '',
+                                       $email_smtp_auth = -1,
+                                string $email_username = '',
+                                string $email_password = '',
+                                string $email_smtpSecure ='TLS',
+                                string $email_port = '',
+                                       $paginaEnabled = -1,
  ){
 
-        $this->id = $id   ;
-        $this->descripcion = $descripcion;
-        $this->direccion = $direccion;
-        $this->cuit = $cuit;
-        $this->localidad = $localidad;
-        $this->provincia = $provincia;
-        $this->codigoPostal = $codigoPostal;
-        $this->email = $email;
-        $this->telefono = $telefono;
-        $this->telefonoWs = $telefonoWs;
-        $this->facebook_link = $facebook_link;
-        $this->twitter_link = $twitter_link;
+        $this->id             = $id   ;
+        $this->descripcion    = $descripcion;
+        $this->direccion      = $direccion;
+        $this->cuit           = $cuit;
+        $this->localidad      = $localidad;
+        $this->provincia      = $provincia;
+        $this->codigoPostal   = $codigoPostal;
+        $this->email          = $email;
+        $this->telefono       = $telefono;
+        $this->telefonoWs     = $telefonoWs;
+        $this->facebook_link  = $facebook_link;
+        $this->twitter_link   = $twitter_link;
         $this->instagram_link = $instagram_link;
         $this->pinterest_link = $pinterest_link;
-        $this->logo = $logo;
+        $this->logo           = $logo;
         $this->maneja_mercado_pago = $maneja_mercado_pago;
         $this->mercado_pago_access_token = $mercado_pago_access_token;
         $this->mercado_pago_key = $mercado_pago_key;
         $this->realiza_envios_gratis_mayor_a = $realiza_envios_gratis;
+        $this->email_is_smtp    =  $email_is_smtp;
+        $this->email_host       = $email_host;
+        $this->email_smtp_auth  = $email_smtp_auth;
+        $this->email_username = $email_username;
+        $this->email_password = $email_password;
+        $this->email_smtpSecure = $email_smtpSecure;
+        $this->email_port       = $email_port ;
+        $this->paginaEnabled    = $paginaEnabled ;
+
         require_once 'conexion.php';
 
   }
@@ -310,12 +316,13 @@ public function getRealizaEnvios() {
             $conexion = new Conexion($superArray);
             $dbConectado = $conexion->DBConect($superArray);
             $sql = $this->sqlEmpresa() . '  LIMIT 1';
+
             $stm= $dbConectado->prepare($sql);
             $stm->execute();
             $registro = $stm->fetch();
 
-            if($registro){
-              return new self( $registro['id'],
+               if($registro){
+                             return new self( $registro['id'],
                               $registro['descripcion'],
                               $registro['direccion'],
                               $registro['cuit'],
@@ -333,8 +340,16 @@ public function getRealizaEnvios() {
                               $registro['maneja_mercado_pago'],
                               $registro['mercado_pago_access_token'],
                               $registro['mercado_pago_key'],
-                              $registro['realiza_envios_gratis']
-                            );
+                              $registro['realiza_envios_gratis'],
+                              $registro['email_is_smtp'],
+                              $registro['email_host'],
+                              $registro['email_smtp_auth'],
+                              $registro['email_username'],
+                              $registro['email_password'],
+                              $registro['email_smtpSecure'],
+                              $registro['email_port'],
+                              $registro['paginaEnabled']
+                         );
             }else{
 
               return false;
@@ -367,7 +382,15 @@ public function getRealizaEnvios() {
                IFNULL(empresa.maneja_mercado_pago,'')as maneja_mercado_pago,
                IFNULL(empresa.mercado_pago_access_token,'')as mercado_pago_access_token,
                IFNULL(empresa.mercado_pago_key,'')as  mercado_pago_key ,
-               IFNULL(empresa.realiza_envios_gratis ,0) as  realiza_envios_gratis
+               IFNULL(empresa.realiza_envios_gratis ,0) as  realiza_envios_gratis ,
+               IFNULL(empresa.email_is_smtp,'') as  email_is_smtp,
+               IFNULL(empresa.email_host,'') as email_host,
+               IFNULL(empresa.email_smtp_auth,'') as email_smtp_auth,
+               IFNULL(empresa.email_username,'') as email_username,
+               IFNULL(empresa.email_password,'') as email_password,
+               IFNULL(empresa.email_smtpSecure,'')  as email_smtpSecure,
+               IFNULL(empresa.email_port,'')  as email_port ,
+               IFNULL(empresa.paginaEnabled,-1)as paginaEnabled
                FROM  ". self::TABLA ;
   }
 

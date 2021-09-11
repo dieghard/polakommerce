@@ -108,7 +108,7 @@ class ManejoCarrito{
             $tablaPrecio ='		<td class="shoping__cart__price"><h5>$'.$productos->precio.'</h5></td>';
             $tabla .= $tablaPrecio;
 			$tablaCantidad =' <td class="shoping__cart__quantity">
-								<h5>$'.$subarray["cantidad"].'</h5>
+								<h5>'.$subarray["cantidad"].'</h5>
 								<!--<input onchange="" type="number" value="'.$subarray["cantidad"] .'" class="form-control">
 								<img onclick="" src="img/aumentar.png" alt="aumentar" title="aumentar">
 								<img onclick="" src="img/restar.png" alt="restar" title="restar">

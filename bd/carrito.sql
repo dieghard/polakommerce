@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2021-09-08 23:12:05
+Date: 2021-09-10 09:21:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,7 +74,7 @@ CREATE TABLE `empresa` (
 -- ----------------------------
 -- Records of empresa
 -- ----------------------------
-INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', null, '-1', null, null, 'TLS', null, '-1');
+INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', 'smtp.gmail.com', '-1', null, null, 'TLS', null, '-1');
 
 -- ----------------------------
 -- Table structure for pedidos

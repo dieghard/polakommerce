@@ -1,5 +1,6 @@
 <?php
 	require_once("class/pedidos.php");
+	require_once("enviomail.php");
 	session_start();
   	//echo 'HOST:'. $_SERVER["HTTP_HOST"] .'</br>';
   	//echo 'REQUEST_URI:'. $_SERVER["REQUEST_URI"] .'</br>';
@@ -65,7 +66,7 @@
 <body>
     <?php 	if ($success):
 
-	 		$pedidos     = new Pedidos($_id,  $_fecha, $_nombre, $_apellido     ,
+	 				$pedidos     = new Pedidos($_id,  $_fecha, $_nombre, $_apellido     ,
 										$_dni, $_pais , $_direccion    ,
 										$_numero       ,$_departamento , $_ciudad,
 										$_codPos       ,
@@ -75,16 +76,21 @@
 										$_estado       ,
 										$_codigoDescuento,$_pagado,
 										$_subtotal, $_descuento, $_total );
-			$arr = $pedidos->guardar();
-			if ($arr['success']):
-				echo '<br>';
-				echo 'Compra realizada correctamente, muchas gracias  ' .$_SESSION['cliente']['nombre'] . ' ' . $_SESSION['cliente']['apellido']. 'por tu compra</br>' ;
-				echo 'Nos pondremos en contaco y te enviaremos la compra a : ' .$_SESSION['cliente']['direccion'] . ' - CP(' . $_SESSION['cliente']['codigoPostal'] . ')';
-				echo '<br>';
-				echo '<br>';
-				$arr = $pedidos->enviarMails();
-				unset($_SESSION['cliente']);
-				unset($_SESSION['carro']);
+					$arr = $pedidos->guardar();
+					if ($arr['success']):
+						echo '<br>';
+						echo 'Compra realizada correctamente, muchas gracias  ' .$_SESSION['cliente']['nombre'] . ' ' . $_SESSION['cliente']['apellido']. ' por tu compra</br>' ;
+						echo 'le enviamos un mail con el numero de comprobante';
+						echo '<br>';
+						echo '<br>';
+						$envioMail = new Mails();
+
+						$arr = $envioMail->envioEmail();
+
+						var_dump($arr);
+						unset($_SESSION['cliente']);
+						unset($_SESSION['carro']);
+						unset($_SESSION['pedido']);
 			endif;
 		endif;
 		?>

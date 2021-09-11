@@ -340,7 +340,7 @@ CLASS Pedidos{
                 return $superArray ;
             }
 
-
+        $_SESSION['pedido']['numeroPedido']  = $idEncabezado;
 	    foreach ($_SESSION['carro'] as $detalle) :
             $pedidoid   = $idEncabezado;
             $productoid = $detalle["id"];

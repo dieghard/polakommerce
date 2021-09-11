@@ -1,54 +1,63 @@
 <?php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    require_once 'vendor/autoload.php';
-
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+        require_once 'vendor/autoload.php';
     class Mails{
 
         public function envioEmail(){
+            require_once("class/empresa.php");
+            $empresa = new Empresa();
+            $empresa = $empresa->Empresa();
+
+                $superArray = array();
+                $superArray['envioMail'] = false;
                 $mail = new PHPMailer(true);
                 if (session_status() === PHP_SESSION_NONE) :
                     session_start();
                 endif;
 
-                if(!isset($_SESSION['empresa'])) :
+                if(!isset($_SESSION['pedido'])) :
                         header("Location:index.php");
                 endif;
 
+                if(!isset($_SESSION['cliente'])) :
+                    header("Location:index.php");
+                endif;
             try {
                 //Server settings
                 //$mail->SMTPDebug = 2;                      //Enable verbose debug output
 
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'markiewiczdiego@gmail.com';                     //SMTP username
-                $mail->Password   = 'Die*666666';                               //SMTP password
+                if ($empresa->getEmail_is_smtp()) :
+                    $mail->isSMTP();
+                endif;           //Enable SMTP authentication
+                $mail->Host       =  $empresa->getEmail_Host() ;                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = false;
+                if ($empresa->getEmail_smtp_auth()) :
+                    $mail->SMTPAuth   = true;
+                endif;           //Enable SMTP authentication
+
+                $mail->Username   = $empresa->getEmail_username();                     //SMTP username
+                $mail->Password   = $empresa->getEmail_password(); //SMTP password
                 //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->SMTPSecure = 'TLS';
-                $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->SMTPSecure = $empresa->getEmail_smtpSecure();
+                $mail->Port       = $empresa->getEmail_port();//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('markiewiczdiego@gmail.com', 'Soy yo!');
-                $mail->addAddress('dieghard@gmail.com', 'Soy yo!');     //Add a recipient
-                $mail->addReplyTo('francoaguado@gmail.com', 'Franco Aguado');
-                //$mail->addCC('cc@example.com');
-                //$mail->addBCC('bcc@example.com');
-
-                //Attachments
-            //   $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            //  $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+                $mail->setFrom($empresa->getEmail_username(), $empresa->getDescripcion());
+                $mail->addAddress($empresa->getEmail_username(), $empresa->getDescripcion());     //Add a recipient
+                $mail->addReplyTo($_SESSION['cliente']['email'] , $_SESSION['cliente']['nombre'] . ' ' . $_SESSION['cliente']['apellido'] );
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'ESTA ES UNA PRUEBA DE MAIL';
-                $mail->Body    = '<smal>puto... </smal> <b>EL QUE LEE</b>';
-                $mail->AltBody = 'puto el que lee...';
-
+                $mail->Subject = 'Hola!,' .$_SESSION['cliente']['nombre'] ;
+                $mail->Body    = '<b>Gracias por su compra!</b>  el pedido con el numero:' . $_SESSION['pedido']['numeroPedido'] . ' a sido realizado correctamente </br> depacharemos el pedido a la brevedad y le estaremos avisando por este medio' ;
+                $mail->AltBody = 'Gracias por su compra!depacharemos el pedido a la brevedad y le estaremos avisando por este medio';
                 $mail->send();
-                echo 'Message has been sent';
+                $superArray['envioMail'] = true;
+                return $superArray;
             } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                $superArray['mensaje'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                return $superArray;
             }
         }
     }
