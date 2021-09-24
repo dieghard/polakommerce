@@ -19,7 +19,7 @@ if(isset($_POST['productoid'])):
 ?>
 <html>
 <?php require_once("head.php"); ?>
-<script src="js/car.js"></script>
+<script src="assets/js/car.js"></script>
 
 <body>
     <?php require_once("header.php") ;?>

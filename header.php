@@ -45,7 +45,7 @@
 
                  <div class="header__logo">
 
-                     <a href="./index.php"><strong><?php echo $empresa->getDescripcion(); ?> </strong><img class="logo" src="img/logo.png" alt=""></a>
+                     <a href="./index.php"><strong><?php echo $empresa->getDescripcion(); ?> </strong><img class="logo" src="assets/img/logo.png" alt=""></a>
                  </div>
              </div>
              <div class="col-sm-12 col-lg-6">

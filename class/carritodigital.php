@@ -8,8 +8,8 @@ class ManejoCarrito{
 	private $_TotalAPagar    ;
 
 	public function __construct(){
-		//require_once("../config.php");
-		require_once($_SESSION['CLASS_PATH'].'productos.php');
+		require_once("../config.php");
+		require_once(ROOT_PATH.'/class/productos.php');
 		require_once 'conexion.php';
 	}
 

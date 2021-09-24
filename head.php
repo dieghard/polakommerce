@@ -2,7 +2,7 @@
 	<title>..::Polakommerce Carrito Compras::..</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Polakommerce">
-	<meta name="keywords" content="carrito, compras, polakomerce">
+	<meta name="keywords" content="carrito, compras, polakommerce">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Polakomerce Carrito de compras</title>
 
@@ -16,12 +16,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<!--<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">-->
-	<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-	<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-	<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link rel="stylesheet" href="css/menu.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/nice-select.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/menu.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 	<script src="https://kit.fontawesome.com/d5ba3992e0.js" crossorigin="anonymous"></script>
 </head>
