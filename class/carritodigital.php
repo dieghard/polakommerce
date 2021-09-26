@@ -1,6 +1,8 @@
 <?php
 session_start();
-class ManejoCarrito{
+
+
+class CarritoDigital{
 
 	private int $_productoId ;
 	private $_cantidad       ;
@@ -8,8 +10,9 @@ class ManejoCarrito{
 	private $_TotalAPagar    ;
 
 	public function __construct(){
-		require_once("../config.php");
-		require_once(ROOT_PATH.'/class/productos.php');
+		//require_once  '../config.php';
+ 		//require_once  '../auto.php';
+ 		//Loader::init('class' );
 		require_once 'conexion.php';
 	}
 

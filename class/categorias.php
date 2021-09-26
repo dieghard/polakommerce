@@ -1,87 +1,91 @@
 <?php
 
-class Categorias{
-	private $datos;
+namespace Class;
 
-	public function __construct(){
-    	require_once 'conexion.php';
-		  $this->datos = array();
-    }
+use Class\Conexion;
 
-	public function getCategorias(){
+class Categorias
+{
+  private $datos;
 
-		$strSql="	SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
+  public function __construct()
+  {
+    require_once 'conexion.php';
+    $this->datos = array();
+  }
+
+  public function getCategorias()
+  {
+
+    $strSql = "	SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
 					FROM categorias
 					WHERE categorias.activo = -1
 
 					ORDER BY categorias.titulo";
 
-        $superArray =  array();
-        $superArray['success'] = true;
-        $conexion = new Conexion($superArray);
-        $dbConectado = $conexion->DBConect($superArray);
+    $superArray =  array();
+    $superArray['success'] = true;
+    $conexion = new Conexion($superArray);
+    $dbConectado = $conexion->DBConect($superArray);
 
-		try {
-            $stmt = $dbConectado->prepare($strSql);
-            $stmt->execute();
-		}
-		catch (Throwable $e) {
-            $superArray['success'] = false;
+    try {
+      $stmt = $dbConectado->prepare($strSql);
+      $stmt->execute();
+    } catch (Throwable $e) {
+      $superArray['success'] = false;
 
-            $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
-            var_dump($trace);
-            die('ERROR EN CATEGORIAS');
-            return $superArray['mensaje'];
-        }
-
-         while ($row=$stmt->fetch()) :
-         	$this->datos[]=$row;
-         endwhile;
-
-         return $this->datos;
+      $trace = $e->getTrace();
+      $superArray['mensaje'] = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
+      var_dump($trace);
+      die('ERROR EN CATEGORIAS');
+      return $superArray['mensaje'];
     }
 
-    public function getCategoriasPorId($id=null){
+    while ($row = $stmt->fetch()) :
+      $this->datos[] = $row;
+    endwhile;
 
-            $id=(int)$id;
-          //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
-           //redireciona llamanedo el metodo _redirect();.
+    return $this->datos;
+  }
 
-            if (empty($id) OR !$id) {
+  public function getCategoriasPorId($id = null)
+  {
 
-                  $this->_redirect();
-            }
+    $id = (int)$id;
+    //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
+    //redireciona llamanedo el metodo _redirect();.
 
+    if (empty($id) or !$id) {
 
-        $superArray =  array();
-        $superArray['success'] = true;
-        $conexion = new Conexion($superArray);
-          $dbConectado = $conexion->DBConect($superArray);
-
-            $stm= $dbConectado->prepare("SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
-										FROM categorias WHERE categorias.id  ='".$id."'");
-            $stm->execute();
-
-            while ($row=$stm->fetch())
-            {
-              $this->datos[]=$row;
-            }
-
-            //validacion de get para detos que sean superior a los id de db
-           if (empty($this->datos)){
-               $this->_redirect();
-           }
-           //***********************************************
-
-            return $this->datos;
+      $this->_redirect();
     }
 
-	private function _redirect(){
 
-		return header("Location:index.php");
+    $superArray =  array();
+    $superArray['success'] = true;
+    $conexion = new Conexion($superArray);
+    $dbConectado = $conexion->DBConect($superArray);
 
-	}
+    $stm = $dbConectado->prepare("SELECT categorias.id, categorias.titulo, categorias.subtitulo, categorias.descripcion,categorias.imagen, categorias.activo
+										FROM categorias WHERE categorias.id  ='" . $id . "'");
+    $stm->execute();
 
+    while ($row = $stm->fetch()) {
+      $this->datos[] = $row;
+    }
 
+    //validacion de get para detos que sean superior a los id de db
+    if (empty($this->datos)) {
+      $this->_redirect();
+    }
+    //***********************************************
+
+    return $this->datos;
+  }
+
+  private function _redirect()
+  {
+
+    return header("Location:index.php");
+  }
 }

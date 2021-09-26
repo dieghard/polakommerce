@@ -1,11 +1,11 @@
 <?php
-        use PHPMailer\PHPMailer\PHPMailer;
-        use PHPMailer\PHPMailer\Exception;
-        require_once 'vendor/autoload.php';
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+   require_once 'vendor/autoload.php';
     class Mails{
 
         public function envioEmail(){
-            require_once("class/empresa.php");
+            require_once("Class/empresa.php");
             $empresa = new Empresa();
             $empresa = $empresa->Empresa();
 

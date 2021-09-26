@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '989ed3423c192b617726feab724cd9d83dbf3c4b',
+        'reference' => 'b7a148a1e9f1c12f9b88c1acbef68a37adb71d0d',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '989ed3423c192b617726feab724cd9d83dbf3c4b',
+            'reference' => 'b7a148a1e9f1c12f9b88c1acbef68a37adb71d0d',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
@@ -117,6 +117,15 @@
             'aliases' => array(),
             'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
             'dev_requirement' => false,
+        ),
+        'squizlabs/php_codesniffer' => array(
+            'pretty_version' => '3.6.0',
+            'version' => '3.6.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
+            'aliases' => array(),
+            'reference' => 'ffced0d2c8fa8e6cdc4d695a743271fab6c38625',
+            'dev_requirement' => true,
         ),
     ),
 );

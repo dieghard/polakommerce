@@ -8,10 +8,10 @@ if(isset($_POST['productoid'])):
 		$productoid = 0 ;
 		$productoid = $_POST['productoid'];
 		$cantidad   = $_POST['cantidad'];
-		$manejoCarrito = new ManejoCarrito();
-		$manejoCarrito->setCantidad($cantidad);
-		$manejoCarrito->setProductoId($productoid);
-		$manejoCarrito->Add($superArray);
+		$CarritoDigital = new CarritoDigital();
+		$CarritoDigital->setCantidad($cantidad);
+		$CarritoDigital->setProductoId($productoid);
+		$CarritoDigital->Add($superArray);
 	endif;
     $datosCompra = array();
     $messages =[];

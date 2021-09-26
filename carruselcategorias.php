@@ -4,8 +4,12 @@
             <div class="owl-stage-outer">
                 <div class="owl-stage" style="transform: translate3d(-1755px, 0px, 0px); transition: all 1.2s ease 0s; width: 3803px;">
                     <?php
-                      $categoriaslider = categoriaFrame();
-                      echo  $categoriaslider;
+                    require_once('autoload.php');
+
+                    use Class\Categorias;
+
+                    $categoriaslider = categoriaFrame();
+                    echo  $categoriaslider;
                     ?>
                 </div>
             </div>
@@ -16,17 +20,22 @@
 </div>
 <?php
 
-function categoriaFrame(){
-    require_once("class/categorias.php");
+
+
+function categoriaFrame()
+{
+
+
+
     $categorias = new Categorias();
-    $categoria_frame ='';
+    $categoria_frame = '';
 
     $arrCategorias = $categorias->getCategorias();
-    foreach ($arrCategorias as $categorias):
+    foreach ($arrCategorias as $categorias) :
         $categoria_frame .=  '<div class="owl-item cloned" style="width: 800.5px;">
                                     <div class="col-lg-3">
-                                        <div class="categories__item set-bg" data-setbg="'. $categorias['imagen'].'" style="background-image: url(&quot;'. $categorias['imagen'].'&quot;);">
-                                            <h5><a href="index.php?categoriaID='.$categorias['id'] .'">'. $categorias['titulo'].'</a></h5>
+                                        <div class="categories__item set-bg" data-setbg="' . $categorias['imagen'] . '" style="background-image: url(&quot;' . $categorias['imagen'] . '&quot;);">
+                                            <h5><a href="index.php?categoriaID=' . $categorias['id'] . '">' . $categorias['titulo'] . '</a></h5>
                                         </div>
                                     </div>
                                 </div>';

@@ -1,21 +1,27 @@
 <?php
 
-class Conexion{
+namespace Class;
 
-    private $iniData ;
+use PDO;
 
-    public function __construct(&$arraydata){
+class Conexion
+{
+
+    private $iniData;
+
+    public function __construct(&$arraydata)
+    {
         try {
             $this->iniData = parse_ini_file(".config/db.php.ini");
             //$arraydata['mensaje   '] ='CARGUE TODO BIEN';
-        }
-        catch (PDOException $e) {
-            $arraydata['mensaje'] =  'ERROR:'.$e->getMessage().'-CODIGO: '.$e->getCode();
+        } catch (PDOException $e) {
+            $arraydata['mensaje'] =  'ERROR:' . $e->getMessage() . '-CODIGO: ' . $e->getCode();
             return $arraydata;
         }
     }
 
-    public function DBConect(&$superArray){
+    public function DBConect(&$superArray)
+    {
 
 
         $SERVIDOR   = $this->iniData['DB_HOST'];
@@ -31,17 +37,15 @@ class Conexion{
         try {
             $conexion = new PDO("mysql:host=$SERVIDOR;port=$PUERTO;dbname=$BASE_DE_DATOS", "$USUARIO", "$PASSWORD", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $superArray['success']= true;
-            $superArray['mensaje']= 'CONEXION EXITOSA';
+            $superArray['success'] = true;
+            $superArray['mensaje'] = 'CONEXION EXITOSA';
             return  $conexion;
-        }
-        catch (PDOException $e) {
-            echo 'ERROR:'.$e->getMessage().'-CODIGO: '.$e->getCode();
+        } catch (PDOException $e) {
+            echo 'ERROR:' . $e->getMessage() . '-CODIGO: ' . $e->getCode();
             $superArray['success'] = false;
-            $superArray['mensaje'] = 'ERROR:'.$e->getMessage().'-CODIGO: '.$e->getCode();
-            return ;
+            $superArray['mensaje'] = 'ERROR:' . $e->getMessage() . '-CODIGO: ' . $e->getCode();
+            return;
         }
-
     }
 }
 /*

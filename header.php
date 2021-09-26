@@ -1,17 +1,22 @@
  <?php
- 	require_once("class/empresa.php");
+    require("config.php");
+    require __DIR__ . '/autoload.php';
+
+    use Class\Empresa;
+
+
     $empresa = new Empresa();
     $empresa = $empresa->Empresa();
-	if (session_status() === PHP_SESSION_NONE) :
-    	session_start();
-	endif;
-	$_SESSION['empresa'] = $empresa;
-    if (strlen($empresa->getTelefonoWs())>0 ) :
-        echo '<a href="https://api.whatsapp.com/send?phone='.$empresa->getTelefonoWs() .'" class="btn-wsp" target="_blank">
+    if (session_status() === PHP_SESSION_NONE) :
+        session_start();
+    endif;
+    $_SESSION['empresa'] = $empresa;
+    if (strlen($empresa->getTelefonoWs()) > 0) :
+        echo '<a href="https://api.whatsapp.com/send?phone=' . $empresa->getTelefonoWs() . '" class="btn-wsp" target="_blank">
             <i class="fa fa-whatsapp icono"></i>
         </a>';
     endif;
- ?>
+    ?>
 
  <header class="header">
      <div class="header__top">
@@ -20,7 +25,7 @@
                  <div class="col-sm-12 col-lg-6 col-md-6">
                      <div class="header__top__left">
                          <ul>
-                             <li><i class="fa fa-envelope"></i><?php  echo $empresa->getEmail(); ?></li>
+                             <li><i class="fa fa-envelope"></i><?php echo $empresa->getEmail(); ?></li>
                              <?php echo $empresa->getRealizaEnvios(); ?>
                          </ul>
                      </div>
@@ -77,4 +82,5 @@
          </div>
      </div>
  </header>
- <?php //require_once("barrabusqueda.php") ?>
+ <?php //require_once("barrabusqueda.php")
+    ?>

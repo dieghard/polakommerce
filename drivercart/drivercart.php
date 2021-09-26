@@ -4,7 +4,9 @@
 	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 	header('Content-type: application/json; charset=utf-8');
     $host = 'polakommerce';
-	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/carritodigital.php');
+//	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/carritodigital.php');
+
+
 
 	$input = json_decode(file_get_contents("php://input"), true);
 	$superArray['success'] = false;
@@ -60,17 +62,17 @@ function Add(&$superArray,$input){
 		header("Location:index.php");
 	endif;
 
-	$manejoCarrito = new ManejoCarrito();
+	$CarritoDigital = new CarritoDigital();
 
-	$manejoCarrito->setCantidad($cantidad);
-	$manejoCarrito->setProductoId($productoid);
+	$CarritoDigital->setCantidad($cantidad);
+	$CarritoDigital->setProductoId($productoid);
 
-	$manejoCarrito->Add($superArray);
+	$CarritoDigital->Add($superArray);
 
-	$superArray['cantidadTotal'] = $manejoCarrito->getCantidadTotal();
-	$superArray['TotalaPagar'] = $manejoCarrito->getTotalAPagar();
+	$superArray['cantidadTotal'] = $CarritoDigital->getCantidadTotal();
+	$superArray['TotalaPagar'] = $CarritoDigital->getTotalAPagar();
 
-	$superArray['carrito'] = $manejoCarrito->getCarro();
+	$superArray['carrito'] = $CarritoDigital->getCarro();
 
 	$superArray['success']=true;
 	$superArray['mensaje']="";
@@ -81,14 +83,16 @@ function Add(&$superArray,$input){
 
 function ShowTotals(&$superArray){
 
-
-
-	$manejoCarrito = new ManejoCarrito();
-
-	$superArray['cantidadTotal'] = $manejoCarrito->getCantidadTotal();
-	$superArray['TotalaPagar'] = $manejoCarrito->getTotalAPagar();
-	$superArray['carrito'] = $manejoCarrito->getCarro();
-
+	require_once  '../config.php';
+ 	require_once  '../auto.php';
+ 	Loader::init('../class' );
+	$superArray['DIR'] = __DIR__;
+	 //$CarritoDigital = new CarritoDigital();
+	/*
+	$superArray['cantidadTotal'] = $CarritoDigital->getCantidadTotal();
+	$superArray['TotalaPagar'] = $CarritoDigital->getTotalAPagar();
+	$superArray['carrito'] = $CarritoDigital->getCarro();
+*/
 	//$superArray['path'] = $_SERVER["DOCUMENT_ROOT"].'/polakommerce/config.php';
 	$superArray['success']= true;
 	$superArray['mensaje']= "";
@@ -100,9 +104,9 @@ function ShowTotals(&$superArray){
 
 function ShowCart(&$superArray){
 
-	$manejoCarrito = new ManejoCarrito();
+	$CarritoDigital = new CarritoDigital();
 
-	$superArray['tabla']  = $manejoCarrito->ShowCart();
+	$superArray['tabla']  = $CarritoDigital->ShowCart();
 	$superArray['success']  = true;
 
 	return;
@@ -111,8 +115,8 @@ function ShowCart(&$superArray){
 
 function ShowOrden(&$superArray){
 
-	$manejoCarrito = new ManejoCarrito();
-	$superArray['tabla']  = $manejoCarrito->ShowOrden();
+	$CarritoDigital = new CarritoDigital();
+	$superArray['tabla']  = $CarritoDigital->ShowOrden();
     $superArray['success']  = true;
 
 	return;

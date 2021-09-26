@@ -2,5 +2,8 @@
     "require": {
         "mercadopago/dx-php": "^2.4",
         "phpmailer/phpmailer": "^6.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6"
     }
 }
