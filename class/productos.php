@@ -5,6 +5,7 @@ namespace Class;
 use Class\Conexion;
 
 class Productos
+
 {
   private $datos;
 

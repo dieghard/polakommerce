@@ -1,10 +1,13 @@
 <!--<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg" style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">-->
 <?php
-	$obj=new Productos();
-   	$id=strip_tags($_GET["id"]);
-    $menssages = [];
-   	$productos=$obj->getProductosPorId($id,$menssages);
-    $productos= (object)$productos[0];
+
+use Class\Productos;
+
+$obj = new Productos();
+$id = strip_tags($_GET["id"]);
+$menssages = [];
+$productos = $obj->getProductosPorId($id, $menssages);
+$productos = (object)$productos[0];
 
 ?>
 <div class="container">
@@ -22,7 +25,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12 text-center">
-			<h2 class="tituloProducto"><?php echo $productos->producto;?></h2>
+			<h2 class="tituloProducto"><?php echo $productos->producto; ?></h2>
 		</div>
 	</div>
 </div>

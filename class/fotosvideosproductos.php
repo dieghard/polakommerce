@@ -1,45 +1,50 @@
 <?php
 
-class FotosVideosProductos{
-	private $datos;
+namespace Class;
 
-	public function __construct(){
-    	require_once 'conexion.php';
-		$this->datos=array();
+use Class\Conexion;
+
+class FotosVideosProductos
+{
+    private $datos;
+
+    public function __construct()
+    {
+        require_once 'conexion.php';
+        $this->datos = array();
     }
 
-	public function getFotosVideos($productoId){
+    public function getFotosVideos($productoId)
+    {
 
-		$strSql="	SELECT * FROM productos_fotos_videos Where productoId=". $productoId;
-		$this->datos=array();
+        $strSql = "	SELECT * FROM productos_fotos_videos Where productoId=" . $productoId;
+        $this->datos = array();
         $superArray =  array();
         $superArray['success'] = true;
         $conexion = new Conexion($superArray);
         $dbConectado = $conexion->DBConect($superArray);
-       // var_dump($strSql);
+        // var_dump($strSql);
 
-		try {
+        try {
             $stmt = $dbConectado->prepare($strSql);
             $stmt->execute();
-		}
-		catch (Throwable $e) {
+        } catch (Throwable $e) {
             $superArray['success'] = false;
 
             $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
+            $superArray['mensaje'] = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
         }
 
-         while ($row=$stmt->fetch()) :
-         	$this->datos[]=$row;
-         endwhile;
+        while ($row = $stmt->fetch()) :
+            $this->datos[] = $row;
+        endwhile;
 
-         return $this->datos;
+        return $this->datos;
     }
 
-	private function _redirect(){
+    private function _redirect()
+    {
 
-		return header("Location:index.php");
-
-	}
-
+        return header("Location:index.php");
+    }
 }

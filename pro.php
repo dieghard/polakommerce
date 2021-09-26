@@ -1,12 +1,19 @@
 <?php
 
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/productos.php');
-	$obj = new Productos();
-   	$id  = strip_tags($_GET["id"]);
-    $menssages = [];
-	$productos=$obj->getProductosPorId($id,$menssages);
-    $productos= (object)$productos[0];
+//require_once($_SERVER["DOCUMENT_ROOT"] . '/polakommerce/class/productos.php');
+//require_once('autoload.php');
+
+require_once('Class/Productos.php');
+
+use Class\Productos;
+
+$obj = new Productos();
+
+$id  = strip_tags($_GET["id"]);
+$menssages = [];
+$productos = $obj->getProductosPorId($id, $menssages);
+$productos = (object)$productos[0];
 ?>
 
 <html>
@@ -29,9 +36,9 @@
                                         <img class="minigaleria" src="fotos/<?php echo $productos->imagenPresentacion; ?>" onclick="imageClick(this)" />
                                     </li>
                                     <?php
-								  		$categoriaslider = categoriaFrame($id);
-                      					echo  $categoriaslider;
-                    				?>
+                                    $categoriaslider = categoriaFrame($id);
+                                    echo  $categoriaslider;
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -42,7 +49,7 @@
                         <form action="carrito.php" method="post">
                             <h3><?php echo $productos->producto ?></h3>
                             <h6><?php echo $productos->subtitulo ?></h6>
-                            <div class="product__details__price">$<?php echo $productos->precio ;?></div>
+                            <div class="product__details__price">$<?php echo $productos->precio; ?></div>
                             <p><?php echo $productos->descripcion; ?></p>
                             <div class="product__details__quantity">
                                 <input type="number" value=<?php echo $productos->id ?> name='productoid' hidden>
@@ -51,15 +58,16 @@
                                 </div>
                             </div>
                             <input type="submit" class="primary-btn" value="COMPRAR">
-                            <!--<a href="carrito.php?id=<?php //echo $productos->id; ?>&action=add">AGREGAR AL CARRITO</a>-->
+                            <!--<a href="carrito.php?id=<?php //echo $productos->id;
+                                                        ?>&action=add">AGREGAR AL CARRITO</a>-->
                             <a href="#" class="heart-icon"><i class="fas fa-heart"></i></a>
                             <ul>
                                 <li><b>Disponibilidad:</b>
-                                    <?php if ($productos->conStock):
-										echo '<span style= "color:green" >SIN STOCK</span>';
-								 	else:
-										echo '<span style= "color:red" >CON STOCK</span>';
-								 endif;?>
+                                    <?php if ($productos->conStock) :
+                                        echo '<span style= "color:green" >SIN STOCK</span>';
+                                    else :
+                                        echo '<span style= "color:red" >CON STOCK</span>';
+                                    endif; ?>
                                 </li>
                                 <!--<li><b>Envio:</b> <span><samp>Free pickup today</samp></span></li>-->
                                 <li><b>Peso</b> <span><?php echo $productos->peso; ?></span></li>
@@ -103,25 +111,36 @@
 
     <!--<div id="video">
 					<a href="carrito.php?id=<?php echo $pro['id']; ?>&action=add">Comprar</a>
-					<button onclick="add2(<?php echo $pro['id'];?>,'add');" class="btn success">Comprar</button>
-					<p><?php //echo $pro["video"]; ?></p>
+					<button onclick="add2(<?php echo $pro['id']; ?>,'add');" class="btn success">Comprar</button>
+					<p><?php //echo $pro["video"];
+                        ?></p>
 				</div>-->
     <!--********************contenedor****************************************-->
 
     <?php require_once("footer.php") ?>
     </div>
 </body>
+
 </html>
 <?php
-function categoriaFrame($id){
-	require_once($_SERVER["DOCUMENT_ROOT"].'/polakommerce/class/fotosvideosproductos.php');
+require_once('autoload.php');
 
-	$obj		 = new FotosVideosProductos();
-	$fotosProductos	 = $obj->getFotosVideos($id);
-	$fotoProducto_frame ='';
-	foreach ($fotosProductos as $fotoProducto):
-		$fotoProducto_frame .=  '<li><img class="minigaleria" src="'. $fotoProducto['foto'].'"onclick="imageClick(this)" /></li>';
+use Class\FotosVideosProductos;
+
+function categoriaFrame($id)
+{
+
+
+    $obj         = new FotosVideosProductos();
+    $fotosProductos     = $obj->getFotosVideos($id);
+    $fotoProducto_frame = '';
+
+    foreach ($fotosProductos as $fotoProducto) :
+        if (file_exists($fotoProducto['foto'])) :
+            $fotoProducto_frame .=  '<li><img class="minigaleria" src="' . $fotoProducto['foto'] . '"onclick="imageClick(this)" /></li>';
+        endif;
     endforeach;
+
     return  $fotoProducto_frame;
 }
 ?>

@@ -1,5 +1,11 @@
 <?php
-CLASS Pedidos{
+
+namespace Class;
+
+use Class\Conexion;
+
+class Pedidos
+{
     private $_id;
     private $_fecha;
     private $_nombre;
@@ -23,167 +29,209 @@ CLASS Pedidos{
 
     const TABLA = 'pedidos';
 
-    public function getId() {
+    public function getId()
+    {
         return $this->_id;
     }
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->_id = $id;
     }
 
-    public function getFecha() {
+    public function getFecha()
+    {
         return $this->_fecha;
     }
-    public function setFecha($fecha) {
+    public function setFecha($fecha)
+    {
         $this->_fecha = $fecha;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->_nombre;
     }
-    public function setNombre($nombre) {
+    public function setNombre($nombre)
+    {
         $this->_nombre = $nombre;
     }
 
-    public function getApellido() {
+    public function getApellido()
+    {
         return $this->_apellido;
     }
-    public function setApellido($apellido) {
+    public function setApellido($apellido)
+    {
         $this->_apellido = $apellido;
     }
 
-    public function getDni() {
+    public function getDni()
+    {
         return $this->_dni;
     }
-    public function setDni($dni) {
+    public function setDni($dni)
+    {
         $this->_dni = $dni;
     }
 
-    public function getPais() {
+    public function getPais()
+    {
         return $this->_pais;
     }
-    public function setPais($pais) {
+    public function setPais($pais)
+    {
         $this->_pais = $pais;
     }
 
-    public function getDireccion() {
+    public function getDireccion()
+    {
         return $this->_direccion;
     }
-    public function setDireccion($direccion) {
+    public function setDireccion($direccion)
+    {
         $this->_direccion = $direccion;
     }
 
-    public function getNumero() {
+    public function getNumero()
+    {
         return $this->_numero;
     }
-    public function setNumero($numero) {
+    public function setNumero($numero)
+    {
         $this->_numero = $numero;
     }
 
-    public function getDepartamento() {
+    public function getDepartamento()
+    {
         return $this->_departamento;
     }
-    public function setDepartamento($departamento) {
+    public function setDepartamento($departamento)
+    {
         $this->_departamento = $departamento;
     }
 
-    public function getCiudad() {
+    public function getCiudad()
+    {
         return $this->_ciudad;
     }
-    public function setCiudad($ciudad) {
+    public function setCiudad($ciudad)
+    {
         $this->_ciudad = $ciudad;
     }
 
-    public function getcodigo_postal() {
+    public function getcodigo_postal()
+    {
         return $this->_codigo_postal;
     }
-    public function setcodigo_postal($codigo_postal) {
+    public function setcodigo_postal($codigo_postal)
+    {
         $this->_codigo_postal = $codigo_postal;
     }
 
-    public function getTelefono() {
+    public function getTelefono()
+    {
         return $this->_telefono;
     }
-    public function setTelefono($telefono) {
+    public function setTelefono($telefono)
+    {
         $this->_telefono = $telefono;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->_email;
     }
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->_email = $email;
     }
 
-    public function getObservaciones() {
+    public function getObservaciones()
+    {
         return $this->_observaciones;
     }
-    public function setObservaciones($observaciones) {
+    public function setObservaciones($observaciones)
+    {
         $this->_observaciones = $observaciones;
     }
 
-    public function getEstado() {
+    public function getEstado()
+    {
         return $this->_estado;
     }
-    public function setEstado($estado) {
+    public function setEstado($estado)
+    {
         $this->_estado = $estado;
     }
 
-    public function getCodigoDescuento() {
+    public function getCodigoDescuento()
+    {
         return $this->_codigoDescuento;
     }
-    public function setCodigoDescuento($codigoDescuento) {
+    public function setCodigoDescuento($codigoDescuento)
+    {
         $this->_codigoDescuento = $codigoDescuento;
     }
 
-    public function getPagado() {
+    public function getPagado()
+    {
         return $this->_pagado;
     }
-    public function setPagado($pagado) {
+    public function setPagado($pagado)
+    {
         $this->_pagado = $pagado;
     }
 
-    public function getSubtotal() {
+    public function getSubtotal()
+    {
         return $this->_subtotal;
     }
-    public function setSubtotal($subtotal) {
+    public function setSubtotal($subtotal)
+    {
         $this->_subtotal = $subtotal;
     }
 
-    public function getDescuento() {
+    public function getDescuento()
+    {
         return $this->_descuento;
     }
-    public function setDescuento($descuento) {
+    public function setDescuento($descuento)
+    {
         $this->_descuento = $descuento;
     }
 
 
-    public function getTotal() {
+    public function getTotal()
+    {
         return $this->_total;
     }
-    public function setTotal($total) {
+    public function setTotal($total)
+    {
         $this->_total = $total;
     }
 
-    public function __construct( int $id = null,
-                                $_fecha = NULL,
-                                string $_nombre   = '',
-                                string $_apellido = '',
-                                string $_dni = '',
-                                string $_pais = '',
-                                string $_direccion = '',
-                                string $_numero    = '',
-                                string $_departamento = '',
-                                string $_ciudad = '',
-                                string $_codigo_postal = '',
-                                string $_telefono = '',
-                                string $_email = '',
-                                string $_observaciones = '',
-                                string $_estado = 'NUEVO',
-                                string $_pagado = 'NO',
-                                string $_codigoDescuento = '',
-                                $_subtotal = 0,
-                                $_descuento = 0,
-                                $_total = 0){
+    public function __construct(
+        int $id = null,
+        $_fecha = NULL,
+        string $_nombre   = '',
+        string $_apellido = '',
+        string $_dni = '',
+        string $_pais = '',
+        string $_direccion = '',
+        string $_numero    = '',
+        string $_departamento = '',
+        string $_ciudad = '',
+        string $_codigo_postal = '',
+        string $_telefono = '',
+        string $_email = '',
+        string $_observaciones = '',
+        string $_estado = 'NUEVO',
+        string $_pagado = 'NO',
+        string $_codigoDescuento = '',
+        $_subtotal = 0,
+        $_descuento = 0,
+        $_total = 0
+    ) {
 
 
         $this->id = $id;
@@ -200,7 +248,7 @@ CLASS Pedidos{
         $this->_telefono = $_telefono;
         $this->_email = $_email;
         $this->_observaciones = $_observaciones;
-        $this->_estado =$_estado;
+        $this->_estado = $_estado;
         $this->_pagado = $_pagado;
         $this->_codigoDescuento = $_codigoDescuento;
         $this->_subtotal = $_subtotal;
@@ -208,11 +256,12 @@ CLASS Pedidos{
         $this->_total = $_total;
 
         require_once 'conexion.php';
-		$this->datos=array();
+        $this->datos = array();
     }
 
-    private function sqlUpdateEncabezado(){
-        return 'UPDATE ' . self::TABLA .'
+    private function sqlUpdateEncabezado()
+    {
+        return 'UPDATE ' . self::TABLA . '
                 SET
                 fecha    = :fecha,
                 nombre = :nombre,
@@ -236,8 +285,9 @@ CLASS Pedidos{
                 WHERE id = :id';
     }
 
-    private function sqlInsertEncabezado(){
-           return 'INSERT INTO '. self::TABLA . '(
+    private function sqlInsertEncabezado()
+    {
+        return 'INSERT INTO ' . self::TABLA . '(
                 fecha    ,
                 nombre ,
                 apellido ,
@@ -281,21 +331,23 @@ CLASS Pedidos{
                 :codigoDescuento)';
     }
 
-    private function sqlInsertDetalle(){
+    private function sqlInsertDetalle()
+    {
         return 'INSERT INTO pedidos_det( pedido_id,  producto_id,cantidad,  precio, porcentaje_descuento, descuento, subtotal, total )
                 VALUES                 (:pedido_id,:producto_id,:cantidad,:precio,:porcentaje_descuento, :descuento,:subtotal,:total)';
     }
-    public function enviarMails(){
-
+    public function enviarMails()
+    {
     }
-    public function guardar(){
+    public function guardar()
+    {
 
         $superArray =  array();
         $superArray['success'] = true;
         $conexion = new Conexion($superArray);
         $dbConectado = $conexion->DBConect($superArray);
 
-        if($this->id):
+        if ($this->id) :
             $consulta = $dbConectado->prepare($this->sqlUpdateEncabezado());
         else :
             $consulta = $dbConectado->prepare($this->sqlInsertEncabezado());
@@ -321,27 +373,27 @@ CLASS Pedidos{
         $consulta->bindParam(':total', $this->_total);
         $consulta->bindParam(':codigoDescuento', $this->_codigoDescuento);
 
-        if($this->id >0) :
+        if ($this->id > 0) :
             $consulta->bindParam(':id', $this->id);
         endif;
-        try   {
-                $dbConectado->beginTransaction();
-                $consulta->execute();
+        try {
+            $dbConectado->beginTransaction();
+            $consulta->execute();
 
-                if(!$this->id >0) :
-                    $this->id = $dbConectado->lastInsertId();
-                    $idEncabezado = $this->id;
-                endif;
-            }catch (PDOException $pdoe) {
-                $dbConectado->rollback();
-                $superArray['ERROR'] = "Mensaje de Error: " . $pdoe->getMessage();
-                $superArray['success'] = false;
-                $dbConectado = null;
-                return $superArray ;
-            }
+            if (!$this->id > 0) :
+                $this->id = $dbConectado->lastInsertId();
+                $idEncabezado = $this->id;
+            endif;
+        } catch (PDOException $pdoe) {
+            $dbConectado->rollback();
+            $superArray['ERROR'] = "Mensaje de Error: " . $pdoe->getMessage();
+            $superArray['success'] = false;
+            $dbConectado = null;
+            return $superArray;
+        }
 
         $_SESSION['pedido']['numeroPedido']  = $idEncabezado;
-	    foreach ($_SESSION['carro'] as $detalle) :
+        foreach ($_SESSION['carro'] as $detalle) :
             $pedidoid   = $idEncabezado;
             $productoid = $detalle["id"];
             $cantidad   =  $detalle["cantidad"];
@@ -360,21 +412,18 @@ CLASS Pedidos{
             $consulta->bindParam(':descuento', $descuento);
             $consulta->bindParam(':subtotal', $subtotal);
             $consulta->bindParam(':total', $total);
-            try   {
+            try {
                 $consulta->execute();
-
-            }catch (PDOException $pdoe) {
+            } catch (PDOException $pdoe) {
                 $superArray['success'] = false;
                 $dbConectado->rollback();
                 $superArray['ERROR'] = "Mensaje de Error: " . $pdoe->getMessage();
                 $dbConectado = null;
-                return $superArray ;
-
+                return $superArray;
             }
         endforeach;
 
         $dbConectado->commit();
-        return $superArray ;
+        return $superArray;
     }
-
 }

@@ -53,20 +53,31 @@ function ShowTotals() {
             console.log(err);
         });
 }
-
+function doesFileExist(urlToFile) {
+    $.ajax({
+               url: urlToFile,
+               type: 'HEAD',
+               error: function()
+               {
+                    //console.log('NO EXISTE');
+                    return false;
+               },
+               success: function()
+               {
+                    //console.log('EXISTE');
+                    return true;
+               }
+     });
+}
 function imageClick(imgenSeleccionada) {
-     var image =  document.getElementById('picturePrincipal');
+
+     var image = document.getElementById('picturePrincipal');
+     //var result = doesFileExist(imgenSeleccionada.src);
+
      image.style.height = '400px';
      image.style.width = '80px';
      image.src = imgenSeleccionada.src;
-     console.log(imgenSeleccionada.src);
 
-     /*var src = 'http://www.todopaisajes.com/Imagenes/paisaje-rural-del-campo.jpg'; //Esta es la variable que contiene la url de una imagen ejemplo, luego puedes poner la que quieras
-    image.src = src;
-
-    $('#product__details__pic__item--large').append(image);
-     */
-     console.log('hola mundo');
 
 
 }
