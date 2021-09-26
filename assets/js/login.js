@@ -33,26 +33,35 @@ $(document).ready(function() {
 
     if (continuar == true){
         var datos = new FormData();
-        datos.append("usuario",usuario);
+        console.log(usuario);
+        console.log(password);
+
+        datos.append("usuario", usuario);
         datos.append("password",password);
         datos.append("tipoVerificacion","ingreso");
-        console.log(datos);
 
+        console.log(JSON.stringify(datos));
+        JSON.stringify({usuario: usuario})
 
-        strUrl = "../admin/vista/ajax/ajaxLoguin.php";
+        strUrl = "../admin/Vista/ajax/ajaxLoguin.php";
+
         fetch(strUrl, {
             method: 'POST',
-            data:datos
+            body: JSON.stringify({ "user": {
+                "tipoVerificacion" : "ingreso" ,
+                "email": usuario,
+                "password" : password
+                }}),
         })
         .then(response => response.json())
         .then(function(data) {
             console.log(data);
-            if(respuesta.success == true) {
-                window.location.href =   respuesta.path;
+            if(data.success == true) {
+                window.location.href =   data.path;
             }
             else {
                     $("#divUsuario").fadeToggle(2000);
-                    $("#divUsuario").text(respuesta.error) ;
+                    $("#divUsuario").text(data.error) ;
                     $("#divUsuario").css("color", "red");
             }
 

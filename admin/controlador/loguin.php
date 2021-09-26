@@ -1,30 +1,33 @@
 <?php
-//namespace Controlador;
-class ControladorLogin{
+
+namespace admin\Controlador;
+
+class Login
+{
 
 	/*=============================================
 	LLAMAMOS LA PLANTILLA
 	=============================================*/
 
-	public function Login(){
+	public function Login()
+	{
 		include "vista/login.php";
 	}
 	/*=============================================
 	Interaccion del Usuario
 	=============================================*/
-	public function enlacesPaginasController(){
+	public function enlacesPaginasController()
+	{
 		$MP = new ModeloPlantilla();
 
-		if (isset ($_GET["action"])) {
+		if (isset($_GET["action"])) {
 			$enlaces = $_GET["action"];
-		} else{
-                        $enlaces ='panel';
-
+		} else {
+			$enlaces = 'panel';
 		}
 		$respuesta = $MP->enlacesPaginasModelo($enlaces);
 
 		include  $respuesta;
-		$respuesta =null;
+		$respuesta = null;
 	}
 }
-

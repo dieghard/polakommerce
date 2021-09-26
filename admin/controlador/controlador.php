@@ -1,9 +1,10 @@
 <?php
 
+namespace admin\Controlador;
 //namespace Controlador;
 class Controlador
 {
- /*=============================================
+    /*=============================================
    Interaccion del Usuario
  =============================================*/
     public function ControladorLinks()
@@ -12,8 +13,7 @@ class Controlador
 
         if (isset($_GET['action'])) {
             $enlaces = $_GET['action'];
-        } 
-        else {
+        } else {
             $enlaces = 'panel';
         }
         $respuesta = $MP->enlacesPaginasModelo($enlaces);
