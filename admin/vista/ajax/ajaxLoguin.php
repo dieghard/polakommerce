@@ -1,9 +1,6 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
 
-
-
-
 $input = file_get_contents("php://input");
 
 require_once "../../../config.php";
@@ -13,16 +10,15 @@ try {
 
     $input = json_decode($input);
     $respuesta['root'] = ROOT_PATH;
-    $respuesta['respuesta'] = 'PASE POR AQUI PAPA';
     $respuesta['root_ADMIN'] = PATH_ADMIN;
 } catch (Throwable $e) {
     $respuesta['Error'] = $e->getMessage();
 }
+
 $respuesta['tipoVerificacion'] = $input;
+$respuesta['user'] = $input->user;
 
-$respuesta['tipoVerificacion'] = $input->user;
-
-
+$respuesta['password'] = $input->user->password;
 
 
 

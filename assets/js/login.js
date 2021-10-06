@@ -57,11 +57,12 @@ $(document).ready(function() {
         .then(function(data) {
             console.log(data);
             if(data.success == true) {
+                console.log(data.path);
                 window.location.href =   data.path;
             }
             else {
                     $("#divUsuario").fadeToggle(2000);
-                    $("#divUsuario").text(data.error) ;
+                    $("#divUsuario").text(data.mensaje) ;
                     $("#divUsuario").css("color", "red");
             }
 

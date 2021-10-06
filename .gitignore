@@ -1,2 +1,73 @@
 #Ignorar las carpetas de squizlab
 vendor/squizlabs
+# System / Log files
+*.DS_Store
+*.log
+
+# Archives
+*.zip
+
+# Sass Cache
+.sass-cache
+
+# Project files
+.idea
+nbproject
+nbproject/private
+.vscode/
+.vs/
+
+# Node / Bower
+node_modules/
+bower_components/
+
+# Plugins
+/assets/plugins/**/*.html
+/assets/plugins/**/*.less
+/assets/plugins/**/*.md
+/assets/plugins/**/*.scss
+/assets/plugins/**/*.ts
+/assets/plugins/**/bower.json
+/assets/plugins/**/package.json
+/assets/plugins/**/webpack.config.js
+/assets/plugins/**/demo/
+/assets/plugins/**/demos/
+/assets/plugins/**/dev/
+/assets/plugins/**/example/
+/assets/plugins/**/examples/
+/assets/plugins/**/less/
+/assets/plugins/**/test/
+/assets/plugins/**/tests/
+/assets/plugins/daterangepicker/website/
+/assets/plugins/daterangepicker/drp.png
+/assets/plugins/daterangepicker/moment.min.js
+/assets/plugins/daterangepicker/package.js
+/assets/plugins/daterangepicker/website.css
+/assets/plugins/daterangepicker/website.js
+/assets/plugins/jquery-ui/AUTHORS.txt
+/assets/plugins/jquery-ui/external/jquery/jquery.js
+/assets/plugins/inputmask/bindings/
+/plugins/flot/plugins/jquery*.js
+!/assets/plugins/flot/plugins/jquery.flot.*.js
+!/assets/plugins/**/LICENSE.md
+!/assets/plugins/**/LICENSE.txt
+!/assets/plugins/**/license.md
+!/assets/plugins/**/license.txt
+!/assets/plugins/**/LICENSE
+!/assets/plugins/**/license
+!/assets/plugins/**/COPYING
+
+
+# Docs
+/docs/_site/
+/docs/vendor/
+/docs/.bundle/
+/docs_html/
+.jekyll-cache/
+.jekyll-metadata
+
+# ETC
+TODO
+test.html
+ad.js
+/.cache/

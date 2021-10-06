@@ -1,6 +1,7 @@
 <?php
 
-re
+namespace admin\Modelo;
+
 class Modelo
 {
 
@@ -29,6 +30,5 @@ class Modelo
 
     public function __construct()
     {
-        require_once "conexion.php";
     }
 }

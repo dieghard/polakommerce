@@ -14,7 +14,6 @@ class Ajax_Validar_User
    {
 
       $CP = new UserController();
-
       $respuesta = $CP->ValidarPasswordController($usuario);
 
       $CP = null;
