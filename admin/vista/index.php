@@ -234,11 +234,10 @@ if (isset($_GET['controlador'])) {
       <script type="text/javascript" language="javascript" src="../../assets/js/vfs_fonts.js"></script>
       <script type="text/javascript" language="javascript" src="../../assets/js/buttons.html5.min.js"></script>
       <!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.2/js/dataTables.rowGroup.min.js" -->
-      <script type="text/javascript" language="javascript" src="../../assets/js/dataTables.rowGroup.min.js" <!-- DATATABLE-->
-        < script src = "../../assets/vendor/dragula/dragula.js" >
-      </script>
-      <script src="../../assets/js/chl.js"></script>
-      <script src="../../paginas/js/panel.js"></script>
+      <script type="text/javascript" language="javascript" src="../../assets/js/dataTables.rowGroup.min.js"></script>
+      <script type="text/javascript" language="javascript" src="../../assets/vendor/dragula/dragula.js"></script>
+      <script type="text/javascript" language="javascript" src="../../assets/js/chl.js"></script>
+      <script type="text/javascript" language="javascript" src="../../assets/js/panel.js"></script>
 </body>
 
 </html>
