@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2021-09-11 16:12:07
+Date: 2021-10-06 22:56:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,9 +32,9 @@ CREATE TABLE `categorias` (
 -- ----------------------------
 -- Records of categorias
 -- ----------------------------
-INSERT INTO `categorias` VALUES ('1', 'Frutas', 'Frutas de estación', 'Frutas Especialmente Seleccionadas', 'img/categorias/frutas.jpg', '-1');
-INSERT INTO `categorias` VALUES ('2', 'Verduras', 'Verduras Seleccionadas', 'Verduras Seleccionadas', 'img/categorias/verduras.jpg', '-1');
-INSERT INTO `categorias` VALUES ('3', 'Otra Categoria', 'Otra Categoria', null, 'img/categorias/otracategoria.jpg', '-1');
+INSERT INTO `categorias` VALUES ('1', 'Frutas', 'Frutas de estación', 'Frutas Especialmente Seleccionadas', 'assets/img/categorias/frutas.jpg', '-1');
+INSERT INTO `categorias` VALUES ('2', 'Verduras', 'Verduras Seleccionadas', 'Verduras Seleccionadas', 'assets/img/categorias/verduras.jpg', '-1');
+INSERT INTO `categorias` VALUES ('3', 'Otra Categoria', 'Otra Categoria', null, 'assets/img/categorias/otracategoria.jpg', '-1');
 
 -- ----------------------------
 -- Table structure for empresa
@@ -76,7 +76,7 @@ CREATE TABLE `empresa` (
 -- ----------------------------
 -- Records of empresa
 -- ----------------------------
-INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', 'smtp.gmail.com', '-1', 'markiewiczdiego@gmail.com', '', 'TLS', '587', '-1', '59aee209e4b0574792f3f52a', '59aee218e4b0edbe887265d3');
+INSERT INTO `empresa` VALUES ('1', 'Colum El Verdulero', 'Emilio Genoud 702', null, 'BienAlSur', 'Santa Cruz', 'X6132', 'gitano@columelverdulero.com.ar', '3385522998', '+5493385505100', 'https://www.facebook.com/columelverdulero', '#', '#', '#', 'assets/img/logo.png', '-1', 'TEST-8883022316865038-082121-a29106f851ba358ef8c612a202e7c1e0-811503701', 'TEST-f23a2997-302e-41c4-ad53-2355f4effee7', '6000', '-1', 'smtp.gmail.com', '-1', 'markiewiczdiego@gmail.com', 'Die*666666', 'TLS', '587', '-1', '59aee209e4b0574792f3f52a', '59aee218e4b0edbe887265d3');
 
 -- ----------------------------
 -- Table structure for pedidos
@@ -105,7 +105,7 @@ CREATE TABLE `pedidos` (
   `total` float DEFAULT NULL,
   `codigoDescuento` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos
@@ -115,6 +115,10 @@ INSERT INTO `pedidos` VALUES ('2', '2021-09-10 22:28:57', '2021-09-11', 'Diego',
 INSERT INTO `pedidos` VALUES ('3', '2021-09-10 22:30:41', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'ARGENTINA', '9 de Julio', '749', '', 'General Levalle', '6132', '3385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '310', '0', '310', 'SI');
 INSERT INTO `pedidos` VALUES ('4', '2021-09-10 22:32:49', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '210', '0', '210', 'SI');
 INSERT INTO `pedidos` VALUES ('5', '2021-09-10 22:37:17', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '210', '0', '210', 'SI');
+INSERT INTO `pedidos` VALUES ('6', '2021-09-11 18:43:30', '2021-09-11', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio ', ' 749', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '530', '0', '530', 'SI');
+INSERT INTO `pedidos` VALUES ('7', '2021-09-11 19:06:06', '2021-09-12', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio ', '749', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '90', '0', '90', 'SI');
+INSERT INTO `pedidos` VALUES ('8', '2021-09-26 15:02:52', '2021-09-26', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '80', '0', '80', 'SI');
+INSERT INTO `pedidos` VALUES ('9', '2021-09-26 15:04:01', '2021-09-26', 'Diego', 'Markiewicz', '28119270', 'Argentina', '9 De Julio 749', '', '', 'General Levalle', '6132', '03385522998', 'dieghard@gmail.com', '', 'NUEVO', '', '80', '0', '80', 'SI');
 
 -- ----------------------------
 -- Table structure for pedidos_det
@@ -135,7 +139,7 @@ CREATE TABLE `pedidos_det` (
   KEY `fk_productoid` (`producto_id`),
   CONSTRAINT `fk_pedidos_det_pedidos_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   CONSTRAINT `fk_productoid` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of pedidos_det
@@ -155,6 +159,22 @@ INSERT INTO `pedidos_det` VALUES ('12', '3', '1', '4', '10', '40', '0', '0', '40
 INSERT INTO `pedidos_det` VALUES ('13', '3', '7', '3', '30', '90', '0', '0', '90');
 INSERT INTO `pedidos_det` VALUES ('14', '4', '3', '7', '30', '210', '0', '0', '210');
 INSERT INTO `pedidos_det` VALUES ('15', '5', '3', '7', '30', '210', '0', '0', '210');
+INSERT INTO `pedidos_det` VALUES ('16', '6', '2', '5', '20', '100', '0', '0', '100');
+INSERT INTO `pedidos_det` VALUES ('17', '6', '3', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('18', '6', '13', '3', '30', '90', '0', '0', '90');
+INSERT INTO `pedidos_det` VALUES ('19', '6', '1', '3', '10', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('20', '6', '4', '2', '40', '80', '0', '0', '80');
+INSERT INTO `pedidos_det` VALUES ('21', '6', '14', '2', '30', '60', '0', '0', '60');
+INSERT INTO `pedidos_det` VALUES ('22', '6', '8', '2', '40', '80', '0', '0', '80');
+INSERT INTO `pedidos_det` VALUES ('23', '7', '5', '6', '10', '60', '0', '0', '60');
+INSERT INTO `pedidos_det` VALUES ('24', '7', '2', '1', '20', '20', '0', '0', '20');
+INSERT INTO `pedidos_det` VALUES ('25', '7', '1', '1', '10', '10', '0', '0', '10');
+INSERT INTO `pedidos_det` VALUES ('26', '8', '3', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('27', '8', '13', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('28', '8', '2', '1', '20', '20', '0', '0', '20');
+INSERT INTO `pedidos_det` VALUES ('29', '9', '3', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('30', '9', '13', '1', '30', '30', '0', '0', '30');
+INSERT INTO `pedidos_det` VALUES ('31', '9', '2', '1', '20', '20', '0', '0', '20');
 
 -- ----------------------------
 -- Table structure for perfiles
@@ -240,19 +260,19 @@ CREATE TABLE `productos_fotos_videos` (
 -- Records of productos_fotos_videos
 -- ----------------------------
 INSERT INTO `productos_fotos_videos` VALUES ('1', '1', 'fotos/ajo_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('2', '2', 'berenjenas_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('3', '3', 'brocoli_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('4', '4', 'lechuga_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('5', '5', 'manzana-roja-3.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('6', '6', 'manzana-verde-2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('7', '7', 'morron_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('8', '8', 'peras_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('9', '9', 'remolacha_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('10', '10', 'uvas_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('11', '11', 'Zanahorias_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('12', '12', 'zapallo_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('13', '13', 'espinacas_2.jpg', null);
-INSERT INTO `productos_fotos_videos` VALUES ('14', '1', 'ajo_3.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('2', '2', 'fotos/berenjenas_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('3', '3', 'fotos/brocoli_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('4', '4', 'fotos/lechuga_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('5', '5', 'fotos/manzana-roja-3.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('6', '6', 'fotos/manzana-verde-2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('7', '7', 'fotos/morron_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('8', '8', 'fotos/peras_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('9', '9', 'fotos/remolacha_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('10', '10', 'fotos/uvas_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('11', '11', 'fotos/Zanahorias_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('12', '12', 'fotos/zapallo_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('13', '13', 'fotos/espinacas_2.jpg', null);
+INSERT INTO `productos_fotos_videos` VALUES ('14', '1', 'fotos/ajo_3.jpg', null);
 
 -- ----------------------------
 -- Table structure for rubros
@@ -286,14 +306,16 @@ CREATE TABLE `usuarios` (
   `pass` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `perfilID` int(11) DEFAULT NULL,
   `activo` smallint(6) DEFAULT NULL,
+  `observaciones` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_EmpresaUsuario` (`empresaid`),
   KEY `fk_UserPerfil` (`perfilID`),
   CONSTRAINT `fk_EmpresaUsuario` FOREIGN KEY (`empresaid`) REFERENCES `empresa` (`id`),
   CONSTRAINT `fk_UserPerfil` FOREIGN KEY (`perfilID`) REFERENCES `perfiles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
+INSERT INTO `usuarios` VALUES ('1', '1', 'admin', 'admin@admin.com', '$2y$10$mNODrL.d8ZGe5WUUGSh9.u/YG37Lztwi0f1yz4neYUu54VYx1STVy', '1', '-1', 'admin');
 SET FOREIGN_KEY_CHECKS=1;
