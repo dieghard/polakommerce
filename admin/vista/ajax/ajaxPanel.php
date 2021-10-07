@@ -1,49 +1,36 @@
 <?php
 
+use admin\Controlador\ControladorPanel;
 
-/*
-=================================================================================================
- * VALIDAR USUARIO!
-=================================================================================================
-*/
-
-class ajax_Panel
+class AjaxPanel
 {
     public function __construct()
     {
         require_once '../../controlador/controladorPanel.php';
     }
 
-    public function verificarUsuarios($bibliotecaID)
+    public function EstadoPedidos()
     {
         $controlador = new controladorPanel();
-        $respuesta = $controlador->verificarUsuarios($bibliotecaID);
+        $respuesta = $controlador->EstadoPedidos();
 
         return $respuesta;
         $CP = null;
     }
 }
-/*
-=================================================================================================
- * LECTURA DE AJAX DEPENDIENDO EL TIPO DE CHEK LLAMO A UNA CLASE O A OTRA!
-=================================================================================================
-*/
 
-if (isset($_POST['ACTION'])) {
+if (isset($_POST['ACTION'])) :
     $accion = $_POST['ACTION'];
-} else {
+else :
     return;
-}
+endif;
 
-if ($accion == 'cantidadSocios') {
-    $panel = new ajax_Panel();
-    if (session_status() == PHP_SESSION_NONE) {
+if ($accion == 'estadoPedidos') :
+    $panel = new AjaxPanel();
+    if (session_status() == PHP_SESSION_NONE) :
         session_start();
-    }
-    $biblioteca = $_SESSION['biblioteca'];
-    $bibliotecaID = $biblioteca['id'];
-
-    //$respuesta ='PASE POR AQUI PAPA';
-    $respuesta = $panel->verificarUsuarios($bibliotecaID);
+    endif;
+    $respuesta = 'PASE POR AQUI PAPA';
+    $respuesta = $panel->EstadoPedidos();
     echo $respuesta;
-}
+endif;

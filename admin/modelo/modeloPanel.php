@@ -1,100 +1,114 @@
 <?php
 
-require_once 'conexion.php';
+namespace admin\Modelo;
 
-class modeloPanel
+require_once "../../../Class/Conexion.php";
+
+use Class\Conexion;
+use PDO;
+
+class ModeloPanel
 {
+    private $iniData;
     public function __construct()
     {
-        require_once 'conexion.php';
+        try {
+            $this->iniData = parse_ini_file('../../../Class/.config/db.php.ini');
+        } catch (PDOException $e) {
+            $arraydata['mensaje'] =  'ERROR:' . $e->getMessage() . '-CODIGO: ' . $e->getCode();
+            return $arraydata;
+        }
     }
 
-    public function verificarUsuarios($bibliotecaID)
+    public function EstadoPedidos()
     {
-        $Coneccion = new Conexion();
-        $dbConectado = $Coneccion->DBConect();
+        $superArray = array();
+        $conexion = new Conexion($superArray);
+
+        $dbConectado = $conexion->DBConect($superArray);
 
         $superArray['success'] = true;
         $superArray['mensaje'] = '';
-        $superArray['cantidadUsuariosActivos'] = 0;
-        $superArray['cantidadUsuariosInactivos'] = 0;
         $superArray['saldo'] = 0;
-        $bibliotecalID = $bibliotecaID;
-        /***********************************************************************************************************************************************************************************************/
-        // CANTIDAD ACTIVOS
-        /***********************************************************************************************************************************************************************************************/
 
-        $strSql = 'SELECT count(*) as cantidad FROM socios Where Activo = "SI"';
-        $strSql .= '    AND  bilbiotecaId=:bibliotecaID';
-
+        $strSql = "SELECT COUNT(*)  as pedido FROM pedidos WHERE estado = 'NUEVO'";
+        $cantidadNuevos = 0;
         try {
             $stmt = $dbConectado->prepare($strSql);
-            $stmt->bindParam(':bibliotecaID', $bibliotecalID, PDO::PARAM_INT);
             $stmt->execute();
             $registro = $stmt->fetchAll();
-
             if ($registro) {
-                foreach ($registro  as $row) {
-                    $superArray['cantidadUsuariosActivos'] = $row['cantidad'];
-                }
+                $row = $registro[0];
+                $cantidadNuevos =  $row['pedido'];
             }
         } catch (Throwable $e) {
             $superArray['success'] = false;
             $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
+            $superArray['mensaje'] = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
         }
-        /***********************************************************************************************************************************************************************************************/
-        // CANTIDAD INACTIVOS
-        /***********************************************************************************************************************************************************************************************/
 
-        $strSql = 'SELECT count(*) as cantidad FROM socios Where Activo = "NO"';
-        $strSql .= '    AND  bilbiotecaId=:bibliotecaID';
+        $strSql = "SELECT COUNT(*)  as pedido FROM pedidos WHERE estado = 'ENTREGADOS'";
+        $cantidadEntragados = 0;
 
         try {
             $stmt = $dbConectado->prepare($strSql);
-            $stmt->bindParam(':bibliotecaID', $bibliotecalID, PDO::PARAM_INT);
             $stmt->execute();
             $registro = $stmt->fetchAll();
-
             if ($registro) {
-                foreach ($registro  as $row) {
-                    $superArray['cantidadUsuariosInactivos'] = $row['cantidad'];
-                }
+                $row = $registro[0];
+                $cantidadEntragados =  $row['pedido'];
             }
         } catch (Throwable $e) {
             $superArray['success'] = false;
             $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
+            $superArray['mensaje'] = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
         }
-        /***********************************************************************************************************************************************************************************************/
-        // SALDO ACTIVOS
-        /***********************************************************************************************************************************************************************************************/
 
-        $strSql = 'SELECT  m.socioId,m.saldo
-                     from movimientos m
-                    inner join socios s on s.id = m.socioId
-                 Where 1= 1 
-                        AND ifnull(m.Eliminado,"NO") <>"SI"
-                        AND  ifnull(s.activo,"NO")="SI"
-                        AND  bilbiotecaId=:bibliotecaID
-                     GROUP by m.socioId';
-        $superArray['sql'] = $strSql;
+        $strSql = "SELECT COUNT(*)  as pedido FROM pedidos WHERE estado = 'EN PROCESO'";
+        $cantidadProceso = 0;
+
         try {
             $stmt = $dbConectado->prepare($strSql);
-            $stmt->bindParam(':bibliotecaID', $bibliotecalID, PDO::PARAM_INT);
             $stmt->execute();
             $registro = $stmt->fetchAll();
-
             if ($registro) {
-                foreach ($registro  as $row) {
-                    $superArray['saldo'] += $row['saldo'];
-                }
+                $row = $registro[0];
+                $cantidadProceso =  $row['pedido'];
             }
         } catch (Throwable $e) {
             $superArray['success'] = false;
             $trace = $e->getTrace();
-            $superArray['mensaje'] = $e->getMessage().' en '.$e->getFile().' en la linea '.$e->getLine().' llamado desde '.$trace[0]['file'].' on line '.$trace[0]['line'];
+            $superArray['mensaje'] = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
         }
+
+
+
+
+        $nuevos = '<div class="info-box">
+                        <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">PEDIDOS NUEVOS</span>
+                            <span id="pedidosNuevos" class="info-box-number">' . $cantidadNuevos . '</span>
+                        </div>
+                   </div>' .
+
+            '<div class="info-box">
+                        <span class="info-box-icon bg-yellow"><i class="fa fa-money"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">PEDIDOS EN PROCESO</span>
+                            <span id="pedidosProceso" class="info-box-number">' . $cantidadProceso . '</span>
+                        </div>
+                   </div>' .
+
+            '<div class="info-box">
+                        <span class="info-box-icon bg-blue"><i class="fa fa-money"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">PEDIDOS ENTREGADOS</span>
+                            <span id="pedidosEntregados" class="info-box-number">' . $cantidadEntragados . '</span>
+                        </div>
+                   </div>';
+
+        $superArray['pedidosNuevos'] = $nuevos;
         $Coneccion = null;
 
         return json_encode($superArray);

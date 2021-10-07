@@ -1,21 +1,21 @@
 <?php
 
+namespace admin\Controlador;
 
-class controladorPanel
+use admin\Modelo\ModeloPanel;
+
+class ControladorPanel
 {
-    /*=============================================
-    LLAMAMOS LA PLANTILLA
-    =============================================*/
     public function __construct()
     {
         require_once '../../modelo/modeloPanel.php';
     }
 
-    public function verificarUsuarios($bibliotecaID)
+    public function EstadoPedidos()
     {
         $moduloPanel = new modeloPanel();
 
-        $ingreso = $moduloPanel->verificarUsuarios($bibliotecaID);
+        $ingreso = $moduloPanel->EstadoPedidos();
 
         return $ingreso;
         $moduloPanel = null;

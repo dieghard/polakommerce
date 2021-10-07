@@ -8,11 +8,9 @@ function llenarData(){
     var strUrl="ajax/ajaxPanel.php";
     var datos = new FormData();
 
-    datos.append("ACTION","cantidadSocios");
-    $('#sociosActivos').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
-    $('#sociosInactivos').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
-    $('#saldoSociosActivos').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
-    /*
+    datos.append("ACTION","estadoPedidos");
+    $('#sociosActivos').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
+
     $.ajax({
             url:strUrl,
                 method:"POST",
@@ -21,15 +19,15 @@ function llenarData(){
                 contentType:false,
                 processData :false,
                 success:function(respuesta){
-                    console.log(oRta);
+                    console.log(respuesta);
 
                     var oRta  = JSON.parse(respuesta);
                     if (oRta.success==true ){
-                        $('#sociosActivos').html(oRta.cantidadUsuariosActivos);
-                        $('#sociosInactivos').html(oRta.cantidadUsuariosInactivos);
-                        $('#saldoSociosActivos').html('$ ' + oRta.saldo);
+                        $('#pedidos').html(oRta.pedidosNuevos);
+
                     }
+
                 }
     });
-    */
+
 }

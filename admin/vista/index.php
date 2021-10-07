@@ -1,9 +1,7 @@
 <?php /// SI NO ESTA LOGUEADO ARAFUE
 require_once '../controlador/controlador.php';
 if (!isset($_SESSION['usuario'])) {
-
   session_start();
-
   if (isset($_SESSION['usuario'])) {
     $usuario = $_SESSION['usuario'];
     $empresa = $_SESSION['empresa'];
@@ -20,8 +18,6 @@ if (isset($_GET['controlador'])) {
   $pagina = $_GET['controlador'];
 } else {
   $newURL = '../index.php';
-  //        header('Location: '.$newURL);
-
 }
 
 ?>
@@ -35,43 +31,23 @@ if (isset($_GET['controlador'])) {
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Software Biblios</title>
-  <!-- END: End javascript files -->
-  <!--MUEVE LOS OBJETOS EN LA PANTALLA -->
-  <!--metisMenu-->
+  <title>Adminitración Polakommerce</title>
   <link rel="stylesheet" href="../../assets/css/metisMenu.min.css" />
-  <!-- /////////////////////////////////////////////////////-->
-  <!-- Vendor stylesheet files. REQUIRED -->
-  <!-- BEGIN: Vendor  -->
   <link rel="stylesheet" href="../../assets/css/vendor.css" />
   <link rel="stylesheet" href="../../assets/vendor/dragula/dragula.css" />
-  <!-- END: plugin stylesheet files -->
-  <!-- Theme main stlesheet files. REQUIRED -->
   <link rel="stylesheet" href="../../assets/css/chl.css" />
-  <!-- Theme TESTEO THEME-->
   <link id="theme-list" rel="stylesheet" href="../../assets/css/theme-peter-river.min.css" />
   <link id="theme-list" rel="stylesheet" href="../../assets/css/AdminLTE.min.css" />
-  <!-- END: theme main stylesheet files -->
-  <!-- animate.css -->
   <link rel="stylesheet" href="../../assets/css/animate.css" />
-  <!-- FIN ANIMATE-->
 </head>
 
 <body>
-  <!-- begin .app -->
   <div class="app">
-    <!-- begin .app-wrap -->
     <div class="app-wrap">
-      <!-- begin .app-heading -->
       <header class="app-heading">
-        <!-- begin .navbar -->
         <nav class="navbar navbar-default navbar-static-top shadow-2dp">
-          <!-- begin .navbar-header -->
           <div class="navbar-header">
-            <!-- begin .navbar-header-left with image -->
             <div class="navbar-header-left b-r">
-              <!--begin logo-->
               <a class="logo" href="../index.html">
                 <span class="logo-xs visible-xs">
                   <img src="../../assets/img/logo_xs.svg" alt="logo-xs">
@@ -80,35 +56,25 @@ if (isset($_GET['controlador'])) {
                   <img src="../../assets/img/logo_lg.svg" alt="logo-lg">
                 </span>
               </a>
-              <!--end logo-->
             </div>
-            <!-- END: .navbar-header-left with image -->
             <nav class="nav navbar-header-nav">
-
               <a class="visible-xs b-r" href="#" data-side=collapse>
                 <i class="fa fa-fw fa-bars"></i>
               </a>
-
               <a class="hidden-xs b-r" id="botonOcultar" href="#" data-side=mini>
                 <i class="fa fa-fw fa-bars"></i>
               </a>
-
             </nav>
-
             <ul class="nav navbar-header-nav m-l-a">
               <li class="visible-xs b-l">
                 <a href="#top-search" data-toggle="canvas">
                   <i class="fa fa-fw fa-search"></i>
                 </a>
               </li>
-              <!-- BEGIN MAILS en NAV ARRIBA -->
-              <?php //include ('wireframe\mails.php')
+              <?php //include ('wireframe\mails.php') <!-- BEGIN MAILS en NAV ARRIBA -->
               ?>
               <!-- END MAILS en NAV ARRIBA -->
-
-              <!-- BEGIN Usuario en NAV ARRIBA -->
               <?php include 'wireframe/datosUser.php'; ?>
-              <!-- END Usuario en NAV ARRIBA -->
             </ul>
           </div>
           <!-- END: .navbar-header -->
@@ -134,16 +100,13 @@ if (isset($_GET['controlador'])) {
           <!-- END: .side-footer -->
         </aside>
         <!-- END: .app-side -->
-
         <!-- begin side-collapse-visible bar -->
         <div class="side-visible-line hidden-xs" data-side="collapse">
           <i class="fa fa-caret-left"></i>
         </div>
         <!-- begin side-collapse-visible bar -->
-
         <!-- begin .app-main -->
         <div class="app-main">
-
           <!-- begin .main-heading -->
           <header class="main-heading shadow-2dp">
             <!-- begin dashhead -->
@@ -153,7 +116,6 @@ if (isset($_GET['controlador'])) {
                 </h6>
                 <h3 class="dashhead-title">Panel</h3>
               </div>
-
               <div class="dashhead-toolbar">
                 <div class="dashhead-toolbar-item">
                   <a href="index.php">Panel</a>
@@ -164,7 +126,6 @@ if (isset($_GET['controlador'])) {
           </header>
           <!-- jQuery first, then Popper.js, then Bootstrap JS -->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -210,13 +171,11 @@ if (isset($_GET['controlador'])) {
       <?php include 'wireframe/footer.php'; ?>
 
       <!-- Bootstrap -->
-
       <!-- FIN Bootstrap -->
       <!-- SELECT2 -->
       <link href="../../assets/select2/css/select2.min.css" rel="stylesheet" />
       <script src="../../assets/select2/js/select2.min.js"></script>
       <!--  FIN SELECT -->
-
       <script src="../../assets/js/metisMenu.min.js"></script>
       <!-- ESTO ES PARA LOS CUADROS DE ALERTA  --->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css" />
@@ -233,7 +192,6 @@ if (isset($_GET['controlador'])) {
       <script type="text/javascript" language="javascript" src="../../assets/js/pdfmake.min.js"></script>
       <script type="text/javascript" language="javascript" src="../../assets/js/vfs_fonts.js"></script>
       <script type="text/javascript" language="javascript" src="../../assets/js/buttons.html5.min.js"></script>
-      <!-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.2/js/dataTables.rowGroup.min.js" -->
       <script type="text/javascript" language="javascript" src="../../assets/js/dataTables.rowGroup.min.js"></script>
       <script type="text/javascript" language="javascript" src="../../assets/vendor/dragula/dragula.js"></script>
       <script type="text/javascript" language="javascript" src="../../assets/js/chl.js"></script>
