@@ -1,5 +1,5 @@
 <?php /// SI NO ESTA LOGUEADO ARAFUE
-require_once '../controlador/controlador.php';
+
 if (!isset($_SESSION['usuario'])) {
   session_start();
   if (isset($_SESSION['usuario'])) {

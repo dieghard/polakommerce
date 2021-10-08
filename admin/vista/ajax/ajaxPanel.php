@@ -1,21 +1,24 @@
 <?php
 
-use admin\Controlador\ControladorPanel;
+
+use admin\Modelo\ModeloPanel;
 
 class AjaxPanel
 {
     public function __construct()
     {
-        require_once '../../controlador/controladorPanel.php';
+
+        require_once '../../modelo/modeloPanel.php';
     }
 
     public function EstadoPedidos()
     {
-        $controlador = new controladorPanel();
-        $respuesta = $controlador->EstadoPedidos();
+        $moduloPanel = new modeloPanel();
 
-        return $respuesta;
-        $CP = null;
+        $ingreso = $moduloPanel->EstadoPedidos();
+
+        return $ingreso;
+        $moduloPanel = null;
     }
 }
 
