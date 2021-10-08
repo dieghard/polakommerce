@@ -108,7 +108,7 @@ function Impresion_de_todos_los_recibos(){
     if (anioImpresion==null){anioImpresion=0;}
 
     var strUrl="paginas/recibos/impresionrecibos.php";
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
     $('#idTablaUser').html('');
     document.location.href = strUrl + "?ACTION=impresionRecibos&socioID=" + socioID + "&mesImpresion=" + mesImpresion +"&anioImpresion=" + anioImpresion+ "&numeroReciboImpresion=" +numeroReciboImpresion + "&sectorImpresion=" + sectorImpresion ;
 }
@@ -128,7 +128,7 @@ function LlenarGrilla(){
     datos.append("mesHasta",mesHasta);
     datos.append("anioHasta",anioHasta);
     datos.append("ACTION","llenarGrilla");
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
     $('#idTablaUser').html('');
     $.ajax({
             url:strUrl,

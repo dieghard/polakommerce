@@ -5,19 +5,19 @@ $(document).ready(function() {
     $("#btnCerrar").on( "click", function() {});
     $("#btnCerrarAbajo").on( "click", function() {});
     $("#botonOcultar" ).trigger( "click" );
-    
+
     $("#btnGuardar").click(function() {
         Guardar_Datos();
     });
     $("#btnNuevo").click(function() {
         LocalidadNuevo();
     });
-    
-   
+
+
     $('#modalLocalidad').on('hidden.bs.modal', function (e) {
-          LlenarGrilla();     
+          LlenarGrilla();
     });
-    
+
     $("#descripcion").keypress(function(e) {
         //no recuerdo la fuente pero lo recomiendan para
         //mayor compatibilidad entre navegadores.
@@ -26,8 +26,8 @@ $(document).ready(function() {
             $("#btnGuardar").trigger("click");
         }
     });
-   
-        
+
+
 /*
 $('#modalUsers2')
    .on('hide', function() {
@@ -43,25 +43,25 @@ $('#modalUsers2')
       console.log('shown' );
    });
 */
-   
-       
+
+
 });
 
 
 function LlenarGrilla(){
-   
-       
+
+
     var strUrl="ajax/ajaxAbmLocalidad.php";
-    
+
     var datos = new FormData();
     datos.append("ACTION","llenarGrilla");
-    
-    
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>'); 
-    
-    
+
+
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
+
+
     $('#idTablaUser').html('');
-    
+
     $.ajax({
             url:strUrl,
                 method:"POST",
@@ -76,7 +76,7 @@ function LlenarGrilla(){
                         if (oRta.success ==true ){
                             $('#tabla').html(oRta.tabla);
                             //TRADUCCION DE LA GRILLA DE MAESTRO SECTOR!!!
-                             
+
                             $('#idTablaUser').DataTable( {
                                 dom: 'Bfrtip',
                                 buttons: [{extend: 'excelHtml5'},],
@@ -98,18 +98,18 @@ function LlenarGrilla(){
                         }
                         else{
                             $('#error').html(oRta.mensaje);
-                        } 
-                }         
+                        }
+                }
         });
 
 }
 function LocalidadNuevo(){
-  
+
     $("#id").val('0');
     $('#descripcion').val('');
-    
+
     $("#modalLocalidad").modal("show");
-        
+
 }
 $(document).on('show.bs.modal', '.modal', centerModal);
 function centerModal() {
@@ -125,13 +125,13 @@ function centerModal() {
 }
 
 function PasarDatosLocalidad(){
-    
+
     var id = $('#id').val();
     if (id==''){
         id =0;
     }
     var Localidad ={
-                   
+
                     id : id,
                     descripcion : $('#descripcion').val(),
                     seguir: true,
@@ -140,15 +140,15 @@ function PasarDatosLocalidad(){
 }
 function Validar(Localidad){
         blnContinuar=true;
-        
+
         if (Localidad.descripcion!= null && Localidad.descripcion.length <=0 ){
             Localidad.mensaje = Localidad.mensaje + 'Debe ingresar una descripción</br>';
             Localidad.seguir = false;
-            blnContinuar=false;   
+            blnContinuar=false;
         }
-        
-  
-         
+
+
+
     return Localidad;
 }
 function Guardar_Datos(){
@@ -156,13 +156,13 @@ function Guardar_Datos(){
         var Localidad =PasarDatosLocalidad();
         ///Valido los datos de la Localidad
         Localidad = Validar(Localidad);
-    
+
         if (Localidad.seguir==false){
             $('#error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Se econtraron errores!</strong></br>'+ Localidad.mensaje +'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
         return false;
-        }   
+        }
         ///SI PASA LO STRINGIFICO
-        
+
         var titulo ='¿Guardar datos? ';
         var content ='¿Guardar datos?';
         $.confirm({
@@ -181,17 +181,17 @@ function Guardar_Datos(){
                     }
                 }
             });
-        
-    
+
+
 }
 function GuardarDatos(Localidad){
         var oLocalidad = JSON.stringify(Localidad);
         var datos = new FormData();
-        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');     
+        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         datos.append("ACTION",'ingresarActualizarLocalidad');
         datos.append("datosjson",oLocalidad );
         console.log(oLocalidad);
-    ////LO PASO CON FORM DATA    
+    ////LO PASO CON FORM DATA
         var strUrl="ajax/ajaxAbmLocalidad.php";
          $.ajax({
                 url:strUrl,
@@ -203,16 +203,16 @@ function GuardarDatos(Localidad){
                 success:function(respuesta){
                       console.log(respuesta);
                         var oRta  = JSON.parse(respuesta);
-                        if (oRta.success ==true ){    
-                            $('#modalLocalidad').modal('toggle');    
+                        if (oRta.success ==true ){
+                            $('#modalLocalidad').modal('toggle');
                             LlenarGrilla();
                             $('#error').html('');
                         }else
                         {
                             $('#error').html(oRta.mensaje);
-                        }                              
-                      
-                }         
+                        }
+
+                }
         });
 }
 ///Eliminar Socio
@@ -221,9 +221,9 @@ function fnProcesaEliminar(x){
     //console.log('id:'+id);
     ////CREO EL OBJETO
     var  Localidad ={id: id} ;
-    
-    
-    
+
+
+
     $.confirm({
                 theme: 'Modern',
                 title: 'ELIMINACIÓN',
@@ -240,17 +240,17 @@ function fnProcesaEliminar(x){
                     }
                 }
             });
-        
+
 }
 function fnProcesaEditar(x){
     var id= $(x).closest('tr').data('id');
     var descripcion= $(x).closest('tr').data('descripcion');
-      
+
     $("#id").val(id);
     $('#descripcion').val(descripcion);
     $("#modalLocalidad").modal("show");
-    
-    
+
+
 }
 function eliminarLocalidad(Localidad){
     ///SI PASA LO STRINGIFICO
@@ -258,9 +258,9 @@ function eliminarLocalidad(Localidad){
         var datos = new FormData();
         datos.append("ACTION","eliminarLocalidad");
         datos.append("datosjson",oLocalidad);
-        ////LO PASO CON FORM DATA    
+        ////LO PASO CON FORM DATA
         var strUrl="ajax/ajaxAbmLocalidad.php";
-        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>'); 
+        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         $.ajax({
             url:strUrl,
             method:"POST",
@@ -268,16 +268,16 @@ function eliminarLocalidad(Localidad){
             cache:false,
             contentType:false,
             processData :false,
-            success:function(respuesta){               
+            success:function(respuesta){
                 console.log(respuesta);
-                var oRta  = JSON.parse(respuesta); 
-                   
+                var oRta  = JSON.parse(respuesta);
+
                 if (oRta.success==false){
-                
+
                     alert (oRta.mensaje);
                 }
                 LlenarGrilla();
-            }  
+            }
         });
 
 }

@@ -19,10 +19,13 @@ class ModeloUser
          return $arraydata;
       }
    }
+
    public function ValidarUser($usuarioLoguin)
    {
       $superArray = array();
       $sql = $this->SqlSelectUser();
+      $sql .= 'WHERE usuarios.mail  = :mail
+               Limit 1';
       if (session_status() == PHP_SESSION_NONE) :
          session_start();
       endif;
@@ -40,8 +43,6 @@ class ModeloUser
       try {
 
          $superArray['success'] = true;
-         $superArray['DEVELOVER_ENVIROMENT'] = $this->iniData['DEVELOVER_ENVIROMENT'];
-
          $conexion = new Conexion($superArray);
 
          $dbConectado = $conexion->DBConect($superArray);
@@ -154,6 +155,71 @@ class ModeloUser
       return  $superArray;
    }
 
+
+   public function LlenarGrilla()
+   {
+      $superArray = array();
+      $sql = $this->SqlSelectUser();
+      $sql .= ' ORDER BY  usuarios.nombreyapellido';
+
+
+      try {
+         $superArray['success'] = true;
+         $conexion = new Conexion($superArray);
+         $dbConectado = $conexion->DBConect($superArray);
+         $stmt  = $dbConectado->prepare($sql);
+         $stmt->execute();
+         $registro = $stmt->fetchAll();
+
+         if ($registro) :
+            $tabla = '<div class="table-responsive">
+                     <table class="table table-condensed  table-striped  table-bordered" id="idTablaUser">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">NOMBRE Y APELLIDO</th>
+                            <th scope="col">MAIL</th>
+                            <th scope="col">PERFIL</th>
+                            <th scope="col">ACTIVO</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                <tbody>';
+
+            if ($registro) :
+               foreach ($registro  as $row) {
+                  $encabezadoRow = '<tr id="' . $row['id'] . '"';
+                  $encabezadoRow .= 'data-id="' . $row['id'] . '"';
+                  $encabezadoRow .= 'data-nombreyapellido="' . $row['nombreyapellido'] . '"';
+                  $encabezadoRow .= 'data-mail="' . $row['mail'] . '"';
+                  $encabezadoRow .= 'data-pass="' . $row['pass'] . '"';
+                  $encabezadoRow .= 'data-perfilID="' . $row['perfilID'] . '"';
+                  $encabezadoRow .= 'data-perfil="' . $row['perfil'] . '"';
+                  $encabezadoRow .= 'data-activo="' . $row['activo'] . '"';
+                  $encabezadoRow .= '">';
+                  $tabla .= $encabezadoRow . '<td>' . $row['nombreyapellido'] . '</td>';
+                  $tabla .= '<td>' . $row['mail'] . '</td>';
+                  $tabla .= '<td>' . $row['perfil'] . '</td>';
+                  $tabla .= '<td>' . $row['activo'] . '</td>';
+                  $tabla .= '<td><button type="button" title="Presione para modificar item" class="btn btn-primary edit" onclick="fnProcesaEditar(this)"  value="' . $row['id'] . '"><i class="fa fa-edit "></i></button>     ';
+                  $tabla .= '<button type="button" title="Presione para eliminar item" class="btn btn-danger delete" onclick="fnProcesaEliminar(this)" value="' . $row['id'] . '"><i class="fa fa-eraser "></i> </button></td>';
+                  $tabla .= '</tr>'; //nueva fila
+               }
+            endif;
+            $tabla .= '</tbody>
+                        </table>
+                        </div>';
+
+         endif;
+      } catch (Throwable $e) {
+         $trace = $e->getTrace();
+         $elDato = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
+         $superArray['success'] = false;
+         $superArray['mensaje'] = 'Message: ' . $e->getMessage();
+      }
+      $superArray['tabla'] = $tabla;
+      return json_encode($superArray);
+   }
+
    private function sqlSelectUser()
    {
       $sql = " SELECT  usuarios.id
@@ -166,8 +232,6 @@ class ModeloUser
                ,usuarios.activo
                FROM usuarios
                INNER JOIN perfiles ON perfiles.id = usuarios.perfilID
-               WHERE usuarios.mail    = :mail
-               Limit 1
       ";
       return $sql;
    }

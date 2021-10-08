@@ -5,19 +5,19 @@ $(document).ready(function() {
     $("#btnCerrar").on( "click", function() {});
     $("#btnCerrarAbajo").on( "click", function() {});
     $("#botonOcultar" ).trigger( "click" );
-    
+
     $("#btnGuardar").click(function() {
         Guardar_Datos();
     });
     $("#btnNuevo").click(function() {
         sectorNuevo();
     });
-    
-   
+
+
     $('#modalCostoCuota').on('hidden.bs.modal', function (e) {
-          LlenarGrilla();     
+          LlenarGrilla();
     });
-    
+
     $("#descripcion").keypress(function(e) {
         //no recuerdo la fuente pero lo recomiendan para
         //mayor compatibilidad entre navegadores.
@@ -26,8 +26,8 @@ $(document).ready(function() {
             $("#btnGuardar").trigger("click");
         }
     });
-   
-        
+
+
 /*
 $('#modalUsers2')
    .on('hide', function() {
@@ -43,25 +43,25 @@ $('#modalUsers2')
       console.log('shown' );
    });
 */
-   
-       
+
+
 });
 
 
 function LlenarGrilla(){
-   
-       
+
+
     var strUrl="ajax/ajaxSector.php";
-    
+
     var datos = new FormData();
     datos.append("ACTION","llenarGrilla");
-    
-    
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>'); 
-    
-    
+
+
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
+
+
     $('#idTablaUser').html('');
-    
+
     $.ajax({
             url:strUrl,
                 method:"POST",
@@ -76,7 +76,7 @@ function LlenarGrilla(){
                         if (oRta.success ==true ){
                             $('#tabla').html(oRta.tabla);
                             //TRADUCCION DE LA GRILLA DE MAESTRO SECTOR!!!
-                             
+
                             $('#idTablaUser').DataTable( {
                                 dom: 'Bfrtip',
                                 buttons: [{extend: 'excelHtml5'},],
@@ -98,28 +98,28 @@ function LlenarGrilla(){
                         }
                         else{
                             $('#error').html(oRta.mensaje);
-                        } 
-                }         
+                        }
+                }
         });
 
 }
 function sectorNuevo(){
-  
+
     $("#id").val('0');
     $('#descripcion').val('');
     $("#modalSector").modal("show");
-        
+
 }
 
 
 function PasarDatosSector(){
-    
+
     var id = $('#id').val();
     if (id==''){
         id =0;
     }
     var sector ={
-                   
+
                     id : id,
                     descripcion : $('#descripcion').val(),
                     seguir: true,
@@ -128,15 +128,15 @@ function PasarDatosSector(){
 }
 function Validar(sector){
         blnContinuar=true;
-        
+
         if (sector.descripcion!= null && sector.descripcion.length <=0 ){
             costoCuota.mensaje = costoCuota.mensaje + 'Debe ingresar una descripción</br>';
             costoCuota.seguir = false;
-            blnContinuar=false;   
+            blnContinuar=false;
         }
-        
-  
-         
+
+
+
     return sector;
 }
 function Guardar_Datos(){
@@ -144,13 +144,13 @@ function Guardar_Datos(){
         var sector =PasarDatosSector();
         ///Valido los datos de la Localidad
         sector = Validar(sector);
-    
+
         if (sector.seguir==false){
             $('#error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Se econtraron errores!</strong></br>'+ sector.mensaje +'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
         return false;
-        }   
+        }
         ///SI PASA LO STRINGIFICO
-        
+
         var titulo ='¿Guardar datos? ';
         var content ='¿Guardar datos?';
         $.confirm({
@@ -169,17 +169,17 @@ function Guardar_Datos(){
                     }
                 }
             });
-        
-    
+
+
 }
 function GuardarDatos(sector){
         var oSector = JSON.stringify(sector);
         var datos = new FormData();
-        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');     
+        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         datos.append("ACTION",'ingresarActualizarSector');
         datos.append("datosjson",oSector);
-        
-    ////LO PASO CON FORM DATA    
+
+    ////LO PASO CON FORM DATA
         var strUrl="ajax/ajaxSector.php";
          $.ajax({
                 url:strUrl,
@@ -190,16 +190,16 @@ function GuardarDatos(sector){
                 processData :false,
                 success:function(respuesta){
                         var oRta  = JSON.parse(respuesta);
-                        if (oRta.success ==true ){    
-                            $('#modalSector').modal('toggle');    
+                        if (oRta.success ==true ){
+                            $('#modalSector').modal('toggle');
                             LlenarGrilla();
                             $('#error').html('');
                         }else
                         {
                             $('#error').html(oRta.mensaje);
-                        }                              
-                      
-                }         
+                        }
+
+                }
         });
 }
 ///Eliminar Sector
@@ -208,9 +208,9 @@ function fnProcesaEliminar(x){
     //console.log('id:'+id);
     ////CREO EL OBJETO
     var  sector ={id: id} ;
-    
-    
-    
+
+
+
     $.confirm({
                 theme: 'Modern',
                 title: 'ELIMINACIÓN',
@@ -227,20 +227,20 @@ function fnProcesaEliminar(x){
                     }
                 }
             });
-        
+
 }
 function fnProcesaEditar(x){
     var id= $(x).closest('tr').data('id');
     var descripcion= $(x).closest('tr').data('descripcion');
-    
-    
-    
+
+
+
     $("#id").val(id);
     $('#descripcion').val(descripcion);
-    
+
     $("#modalSector").modal("show");
-    
-    
+
+
 }
 function eliminarSector(sector){
     ///SI PASA LO STRINGIFICO
@@ -248,9 +248,9 @@ function eliminarSector(sector){
         var datos = new FormData();
         datos.append("ACTION","eliminarSector");
         datos.append("datosjson",oSector);
-        ////LO PASO CON FORM DATA    
+        ////LO PASO CON FORM DATA
         var strUrl="ajax/ajaxSector.php";
-        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>'); 
+        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         $.ajax({
             url:strUrl,
             method:"POST",
@@ -258,16 +258,16 @@ function eliminarSector(sector){
             cache:false,
             contentType:false,
             processData :false,
-            success:function(respuesta){   
-                console.log(respuesta);            
-                var oRta  = JSON.parse(respuesta); 
-                   
+            success:function(respuesta){
+                console.log(respuesta);
+                var oRta  = JSON.parse(respuesta);
+
                 if (oRta.success==false){
-                
+
                     alert (oRta.mensaje);
                 }
                 LlenarGrilla();
-            }  
+            }
         });
 
 }

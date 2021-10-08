@@ -99,7 +99,7 @@ function LlenarGrilla() {
     datos.append("bibliotecaID", "llenarGrilla");
     datos.append("ACTION", "llenarGrilla");
 
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
     $('#idTablaUser').html('');
     $.ajax({
         url: strUrl,

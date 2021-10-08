@@ -43,7 +43,7 @@ function LlenarGrilla(){
     datos.append("ACTION","llenarGrilla");
 
 
-    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+    $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
 
 
     $('#idTablaUser').html('');
@@ -173,7 +173,7 @@ function Guardar_Datos(){
 function GuardarDatos(provincia){
         var oProvincia = JSON.stringify(provincia);
         var datos = new FormData();
-        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+        $('#error').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         datos.append("ACTION",'ingresarActualizarProvincia');
         datos.append("datosjson",oProvincia );
         console.log(oProvincia);
@@ -246,7 +246,7 @@ function eliminarProvincia(provincia){
         datos.append("datosjson",oProvincia);
         ////LO PASO CON FORM DATA
         var strUrl="ajax/ajaxAbmProvincias.php";
-        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../vista/images/save.gif"  width="50" height="50" alt="loading"/></div>');
+        $('#tabla').html('<div class="loading"><h7>Aguarde Un momento, por favor...</h7><img src="../../assets/img/save.gif"  width="50" height="50" alt="loading"/></div>');
         $.ajax({
             url:strUrl,
             method:"POST",
