@@ -1,9 +1,9 @@
 <?php
 
 
-require_once "../../../admin/Modelo/ModeloUser.php";
+require_once "../../../Admin/Modelo/User.php";
 
-use admin\Modelo\ModeloUser;
+use Admin\Modelo\User;
 
 class Ajax_Validar_User
 {
@@ -11,11 +11,23 @@ class Ajax_Validar_User
    {
    }
 
+   public function GuardarUsuario($oUsuario)
+   {
+
+      $respuesta = '';
+      $MP = new User();
+
+      $respuesta = $MP->GuardarUsuario($oUsuario);
+      return  $respuesta;
+      $MP = null;
+   }
+
+
    public function Ingreso($usuario)
    {
 
       $respuesta = '';
-      $MP = new ModeloUser();
+      $MP = new User();
 
       $respuesta = $MP->ValidarUser($usuario);
       return  $respuesta;
@@ -25,9 +37,16 @@ class Ajax_Validar_User
    public function LlenarGrilla()
    {
 
-      $MP = new ModeloUser();
-
+      $MP = new User();
       $respuesta = $MP->LlenarGrilla();
+      return  $respuesta;
+      $MP = null;
+   }
+   public function BuscarxMail($mail)
+   {
+      $MP = new User();
+
+      $respuesta = $MP->BuscarxMail($mail);
       return  $respuesta;
       $MP = null;
    }
@@ -41,8 +60,27 @@ endif;
 
 if ($accion == 'llenarGrilla') :
    $panel = new Ajax_Validar_User();
-
-   $respuesta = 'PASE POR AQUI PAPA';
    $respuesta = $panel->LlenarGrilla();
    echo $respuesta;
+endif;
+
+if ($accion == 'buscarxMail') :
+   if (isset($_POST['mail'])) :
+      $mail = $_POST['mail'];
+      $panel = new Ajax_Validar_User();
+      $respuesta = $panel->BuscarxMail($mail);
+   else :
+      return;
+   endif;
+
+   echo $respuesta;
+endif;
+
+if ($action = 'ingresousuario') :
+   $panel = new Ajax_Validar_User();
+   if (isset($_POST['datosjson'])) :
+      $oUsuario = json_decode($_POST["datosjson"]);
+      $respuesta = $panel->GuardarUsuario($oUsuario);
+      echo $respuesta;
+   endif;
 endif;

@@ -4,7 +4,6 @@
 
     use Class\Empresa;
 
-
     $empresa = new Empresa();
     $empresa = $empresa->Empresa();
     if (session_status() === PHP_SESSION_NONE) :

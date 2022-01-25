@@ -70,7 +70,7 @@ function LlenarGrilla(){
                 contentType:false,
                 processData :false,
                 success:function(respuesta){
-                        console.log(respuesta);
+                        //console.log(respuesta);
                         var oRta  = JSON.parse(respuesta);
                         //console.log(oRta);
                         if (oRta.success ==true ){
@@ -259,7 +259,7 @@ function eliminarSector(sector){
             contentType:false,
             processData :false,
             success:function(respuesta){
-                console.log(respuesta);
+                //console.log(respuesta);
                 var oRta  = JSON.parse(respuesta);
 
                 if (oRta.success==false){

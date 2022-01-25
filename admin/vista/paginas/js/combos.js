@@ -47,17 +47,17 @@ function llenarComboLocalidad(tabIndex){
                         }else
                         {
                             $('#cartel').html(oRta.mensaje);
-                        }                              
-                      
-                }         
+                        }
+
+                }
         });
-     
+
 }
 function LLenarComboSector(tabIndex){
     var datos = new FormData();
     var strUrl="ajax/ajaxCombos.php";
-    
-    
+
+
     datos.append("tabIndex",tabIndex);
     datos.append("combo","sector");
 
@@ -72,13 +72,13 @@ function LLenarComboSector(tabIndex){
                         var oRta  = JSON.parse(respuesta);
                         if (oRta.success ==true ){
                             $('#elSector').html(oRta.combo);
-                            $('#cmbSector').select2();    
+                            $('#cmbSector').select2();
                         }else
                         {
                             $('#cartel').html(oRta.mensaje);
-                        }                              
-                      
-                }         
+                        }
+
+                }
         });
 }
 function LLenarComboTipoSocio(tabIndex){
@@ -98,13 +98,13 @@ function LLenarComboTipoSocio(tabIndex){
                         var oRta  = JSON.parse(respuesta);
                         if (oRta.success ==true ){
                             $('#elTipoSocio').html(oRta.combo);
-                            $('#cmbTipoSocio').select2();    
+                            $('#cmbTipoSocio').select2();
                         }else
                         {
                             $('#cartel').html(oRta.mensaje);
-                        }                              
-                      
-                }         
+                        }
+
+                }
         });
 }
 function LLenarComboSocios(tabIndex){
@@ -125,7 +125,7 @@ function LLenarComboSocios(tabIndex){
 
                         if (oRta.success ==true ){
                             $('#comboSocios').html(oRta.combo);
-                            $('#cmbSocio').select2();    
+                            $('#cmbSocio').select2();
                         }else
                         {
                             $('#cartel').html(oRta.mensaje);
@@ -134,5 +134,4 @@ function LLenarComboSocios(tabIndex){
                 }
         });
 }
-
 

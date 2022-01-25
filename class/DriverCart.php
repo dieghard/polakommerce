@@ -1,10 +1,5 @@
 <?php
-
-
-
-
 namespace Class;
-
 use Class\CarritoDigital;
 
 require_once '../Class/CarritoDigital.php';

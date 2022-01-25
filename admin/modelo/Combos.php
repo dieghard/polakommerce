@@ -6,8 +6,10 @@ require_once "../../../Class/Conexion.php";
 
 use Class\Conexion;
 use PDO;
+use PDOException;
+use Throwable;
 
-class ModeloCombos
+class Combos
 {
     private $iniData;
     public function __construct()
@@ -19,7 +21,9 @@ class ModeloCombos
             return $arraydata;
         }
     }
-    public function ComboLocalidad($tabIndex)
+
+
+    public function ComboGenerico(int $tabIndex, string $tabla, string $nombreCombo, string $descripcionCombo)
     {
         $superArray = array();
         $conexion = new Conexion($superArray);
@@ -28,17 +32,14 @@ class ModeloCombos
         $superArray['mensaje'] = '';
         $superArray['combo'] = '';
         header('Content-Type: text/html;charset=utf-8');
-        $strSql = 'SELECT id, descripcion
-                FROM localidades
-                ORDER BY descripcion';
+        $strSql = 'SELECT id, descripcion FROM  ' . $tabla . '  ORDER BY descripcion';
         try {
             $stmt = $dbConectado->prepare($strSql);
             $stmt->execute();
 
             $registro = $stmt->fetchAll();
-            $combo = '<label for="cmbLocalidad">Localidad: </label><select class="form-control" id="cmbLocalidad" style="width:100%;" tabindex="' . $tabIndex . '"  require><option value=0>Seleccione Localidad</option>';
+            $combo = '<label for=lbl"' . $nombreCombo . '">' . $descripcionCombo . ': </label><select class="form-control" id="' . $nombreCombo . '" style="width:100%;" tabindex="' . $tabIndex . '"  require><option value=0>Seleccione ' . $descripcionCombo . '</option>';
             if ($registro) {
-                /* obtener los valores */
                 foreach ($registro  as $row) {
                     $combo .= '<option value=' . $row['id'] . '>' . $row['descripcion'] . '</option>';
                 }

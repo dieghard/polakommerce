@@ -201,7 +201,7 @@ function GuardarDatos(Localidad){
                 contentType:false,
                 processData :false,
                 success:function(respuesta){
-                      console.log(respuesta);
+                      //console.log(respuesta);
                         var oRta  = JSON.parse(respuesta);
                         if (oRta.success ==true ){
                             $('#modalLocalidad').modal('toggle');
@@ -269,7 +269,7 @@ function eliminarLocalidad(Localidad){
             contentType:false,
             processData :false,
             success:function(respuesta){
-                console.log(respuesta);
+                //console.log(respuesta);
                 var oRta  = JSON.parse(respuesta);
 
                 if (oRta.success==false){

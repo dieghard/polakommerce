@@ -1,8 +1,7 @@
 $(document).ready(function() {
-    ///BOTON CERRAR
     llenarData();
-
 });
+
 function llenarData(){
 
     var strUrl="ajax/ajaxPanel.php";
@@ -21,14 +20,11 @@ function llenarData(){
                 processData :false,
                 success:function(respuesta){
                         var oRta  = JSON.parse(respuesta);
-                        console.log(oRta);
                         if (oRta.success==true ){
 
                             $('#sociosActivos').html(oRta.cantidadUsuariosActivos);
                             $('#sociosInactivos').html(oRta.cantidadUsuariosInactivos);
                             $('#saldoSociosActivos').html('$ ' + oRta.saldo);
-
-                            //TRADUCCION DE LA GRILLA DE MAESTRO SECTOR!!!
                         }
                 }
         });

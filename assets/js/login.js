@@ -14,6 +14,9 @@ $(document).ready(function() {
     var password = $("#inputPassword").val();
 
     var continuar = true;
+
+    console.log(usuario.length);
+
     if (usuario.length <=0){
         $("#divUsuario").fadeToggle(2000);
         $("#divUsuario").text('Debe ingresar un usuario') ;

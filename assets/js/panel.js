@@ -19,7 +19,7 @@ function llenarData(){
                 contentType:false,
                 processData :false,
                 success:function(respuesta){
-                    console.log(respuesta);
+                    //console.log(respuesta);
 
                     var oRta  = JSON.parse(respuesta);
                     if (oRta.success==true ){

@@ -6,8 +6,11 @@ require_once "../../../Class/Conexion.php";
 
 use Class\Conexion;
 use PDO;
+use PDOException;
+use Exception;
+use Throwable;
 
-class ModeloUser
+class User
 {
    private $iniData;
    public function __construct()
@@ -20,12 +23,104 @@ class ModeloUser
       }
    }
 
+   private function ArmarSqlInsert()
+   {
+      $strSql = 'INSERT INTO  usuarios (empresaid ,nombreyapellido, mail, pass, perfilID, activo, observaciones)
+                    VALUES(            :empresaid,:nombreyapellido,:mail,:pass,:perfilID,:activo,:observaciones)';
+
+      return $strSql;
+   }
+
+   private function ArmarSqlUpdate()
+   {
+      $strSql = 'UPDATE usuarios SET  empresaid = :empresaid,
+                                      nombreyapellido = :nombreyapellido,
+                                        mail          = :mail,
+                                        pass          = :pass,
+                                        perfilID      = :perfilID,
+                                        activo        = :activo,
+                                        observaciones = :observaciones
+                                        WHERE id=:id';
+      return $strSql;
+   }
+
+   public function GuardarUsuario($oUsuario)
+   {
+      $superArray = array();
+      $superArray['success'] = true;
+      $conexion = new Conexion($superArray);
+      $dbConectado = $conexion->DBConect($superArray);
+      $superArray['mensaje'] = '';
+
+      if (session_status() == PHP_SESSION_NONE) :
+         session_start();
+      endif;
+      $empresa = $_SESSION['empresa'];
+      $superArray['$empresa'] = $empresa;
+
+
+      if ($oUsuario->id > 0) :
+         $strSql = $this->ArmarSqlUpdate();
+      else :
+         $strSql = $this->ArmarSqlInsert();
+      endif;
+
+      $pass = base64_encode($oUsuario->pass);
+      $superArray['$oUsuario'] = $oUsuario;
+
+      $stmt = $dbConectado->prepare($strSql);
+      if ($oUsuario->id > 0) :
+         $stmt->bindParam(':id', $oUsuario->id, PDO::PARAM_INT);
+      endif;
+      $stmt->bindParam(':empresaid', $empresa['id'], PDO::PARAM_INT);
+      $stmt->bindParam(':nombreyapellido', $oUsuario->nombreyapellido, PDO::PARAM_STR);
+      $stmt->bindParam(':mail', $oUsuario->mail, PDO::PARAM_STR);
+      $stmt->bindParam(':pass', $pass, PDO::PARAM_STR);
+      $stmt->bindParam(':perfilID', $oUsuario->perfilID, PDO::PARAM_INT);
+      $stmt->bindParam(':activo', $oUsuario->activo, PDO::PARAM_STR);
+      $stmt->bindParam(':observaciones', $oUsuario->observaciones, PDO::PARAM_STR);
+      //Comienzo la transaccion
+      $dbConectado->beginTransaction();
+      try {
+         $stmt->execute();
+         $dbConectado->commit();
+      } catch (Exception $e) {
+         $superArray['success'] = false;
+         $superArray['mensaje'] = 'Error: ' . $e->getMessage();
+         $dbConectado->rollBack();
+      }
+
+      $stmt = null;
+      $dbConectado = null;
+
+      return json_encode($superArray);
+
+      /*
+        $from = "soporte@rasoftware.com.ar";
+        $to = $data['mail'];
+        $subject = "SOFTWARE BIBLIOTECA -EL USUARIO:" . $data['nombre'] . "  fue ingresado al sistema datos" ;
+        $message = "NUEVO INGRESO DE DATOS PARA EL USER:" .  $nombre ;
+        $message = $message . "";
+        $headers = "Desde:" . $from;
+        mail($to,$subject,$message, $headers);
+
+        $from = "soporte@rasoftware.com.ar";
+        $to = 'soporte@rasoftware.com.ar';
+        $subject = "SOFTWARE BIBLIOTECA  -EL USUARIO:" . $data['nombre'] . "  fue ingresado al sistema datos" ;
+        $message = "NUEVO INGRESO DE DATOS PARA EL USER:" .  $nombre ;
+        $message = $message . "";
+        $headers = "Desde:" . $from;
+        mail($to,$subject,$message, $headers);
+
+        */
+   }
+
    public function ValidarUser($usuarioLoguin)
    {
       $superArray = array();
       $sql = $this->SqlSelectUser();
-      $sql .= 'WHERE usuarios.mail  = :mail
-               Limit 1';
+      $sql .= '   WHERE mail  = :mail  Limit 1';
+
       if (session_status() == PHP_SESSION_NONE) :
          session_start();
       endif;
@@ -155,13 +250,62 @@ class ModeloUser
       return  $superArray;
    }
 
+   public function BuscarxMail(string $email)
+   {
+
+      $superArray = array();
+      $sql = $this->SqlSelectUser();
+      $sql .= 'WHERE usuarios.mail  = :mail
+               Limit 1';
+
+      if (session_status() == PHP_SESSION_NONE) :
+         session_start();
+      endif;
+      $usuario = [
+         'id' => 0,
+         'empresaid' => 0,
+         'nombreyapellido' => '',
+         'mail' => '',
+         'pass' => '',
+         'activo' => '',
+         'perfil' => ''
+      ];
+      try {
+         $conexion = new Conexion($superArray);
+         $dbConectado = $conexion->DBConect($superArray);
+         $stmt  = $dbConectado->prepare($sql);
+         $mail = htmlentities(addslashes($email));
+         $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+         $stmt->execute();
+         $registro = $stmt->fetchAll();
+         $superArray['success'] = true;
+         $superArray['mensaje'] = '';
+         $superArray['encontrado'] = false;
+         if ($registro) :
+            $row = $registro[0];
+            $superArray['success'] = true;
+            $usuario = $this->PasarRow($row);
+            $superArray['mensaje'] = 'Todo ok';
+            $superArray['encontrado'] = true;
+            $superArray['user'] = $usuario;
+         endif;
+      } catch (Throwable $e) {
+         $trace = $e->getTrace();
+         $elDato = $e->getMessage() . ' en ' . $e->getFile() . ' en la linea ' . $e->getLine() . ' llamado desde ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'];
+         $superArray['success'] = false;
+         $superArray['mensaje'] = 'Message: ' . $e->getMessage();
+         $superArray['path'] = '#';
+         return json_encode($superArray);
+      }
+      return json_encode($superArray);
+   }
 
    public function LlenarGrilla()
    {
       $superArray = array();
       $sql = $this->SqlSelectUser();
       $sql .= ' ORDER BY  usuarios.nombreyapellido';
-
+      $tabla = '';
 
       try {
          $superArray['success'] = true;
@@ -192,7 +336,7 @@ class ModeloUser
                   $encabezadoRow .= 'data-nombreyapellido="' . $row['nombreyapellido'] . '"';
                   $encabezadoRow .= 'data-mail="' . $row['mail'] . '"';
                   $encabezadoRow .= 'data-pass="' . $row['pass'] . '"';
-                  $encabezadoRow .= 'data-perfilID="' . $row['perfilID'] . '"';
+                  $encabezadoRow .= 'data-perfilid="' . $row['perfilID'] . '"';
                   $encabezadoRow .= 'data-perfil="' . $row['perfil'] . '"';
                   $encabezadoRow .= 'data-activo="' . $row['activo'] . '"';
                   $encabezadoRow .= '">';
@@ -231,8 +375,7 @@ class ModeloUser
                ,perfiles.descripcion as perfil
                ,usuarios.activo
                FROM usuarios
-               INNER JOIN perfiles ON perfiles.id = usuarios.perfilID
-      ";
+               INNER JOIN perfiles ON perfiles.id = usuarios.perfilID  ";
       return $sql;
    }
 
@@ -246,5 +389,18 @@ class ModeloUser
                       ,empresa.cliengo_chat_token_1,empresa.cliengo_chat_token_2  FROM empresa ";
 
       return $sql;
+   }
+
+   private function PasarRow($row)
+   {
+      return [
+         'id' => $row['id'],
+         'empresaid' => $row['empresaid'],
+         'nombreyapellido' => $row['nombreyapellido'],
+         'mail' => $row['mail'],
+         'pass' => $row['pass'],
+         'activo' => $row['activo'],
+         'perfil' => $row['perfil']
+      ];
    }
 }

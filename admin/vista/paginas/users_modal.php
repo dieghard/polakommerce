@@ -7,7 +7,7 @@
  <div class="modal-body">
      <div class="form-group">
          <label for="mail">Mail</label>
-         <input type="text" class="form-control" id="mail" placeholder="Ingrese el documento y presione enter" onkeypress="return AddKeyPress(event);" maxlength="20" tabindex="1" required>
+         <input type="email" class="form-control" id="mail" placeholder="Ingrese el documento y presione enter" onkeypress="return AddKeyPress(event);" maxlength="20" tabindex="1" required>
      </div>
      <div class="form-group ">
          <label for="nombreyapellido">Apellido y Nombre:</label>
@@ -25,7 +25,7 @@
          </select>
      </div>
      <div class="form-group">
-         <div id="perfilId" class="form-group">
+         <div id="divPerfil" class="form-group">
          </div>
      </div>
      <div class="form-group">

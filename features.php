@@ -14,8 +14,6 @@ use Class\Productos;
                 <ul>
                     <li class="active" data-filter="*">Todos</li>
                     <?php
-
-
                     $categorias = new Categorias();
                     $arrCategorias = $categorias->getCategorias();
                     $categoria_frame = '';

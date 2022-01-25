@@ -29,9 +29,12 @@
                 <div class="login">
                   <div class="group"> <label for="user" class="label">Mail</label> <input type="text" class="input" id="inputEmail" placeholder="Ingrese su Email"> </div>
                   <div class="group"> <label for="pass" class="label">Password</label> <input type="password" class="input" data-type="password" id="inputPassword" placeholder="Ingrese su Password"> </div>
+                  <!-- <div class="hr"></div>-->
+                  </br>
                   <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Mantenerme Logueado</label> </div>
                   <div class="group"><button id="btn-login" class="btn btn-primary btn-lg m-3 ">Ingresar</button></div>
-                  <div class="hr"></div>
+                  </br>
+                  <div id='divUsuario'></div>
                   <div class="foot"> <a href="#">¿Olvidaste tu Password?</a> </div>
                 </div>
                 <div class="sign-up-form">
@@ -46,6 +49,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
