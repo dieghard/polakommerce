@@ -3,7 +3,7 @@
         <div class="row">
             <div class="box box-solid box-success">
                 <div class="box-header">
-                    <h4>Maestro de Usuarios <button type="button" class="btn btn-primary" id="btnNuevo" title="haga un click aqui para ingresar un nuevo socio">NUEVO Usuario</button> </h4>
+                    <h4>Maestro de Usuarios <button type="button" class="btn btn-primary" id="btnNuevo" title="haga un click aqui para ingresar un nuevo usuario">NUEVO Usuario</button> </h4>
                 </div>
                 <div class="box-body">
                     <div id="tabla">

@@ -54,6 +54,7 @@ function LLenarComboPerfiles(tabIndex){
 function AddKeyPress(e) {
         // look for window.event in case event isn't passed in
         e = e || window.event;
+
         if (e.keyCode == 13) {
             var error = '';
             var blnSeguir = true;
@@ -109,20 +110,17 @@ function AddKeyPress(e) {
 }
 
 function fnProcesaEditar(x){
-    var id= $(x).closest('tr').data('id');
-    var mail= $(x).closest('tr').data('mail');
-    var nombreyapellido= $(x).closest('tr').data('nombreyapellido');
-    var pass= $(x).closest('tr').data('pass');
-    var perfilId= $(x).closest('tr').data('perfilid');
-    var activo= $(x).closest('tr').data('activo');
+    var id   = $(x).closest('tr').data('id');
+    var mail = $(x).closest('tr').data('mail');
+    var nombreyapellido = $(x).closest('tr').data('nombreyapellido');
+    var perfilId = $(x).closest('tr').data('perfilid');
+    var activo   = $(x).closest('tr').data('activo');
     var observaciones = $(x).closest('tr').data('observaciones');
 
-    console.log('nombreyapellido=' + nombreyapellido);
 
     $("#id").val(id);
     $("#mail").val(mail);
     $("#nombreyapellido").val(nombreyapellido);
-    $("#pass").val(pass);
     $("#observaciones").val(observaciones);
 
     $('#mail').prop('disabled', true);
@@ -140,6 +138,7 @@ function fnProcesaEditar(x){
 
     $('#cmbPerfil').val(perfilId);
     $('#cmbPerfil').trigger('change'); // Notify any JS components that the value changed
+    $('#btnGuardar').prop('disabled', false);
     $("#modalUsers2").modal("show");
 
 
@@ -198,7 +197,7 @@ function Nuevo(){
     $('#mail').val('');
     $('#pass').val('');
 
-    $('#cmbActivo').val('SI');
+    $('#cmbActivo').val(-1);
 
     $('#mail').prop('disabled', false);
     $('#nombreyapellido').prop('disabled', true);
@@ -215,16 +214,16 @@ function Nuevo(){
 
 function PasarDatosusuario() {
 
-    var usuario ={
-                    id: $('#id').val(),
-                    mail : $('#mail').val(),
-                    nombre : $('#nombreyapellido').val(),
-                    pass: $('#pass').val(),
-                    perfilID: $('#cmbPerfil').val(),
-                    activo: $('#cmbActivo').val(),
-                    observaciones: $('#observaciones').val(),
-                    seguir: true,
-                    mensaje: ''};
+    var usuario ={ id: $('#id').val(),
+                   mail : $('#mail').val(),
+                   nombreyapellido : $('#nombreyapellido').val(),
+                   pass: $('#pass').val(),
+                   perfilID: $('#cmbPerfil').val(),
+                   activo: $('#cmbActivo').val(),
+                   observaciones: $('#observaciones').val(),
+                   seguir: true,
+                   mensaje: ''};
+
     return usuario;
 }
 
@@ -243,12 +242,17 @@ function Validar(usuario){
             usuario.seguir = false;
             blnContinuar=false;
         }
-        if ( usuario.pass!= null  && usuario.pass.length<=0 ){
-            usuario.mensaje = usuario.mensaje + 'Debe ingresar un pass</br>';
-            usuario.seguir = false;
-            blnContinuar=false;
+
+        if (usuario.id == 0) {
+            if (usuario.pass != null && usuario.pass.length <= 0) {
+                console.log('Debe ingresar un pass</br>');
+                usuario.mensaje = usuario.mensaje + 'Debe ingresar un pass</br>';
+                usuario.seguir = false;
+                blnContinuar = false;
+            }
         }
-        if (  usuario.sectorID!= null && usuario.sectorID.length<=0 ){
+
+        if (usuario.sectorID != null && usuario.sectorID.length <= 0) {
             usuario.mensaje = usuario.mensaje + 'Debe ingresar un sector</br>';
             usuario.seguir = false;
             blnContinuar=false;
@@ -261,17 +265,19 @@ function Guardar_Datos(){
 
     var usuario = PasarDatosusuario();
     usuario = Validar(usuario);
+    console.log(usuario);
 
-    if (usuario.seguir==false){
-        $('#error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Se econtraron errores!</strong></br>'+ usuario['mensaje']+'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+    if (usuario.seguir == false) {
+        let mensaje = '<div class="alert alert-warning"><strong>' + usuario.mensaje + '</strong></div>';
+        $('#error_abm').html( mensaje).show().delay(1250).fadeOut();
     return false;
     }
 
-    var titulo ='Guardar el nuevo usuario '  + usuario.nombre;
-    var content ='¿Guardar el nuevo usuario '  + usuario.nombre + ' ?';
+    var titulo ='Guardar el nuevo usuario '  + usuario.nombreyapellido;
+    var content ='¿Guardar el nuevo usuario '  + usuario.nombreyapellido + ' ?';
     if (usuario.id >0){
-        var titulo ='Guardar modificaciones  del usuario ' + usuario.nombre  ;
-        var content ='¿Guardar modificaciones del usuario?' + usuario.nombre  ;
+        var titulo ='Guardar modificaciones  del usuario ' + usuario.nombreyapellido  ;
+        var content ='¿Guardar modificaciones del usuario?' + usuario.nombreyapellido  ;
     }
 
         $.confirm({
@@ -310,14 +316,15 @@ function GuardarUsuario(usuario){
                 contentType:false,
                 processData :false,
                 success:function(respuesta){
-                    //console.log(respuesta);
+
                         var oRta = JSON.parse(respuesta);
                             if (oRta.success==true){
                                 $('#modalUsers2').modal('toggle');
                                 LlenarGrilla();
                             }
                             else{
-                                alert (oRta.mensaje);
+                                console.log(oRta);
+                                alert(oRta.mensaje);
                             }
                 }
         });

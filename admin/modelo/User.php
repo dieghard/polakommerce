@@ -31,16 +31,15 @@ class User
       return $strSql;
    }
 
-   private function ArmarSqlUpdate()
+   private function ArmarSqlUpdate($oUsuario)
    {
-      $strSql = 'UPDATE usuarios SET  empresaid = :empresaid,
-                                      nombreyapellido = :nombreyapellido,
-                                        mail          = :mail,
-                                        pass          = :pass,
-                                        perfilID      = :perfilID,
-                                        activo        = :activo,
-                                        observaciones = :observaciones
-                                        WHERE id=:id';
+      $strSql = 'UPDATE usuarios SET  empresaid = :empresaid, nombreyapellido = :nombreyapellido,mail = :mail';
+
+      if (strlen($oUsuario->pass) > 0) :
+         $strSql .= ",pass = :pass";
+      endif;
+      $strSql .= ',perfilID = :perfilID, activo = :activo, observaciones = :observaciones WHERE id=:id';
+
       return $strSql;
    }
 
@@ -58,24 +57,28 @@ class User
       $empresa = $_SESSION['empresa'];
       $superArray['$empresa'] = $empresa;
 
-
       if ($oUsuario->id > 0) :
-         $strSql = $this->ArmarSqlUpdate();
+         $strSql = $this->ArmarSqlUpdate($oUsuario);
       else :
          $strSql = $this->ArmarSqlInsert();
       endif;
 
-      $pass = base64_encode($oUsuario->pass);
       $superArray['$oUsuario'] = $oUsuario;
 
       $stmt = $dbConectado->prepare($strSql);
+
       if ($oUsuario->id > 0) :
          $stmt->bindParam(':id', $oUsuario->id, PDO::PARAM_INT);
       endif;
+
       $stmt->bindParam(':empresaid', $empresa['id'], PDO::PARAM_INT);
       $stmt->bindParam(':nombreyapellido', $oUsuario->nombreyapellido, PDO::PARAM_STR);
       $stmt->bindParam(':mail', $oUsuario->mail, PDO::PARAM_STR);
-      $stmt->bindParam(':pass', $pass, PDO::PARAM_STR);
+      if (strlen($oUsuario->pass) > 0) :
+         $password = htmlentities(addslashes($oUsuario->pass)); //variable auxiliar para comprobar que el
+         $pass_cifrada = password_hash($password, PASSWORD_DEFAULT, array("cost" => 10));
+         $stmt->bindParam(':pass', $pass_cifrada, PDO::PARAM_STR);
+      endif;
       $stmt->bindParam(':perfilID', $oUsuario->perfilID, PDO::PARAM_INT);
       $stmt->bindParam(':activo', $oUsuario->activo, PDO::PARAM_STR);
       $stmt->bindParam(':observaciones', $oUsuario->observaciones, PDO::PARAM_STR);
@@ -143,8 +146,14 @@ class User
          $dbConectado = $conexion->DBConect($superArray);
          $stmt  = $dbConectado->prepare($sql);
          $password = htmlentities(addslashes($usuarioLoguin->password)); //variable auxiliar para comprobar que el usuario existe o no
-         $pass_cifrada = password_hash($password, PASSWORD_DEFAULT, array("cost" => 10));
+         if ($this->iniData['DEVELOVER_ENVIROMENT']) :
+            $superArray['PassSinEncode'] = $password;
+         endif;
 
+         $pass_cifrada = password_hash($password, PASSWORD_DEFAULT, array("cost" => 10));
+         if ($this->iniData['DEVELOVER_ENVIROMENT']) :
+            $superArray['PassEncode'] = $pass_cifrada;
+         endif;
          $mail = htmlentities(addslashes($usuarioLoguin->email));
 
          $stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
@@ -168,9 +177,6 @@ class User
                   'activo' => $row['activo'],
                   'perfil' => $row['perfil']
                ];
-               $superArray['mensaje'] = 'Todo ok';
-
-
                $_SESSION['usuario'] = $usuario;
                $superArray['path'] = 'vista/index.php?controlador=mesadeentrada'; //COINCIDEN LAS CLAVES!
             else :
@@ -235,7 +241,6 @@ class User
             $superArray['sqlUser'] = $sql;
             $superArray['mail'] = $usuarioLoguin->email;
             $superArray['$password'] = $password;
-            //$superArray['$pass_cifrada'] = $pass_cifrada;
             $superArray['usuariodb'] = $usuario;
             $superArray['usuarioEmpresa'] = $empresa;
             $superArray['mail'] = $mail;
@@ -335,15 +340,20 @@ class User
                   $encabezadoRow .= 'data-id="' . $row['id'] . '"';
                   $encabezadoRow .= 'data-nombreyapellido="' . $row['nombreyapellido'] . '"';
                   $encabezadoRow .= 'data-mail="' . $row['mail'] . '"';
-                  $encabezadoRow .= 'data-pass="' . $row['pass'] . '"';
                   $encabezadoRow .= 'data-perfilid="' . $row['perfilID'] . '"';
                   $encabezadoRow .= 'data-perfil="' . $row['perfil'] . '"';
+                  $activo = 'NO';
+
+                  if ($row['activo'] == -1) :
+                     $activo = 'SI';
+                  endif;
+
                   $encabezadoRow .= 'data-activo="' . $row['activo'] . '"';
                   $encabezadoRow .= '">';
                   $tabla .= $encabezadoRow . '<td>' . $row['nombreyapellido'] . '</td>';
                   $tabla .= '<td>' . $row['mail'] . '</td>';
                   $tabla .= '<td>' . $row['perfil'] . '</td>';
-                  $tabla .= '<td>' . $row['activo'] . '</td>';
+                  $tabla .= '<td>' . $activo . '</td>';
                   $tabla .= '<td><button type="button" title="Presione para modificar item" class="btn btn-primary edit" onclick="fnProcesaEditar(this)"  value="' . $row['id'] . '"><i class="fa fa-edit "></i></button>     ';
                   $tabla .= '<button type="button" title="Presione para eliminar item" class="btn btn-danger delete" onclick="fnProcesaEliminar(this)" value="' . $row['id'] . '"><i class="fa fa-eraser "></i> </button></td>';
                   $tabla .= '</tr>'; //nueva fila
