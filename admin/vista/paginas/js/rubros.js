@@ -12,15 +12,44 @@ $(document).ready(function() {
     $("#btnNuevo").click(function() {
         Nuevo();
     });
-    $('#modalUsers2').on('hidden.bs.modal', function (e) {
+    $('#modalRubros').on('hidden.bs.modal', function (e) {
         LlenarGrilla();
     });
-
+    $("#btnUpload").click(function() {
+        SubirImagen();
+    });
 
 });
 
+function SubirImagen() {
+ var formData = new FormData();
+        var files = $('#image')[0].files[0];
+        formData.append('file', files);
+        formData.append('vengode', 'rubros');
+        console.log('pase por subir imagen');
+        $.ajax({
+            url: 'ajax/UploadImage.php',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
 
-function fnProcesaEditar(x){
+                console.log(response.success);
+                console.log(response);
+                response  = JSON.parse(response);
+                if (response.success==true) {
+                    $(".card-img-top").attr("src","../../assets/img/rubros/" + response.nombreArchivo);
+                } else {
+                    console.log('Formato de imagen incorrecto.');
+                }
+            }
+        });
+        return false;
+}
+
+function fnProcesaEditar(x) {
+
     var id   = $(x).closest('tr').data('id');
     var titulo = $(x).closest('tr').data('titulo');
     var subtitulo = $(x).closest('tr').data('subtitulo');
@@ -28,28 +57,34 @@ function fnProcesaEditar(x){
     var imagen   = $(x).closest('tr').data('imagen');
     var activo = $(x).closest('tr').data('activo');
 
+/*
+    console.log('id:'+id);
+    console.log('titulo:'+titulo);
+    console.log('subtitulo:'+ subtitulo);
+    console.log('descripcion:'+descripcion);
+    console.log('imagen:'+imagen);
+    console.log('activo:'+activo);
+*/
+
     $("#id").val(id);
     $("#titulo").val(titulo);
     $("#subtitulo").val(subtitulo);
+    $("#descripcion").val(descripcion);
     $("#activo").val(activo);
 
-    $('#titulo').prop('disabled', true);
-
+    $('#titulo').prop('disabled', false);
     $('#subtitulo').prop('disabled', false);
     $('#pass').prop('disabled', false);
-
     $('#imagen').val(imagen);
-    $('#imagen').trigger('change'); // Notify any JS components that the value changed
-
     $('#btnGuardar').prop('disabled', false);
-    $("#modalUsers2").modal("show");
+    $("#modalRubros").modal("show");
 
 
 }
 
 function LlenarGrilla(){
 
-   var strUrl = "ajax/ajaxRubros.php";
+   var strUrl = "ajax/Rubros.php";
    var datos = new FormData();
 
    datos.append("ACTION", "llenarGrilla");
@@ -64,7 +99,6 @@ function LlenarGrilla(){
                 contentType:false,
                 processData :false,
                 success: function (respuesta) {
-
                     var oRta = JSON.parse(respuesta);
                         if (oRta.success ==true ){
                             $('#tabla').html(oRta.tabla);
@@ -107,7 +141,7 @@ function Nuevo(){
     $('#pass').prop('disabled', true);
     $('#imagen').prop('disabled', true);
     $('#activo').prop('disabled', true);
-    $("#modalUsers2").modal("show");
+    $("#modalRubros").modal("show");
     $('#btnGuardar').prop('disabled', true);
 }
 
@@ -202,7 +236,7 @@ function Guardar(data){
 
                         var oRta = JSON.parse(respuesta);
                             if (oRta.success==true){
-                                $('#modalUsers2').modal('toggle');
+                                $('#modalRubros').modal('toggle');
                                 LlenarGrilla();
                             }
                             else{

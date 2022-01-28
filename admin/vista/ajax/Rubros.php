@@ -40,6 +40,12 @@ class AjaxRubros
 
 $ajaxRubro = new AjaxRubros();
 
+if (isset($_POST['ACTION'])) :
+   $accion = $_POST['ACTION'];
+else :
+   return;
+endif;
+
 if ($accion == 'llenarGrilla') :
    $respuesta = $ajaxRubro->LlenarGrilla();
 endif;

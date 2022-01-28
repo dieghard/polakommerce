@@ -12,15 +12,27 @@
     </div>
     <div class="form-group">
        <label for="subtitulo">Subtitulo</label>
-       <input type="text" class="form-control" id="titulo" placeholder="Ingrese el Subtitulo" maxlength="255" tabindex="2" required>
+       <input type="text" class="form-control" id="subtitulo" placeholder="Ingrese el Subtitulo" maxlength="255" tabindex="2" required>
     </div>
     <div class="form-group">
        <label for="descripcion">Descripcion</label>
-       <input type="text" class="form-control" id="titulo" placeholder="Ingrese la descripción" maxlength="255" tabindex="3" required>
+       <input type="text" class="form-control" id="descripcion" placeholder="Ingrese la descripción" maxlength="255" tabindex="3" required>
     </div>
     <div class="form-group">
-       <label for="imagen">Imagen</label>
-       <input type="text" class="form-control" id="imagen" placeholder="Ingrese una imagen que identifique el rubro" maxlength="255" tabindex="4" required>
+       <form method="post" action="#" enctype="multipart/form-data">
+          <div class="card" style="width: 18rem;">
+             <img class="card-img-top" src="../../assets/img/rubros/default.png">
+             <div class="card-body">
+                <!--<h5 class="card-title">Sube una foto</h5>
+                <p class="card-text">Sube una imagen...</p>-->
+                <div class="form-group">
+                   <label for="image">Subir imagen</label>
+                   <input type="file" class="form-control-file" name="image" id="image">
+                </div>
+                <input type="button" id='btnUpload' class="btn btn-primary upload" value="Subir">
+             </div>
+          </div>
+       </form>
     </div>
     <div class="form-group">
        <label for="activo">Activo</label>

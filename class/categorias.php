@@ -3,6 +3,7 @@
 namespace Class;
 
 use Class\Conexion;
+use Throwable;
 
 class Categorias
 {

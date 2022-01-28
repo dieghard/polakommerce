@@ -113,20 +113,10 @@ if (isset($_GET['controlador'])) {
               <?php
               if ($pagina == 'panel') {
                 include 'paginas/panel.php';
-              } elseif ($pagina == 'emisionderecibos') {
-                include 'paginas/emisionderecibos_abm.php';
-              } elseif ($pagina == 'pagosRecibos') {
-                include 'paginas/pagosRecibos_abm.php';
               } elseif ($pagina == 'Usuarios') {
                 include 'paginas/users_abm.php';
-              } elseif ($pagina == 'provincias') {
-                include 'paginas/provincias_abm.php';
-              } elseif ($pagina == 'localidad') {
-                include 'paginas/localidad_abm.php';
-              } elseif ($pagina == 'costoCuota') {
-                include 'paginas/costoCuota_abm.php';
-              } elseif ($pagina == 'sectores') {
-                include 'paginas/sector_abm.php';
+              } elseif ($pagina == 'Rubros') {
+                include 'paginas/Rubros.php';
               } else {
                 $newURL = 'logout.php';
                 echo '<meta http-equiv="refresh" content="0;URL=logout.php">';

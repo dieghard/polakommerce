@@ -41,6 +41,25 @@ class Rubros
    {
       return 'Delete FROM rubros Where id=:id';
    }
+
+   private function sqlSelect()
+   {
+      $sql = " SELECT  id,titulo,subtitulo,descripcion,imagen,activo  FROM rubros ";
+      return $sql;
+   }
+
+   private function PasarRow($row)
+   {
+      return [
+         'id' => $row['id'],
+         'titulo' => $row['titulo'],
+         'subtitulo' => $row['subtitulo'],
+         'descripcion' => $row['descripcion'],
+         'imagen' => $row['imagen'],
+         'activo' => $row['activo']
+      ];
+   }
+
    public function Guardar($oData)
    {
       $superArray = array();
@@ -146,7 +165,7 @@ class Rubros
                   $encabezadoRow .= 'data-titulo="' . $row['titulo'] . '"';
                   $encabezadoRow .= 'data-subtitulo="' . $row['subtitulo'] . '"';
                   $encabezadoRow .= 'data-descripcion="' . $row['descripcion'] . '"';
-                  $encabezadoRow .= 'data-imagen="' . $row['imgen'] . '"';
+                  $encabezadoRow .= 'data-imagen="' . $row['imagen'] . '"';
                   $activo = 'NO';
                   if ($row['activo'] == -1) :
                      $activo = 'SI';
@@ -175,24 +194,5 @@ class Rubros
       }
       $superArray['tabla'] = $tabla;
       return json_encode($superArray);
-   }
-
-   private function sqlSelect()
-   {
-      $sql = " SELECT  id,titulo,subtitulo,descripcion,imagen,activo  FROM rubros ";
-      return $sql;
-   }
-
-
-   private function PasarRow($row)
-   {
-      return [
-         'id' => $row['id'],
-         'titulo' => $row['titulo'],
-         'subtitulo' => $row['subtitulo'],
-         'descripcion' => $row['descripcion'],
-         'imagen' => $row['imagen'],
-         'activo' => $row['activo']
-      ];
    }
 }

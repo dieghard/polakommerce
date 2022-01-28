@@ -14,12 +14,12 @@
          </div>
       </div>
       <!-- Modal -->
-      <div class="modal" id="modalUsers2">
+      <div class="modal" id="modalRubros">
          <div class="modal-dialog">
             <!-- Modal content -->
             <div class="modal-content">
                <!-- Modal HEADER-->
-               <?php include 'users_modal.php'; ?>
+               <?php include 'Rubros_modal.php'; ?>
                <!-- Modal FOOTER-->
                <div class="modal-footer">
                   <button type="button" id="btnGuardar" class="btn btn-success" tabindex="13">Guardar</button>
